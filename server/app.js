@@ -113,9 +113,25 @@ app.set('view engine', 'html');
     })
   })
 
-  //Delete news in database, PASSED POSTMAN TEST: PENDING
-  app.delete('/news/:id', (req, res) =>{
-
+  //Delete news in database, PASSED POSTMAN TEST: PASSED
+  app.delete('/news/:newsId', (req, res) =>{
+    db.News.findOne({
+      _id: req.params.newsId
+    })
+    .then((news) =>{
+      if(!news) {
+        res.status(404).send('data not found');
+      } else {
+        news.deleteOne()
+        .then(news =>{
+          res.json(news)
+        })
+        .catch((err) =>{
+          console.log('err', err)
+          res.status(500).end();
+        })
+      }
+    })
   })
 
 // catch 404 and forward to error handler
