@@ -15,7 +15,6 @@ var db = require('./models');
 
 //API Routes 
 var routes = require('./routes');
-const { restart } = require('nodemon');
 
 //Define middleware
 app.use(logger('dev'));
