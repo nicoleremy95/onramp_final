@@ -87,10 +87,10 @@ app.set('view engine', 'html');
     })
   })
 
-  //Update news in the database, PASSED POSTMAN TEST: PENDING
-  app.put('/news/:id', (req, res) =>{
-    db.News.findById({
-      _id: req.body.id
+  //Update news in the database, PASSED POSTMAN TEST: PASSED
+  app.put('/news/:newsId', (req, res) =>{
+    db.News.findOne({
+      _id: req.params.newsId
     }) 
     .then((news) =>{
       if(!news) {
