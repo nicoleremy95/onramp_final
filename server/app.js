@@ -15,6 +15,7 @@ var db = require('./models');
 
 //API Routes 
 var routes = require('./routes');
+const { restart } = require('nodemon');
 
 //Define middleware
 app.use(logger('dev'));
@@ -35,8 +36,8 @@ app.get('/test', (req, res) =>{
 })
 
 //NEWS ROUTES 
-  //Get all news in database
-  app.get('/', (req, res) =>{
+  //Get all news in database, PASSED POSTMAN TEST: YES
+  app.get('/news', (req, res) =>{
     db.News.find({})
     .then((allNews) =>{
         res.json(allNews);
@@ -47,8 +48,8 @@ app.get('/test', (req, res) =>{
     });
   })
 
-  //Add news to the database
-  app.post('/new', (req, res) =>{
+  //Add news to the database, PASSED POSTMAN TEST: YES
+  app.post('/news/new', (req, res) =>{
     db.News.create({
         newsData: req.body.newsData,
         newsCreator: req.body.newsCreator
@@ -62,13 +63,34 @@ app.get('/test', (req, res) =>{
     })
   })
 
-  //Update news in the database
-  app.put('/update', (req, res) =>{
-    
+  //Update news in the database, PASSED POSTMAN TEST: PENDING
+  app.put('/news/update/:id', (req, res) =>{
+    db.News.findById({
+      _id: req.body.id
+    }) 
+    .then((news) =>{
+      if(!news) {
+        res.status(404).send('data not found');
+      } else {
+      news.newsData = req.body.newsData;
+      news.save()
+      .then(news =>{
+        res.json(news)
+      })
+      .catch((err) =>{
+        console.log('err', err)
+        res.status(500).end();
+      })
+      }
+    })
+    .catch((err) =>{
+      console.log('err', err)
+      res.status(500).end();
+    })
   })
 
-  //Delete news in database
-  app.delete('/delete', (req, res) =>{
+  //Delete news in database, PASSED POSTMAN TEST: PENDING
+  app.delete('/news/delete/:id', (req, res) =>{
 
   })
 
