@@ -1,6 +1,9 @@
 var createError = require('http-errors');
 var express = require('express');
 var cookieParser = require('cookie-parser');
+var mongoose = require('mongoose');
+
+//middleware similar to cors
 var logger = require('morgan');
 
 var app = express();
@@ -36,6 +39,12 @@ app.use(function (err, req, res, next) {
     error: err,
   });
 });
+
+mongoose.connect('mongodb://127.0.0.1:27017/news', {useNewUrlParser: true});
+const connection = mongoose.connection;
+connection.once('open', function(){
+  console.log('MongoDB database connection established success')
+})
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
