@@ -1,19 +1,18 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from './pages/Home'
 import './App.css';
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  const getData = () => {
-    fetch('/api')
-      .then((result) => result.text())
-      .then((res) => setData(res));
-  };
   return (
     <div className="App">
-      <header className="App-header">
-       <h1>onramp</h1>
-      </header>
+      <Router>
+        <Switch>
+          <Route exact path = '/'>
+            <Home/>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
