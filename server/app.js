@@ -11,7 +11,7 @@ var app = express();
 const port = 8080;
 
 //Models
-var models = require('./models');
+var db = require('./models');
 
 //API Routes 
 var routes = require('./routes');
@@ -30,6 +30,47 @@ app.get('/api', (req, res) => {
 app.get('/api/users', (req, res) => {
   res.send(['Aang', 'Katara', 'Momo', 'Sokka', 'Appa']);
 });
+app.get('/test', (req, res) =>{
+  res.send("this is a test");
+})
+
+//NEWS ROUTES 
+  //Get all news in database
+  app.get('/', (req, res) =>{
+    db.News.find({})
+    .then((allNews) =>{
+        res.json(allNews);
+    })
+    .catch((err) =>{
+        console.log('err', err);
+        res.status(500).end();
+    });
+  })
+
+  //Add news to the database
+  app.post('/new', (req, res) =>{
+    db.News.create({
+        newsData: req.body.newsData,
+        newsCreator: req.body.newsCreator
+    })
+    .then((newNews) =>{
+        res.json(newNews);
+    })
+    .catch((err) =>{
+        console.log('err', err);
+        res.status(500).end();
+    })
+  })
+
+  //Update news in the database
+  app.put('/update', (req, res) =>{
+    
+  })
+
+  //Delete news in database
+  app.delete('/delete', (req, res) =>{
+
+  })
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -50,14 +91,18 @@ app.use(function (err, req, res, next) {
 });
 
 //Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/news', {useNewUrlParser: true});
+mongoose.connect('mongodb://127.0.0.1:27017/news', {useNewUrlParser: true}, 
+// { useUnifiedTopology: true }
+);
 const connection = mongoose.connection;
 connection.once('open', function(){
   console.log('MongoDB database connection established success')
 })
 
+//Use routes
 app.use('/', routes);
-//
+
+//Initialize server
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
