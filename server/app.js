@@ -23,19 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set('view engine', 'html');
 
-//TESTER ROUTES 
-app.get('/api', (req, res) => {
-  res.send(`${new Date()}`);
-});
-app.get('/api/users', (req, res) => {
-  res.send(['Aang', 'Katara', 'Momo', 'Sokka', 'Appa']);
-});
-app.get('/test', (req, res) =>{
-  res.send("this is a test");
-})
-
 //NEWS ROUTES 
-  //Get all news in database, PASSED POSTMAN TEST: YES
+  //Get all news in database, PASSED POSTMAN TEST: PASSED
   app.get('/news', (req, res) =>{
     db.News.find({})
     .then((allNews) =>{
@@ -47,8 +36,8 @@ app.get('/test', (req, res) =>{
     });
   })
 
-  //Add news to the database, PASSED POSTMAN TEST: YES
-  app.post('/news/new', (req, res) =>{
+  //Add news to the database, PASSED POSTMAN TEST: PASSED
+  app.post('/news', (req, res) =>{
     db.News.create({
         newsData: req.body.newsData,
         newsCreator: req.body.newsCreator
@@ -62,8 +51,44 @@ app.get('/test', (req, res) =>{
     })
   })
 
+  //Add comment to news, PASSWED POSTMAN TEST: PASSED
+  app.post('/comment/:newsId',(req, res) =>{
+    db.News.findOne({
+      _id: req.params.newsId
+    })
+    .then(news =>{
+      news.comments.push({
+        message: req.body.message
+      })
+      news.save();
+      res.json(news)
+    })
+    .catch((err) =>{
+      console.log('err', err)
+      res.status(500).end();
+    })
+  })
+
+  //Add reaction to news, PASSED POSTMAN TEST: PASSED 
+  app.post('/reaction/:newsId', (req, res) =>{
+    db.News.findOne({
+      _id: req.params.newsId
+    })
+    .then(news =>{
+      news.reactions.push({
+        reaction: req.body.reaction
+      })
+      news.save();
+      res.json(news)
+    })
+    .catch((err) =>{
+      console.log('err', err)
+      res.status(500).end();
+    })
+  })
+
   //Update news in the database, PASSED POSTMAN TEST: PENDING
-  app.put('/news/update/:id', (req, res) =>{
+  app.put('/news/:id', (req, res) =>{
     db.News.findById({
       _id: req.body.id
     }) 
@@ -89,7 +114,7 @@ app.get('/test', (req, res) =>{
   })
 
   //Delete news in database, PASSED POSTMAN TEST: PENDING
-  app.delete('/news/delete/:id', (req, res) =>{
+  app.delete('/news/:id', (req, res) =>{
 
   })
 
