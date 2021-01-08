@@ -1,6 +1,7 @@
 var express = require('express');
-var router = express.Router();
 var db = require('../models');
+var router = express.Router();
+
 
 //NEWS ROUTES '/api/news'
   //Get all news in database, PASSED POSTMAN TEST: PASSED

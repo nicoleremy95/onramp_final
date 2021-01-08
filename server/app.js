@@ -13,7 +13,7 @@ const port = 8080;
 //Models
 //UNCOMMENT FOR PROPER FILE STRUCTURE
 // var models = require('./models');
-//TEMPORARY
+// TEMPORARY
 var db = require('./models');
 
 //API Routes 
