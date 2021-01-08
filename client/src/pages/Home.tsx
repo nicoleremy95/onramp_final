@@ -1,10 +1,11 @@
 import React from 'react'
 import './home.css'
+import AppBar from '../components/Appbar/Appbar';
 
 export default function Home() {
     return (
         <div>
-            <h1>home page</h1>
+           <AppBar/>
         </div>
     )
 }
