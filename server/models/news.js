@@ -16,6 +16,9 @@ const News = new Schema({
     newsCreator : {
         type: String
     },
+    newsType: {
+        type: String
+    },
     comments: [Comments],
     reactions: [Reactions]
 
