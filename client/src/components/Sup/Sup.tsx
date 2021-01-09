@@ -46,16 +46,16 @@ export default function Sup(){
 
     //initialize form object state
     const [newsObj, setNewsObj] = useState<State>({
-        newsData: "",
-        newsCreator: "",
-        newsType: ""
+        newsData:"",
+        newsCreator:"",
+        newsType:""
     })
 
     //input change function
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>){
         //TODO: refactor any
-        const{name, value}: any = e.target;
-        setNewsObj({ ...newsObj, [name]: value })
+        const{ name, value}: any = e.target;
+        setNewsObj({ ...newsObj,[name]: value})
     }
 
     // input submit function
@@ -85,29 +85,30 @@ export default function Sup(){
                         multiline
                         rows={4}
                         type="textarea"
-                        onChange={inputChange}
+                        name="newsData"
                         value={newsObj.newsData}
+                        onChange={inputChange}
                         className={classes.input}
                     />
                     <TextField 
                         id="outlined-basic" 
                         label="name" 
                         variant="outlined" 
-                        rows={4}
                         required= {true}
                         type="textarea"
-                        onChange={inputChange}
+                        name="newsCreator"
                         value={newsObj.newsCreator}
+                        onChange={inputChange}
                         className={classes.input}
                     />
                     <TextField 
                         id="outlined-basic" 
                         label="type" 
                         variant="outlined" 
-                        rows={4}
                         type="textarea"
-                        onChange={inputChange}
+                        name="newsType"
                         value={newsObj.newsType}
+                        onChange={inputChange}
                         className={classes.input}
                     />
                     <Button
