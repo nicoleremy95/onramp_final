@@ -69,16 +69,10 @@ export default function Footer() {
                       </Link>
                     </IconButton>
                   </Tooltip>
-            
-                </Grid>
-                <Grid item xs={3}>
-                  
-                </Grid>
-                <Grid item>
                   <Typography className="more-talk" align="left" variant="h2">
                     suP?
                   </Typography>
-                </Grid> 
+                </Grid>
               </Grid>
           </Container>
         </div>
