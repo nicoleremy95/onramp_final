@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -20,6 +21,10 @@ import './news.css'
 //set up interface for props taken from parent component (Home.jsx)
 interface Props {
     newsDB: object;
+}
+
+interface State {
+  message: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -68,6 +73,9 @@ const useStyles = makeStyles((theme: Theme) =>
             
 //take props from parent Home.tsx
 export default function News({newsDB}: Props) : JSX.Element {
+  const [commentObj, setCommentObj] = useState<State>({
+    message:""
+  })
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -78,7 +86,13 @@ export default function News({newsDB}: Props) : JSX.Element {
     setOpen(false);
   };
 
-    const classes = useStyles();
+  const classes = useStyles();
+
+  function inputChange(e: React.ChangeEvent<HTMLTextAreaElement>){
+    //TODO: refactor any
+    const{name,value}: any = e.target;
+    setCommentObj({...commentObj, [name]: value})
+  }
 
     // const newsArr:object[] = [];
     // Props.map(item =>{
@@ -180,6 +194,9 @@ export default function News({newsDB}: Props) : JSX.Element {
                   id="filled-multiline-static"
                   label="comment"
                   variant="filled"
+                  name="message"
+                  value={commentObj.message}
+                  onChange={inputChange}
                   className={classes.textField}
                 />
               </div>
