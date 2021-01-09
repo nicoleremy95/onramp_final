@@ -25,6 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       alignItems: 'center',
       justifyContent: 'center',
+      borderRadius: '10px'
+    },
+    cards: {
+      minWidth: '200px',
+      maxWidth: '600px',
+      margin: '100px',
     },
     textField:{
       width: '55ch',
@@ -98,7 +104,7 @@ export default function News({newsDB}: Props) : JSX.Element {
         >
            {/* {newsArr.map(news =>{return news})} */}
           <Card 
-            className="News-cards-root" 
+            className={classes.cards} 
             variant="outlined"  
           >
               <CardContent>
@@ -121,10 +127,49 @@ export default function News({newsDB}: Props) : JSX.Element {
                   Angie
               </Typography>
               </CardContent>
-              <CardActions>
-              <Button size="small">comment</Button>
-              <Button size="small">react</Button>
+              <CardActions disableSpacing = {false}>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <Button size="small" onClick={handleOpen}>react</Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500,
+                  }}
+                >
+                <Fade in={open}>
+                  <div className={classes.paper}>
+                    <Button size="small">❤️️</Button>
+                    <Button size="small">😜️</Button>
+                    <Button size="small">😈</Button>
+                    <Button size="small">😍</Button>
+                    <Button size="small">😂</Button>
+                    <Button size="small">😊</Button>
+                  </div>
+                </Fade>
+              </Modal>
               </CardActions>
+              <div
+                className="News-cards-comment"
+              >
+                <TextField
+                  id="filled-multiline-static"
+                  label="comment"
+                  variant="filled"
+                  className={classes.textField}
+                />
+              </div>
+              
          </Card>
           <Card 
             className="News-cards-root" 
@@ -172,7 +217,7 @@ export default function News({newsDB}: Props) : JSX.Element {
                 >
                 <Fade in={open}>
                   <div className={classes.paper}>
-                    <Button size="small" className="News-cards-emoji">❤️️</Button>
+                    <Button size="small">❤️️</Button>
                     <Button size="small">😜️</Button>
                     <Button size="small">😈</Button>
                     <Button size="small">😍</Button>

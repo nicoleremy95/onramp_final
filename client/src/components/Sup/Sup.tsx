@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import API from '../../utils/API';
+import './sup.css'
 
 interface State {
     newsData: string,
@@ -16,11 +17,21 @@ interface State {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    container: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     root: {
       '& > *': {
         margin: theme.spacing(1),
         width: '25ch',
       },
+    },
+    input: {
+        '& > *': {
+            background: 'white',
+        },
     },
     button: {
         margin: theme.spacing(1),
@@ -60,46 +71,50 @@ export default function Sup(){
         })
     }
     return(
-        <div>
-            <form className={classes.root} noValidate autoComplete="off" onSubmit={inputSubmit}>
-                <TextField 
-                    id="outlined-basic" 
-                    label="suP friend?" 
-                    variant="outlined" 
-                    multiline
-                    rows={4}
-                    type="textarea"
-                    onChange={inputChange}
-                    value={newsObj.newsData}
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="name" 
-                    variant="outlined" 
-                    rows={4}
-                    required= {true}
-                    type="textarea"
-                    onChange={inputChange}
-                    value={newsObj.newsCreator}
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="type" 
-                    variant="outlined" 
-                    rows={4}
-                    type="textarea"
-                    onChange={inputChange}
-                    value={newsObj.newsType}
-                />
-                 <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    endIcon={<Icon>send</Icon>}
-                >
-                    Send
-                </Button>
-                
+        <div className={classes.container}>
+            <form className={classes.root} noValidate autoComplete="on" onSubmit={inputSubmit}>
+                <div>
+                    <TextField 
+                        id="outlined-basic" 
+                        label="suP friend?" 
+                        variant="outlined" 
+                        multiline
+                        rows={4}
+                        type="textarea"
+                        onChange={inputChange}
+                        value={newsObj.newsData}
+                        className={classes.input}
+                    />
+                    <TextField 
+                        id="outlined-basic" 
+                        label="name" 
+                        variant="outlined" 
+                        rows={4}
+                        required= {true}
+                        type="textarea"
+                        onChange={inputChange}
+                        value={newsObj.newsCreator}
+                        className={classes.input}
+                    />
+                    <TextField 
+                        id="outlined-basic" 
+                        label="type" 
+                        variant="outlined" 
+                        rows={4}
+                        type="textarea"
+                        onChange={inputChange}
+                        value={newsObj.newsType}
+                        className={classes.input}
+                    />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        endIcon={<Icon>send</Icon>}
+                    >
+                        Send
+                    </Button>
+                </div>
             </form>
         </div>
     )
