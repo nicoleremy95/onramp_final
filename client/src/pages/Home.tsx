@@ -5,6 +5,7 @@ import AppBar from '../components/Appbar/Appbar';
 import News from '../components/News/News'
 import Sup from '../components/Sup/Sup'
 import API from '../utils/API'
+import Scroll from '../components/Scroll/Scroll'
 import './home.css'
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
     
     return (
         <div className="Home">
+            <Scroll showBelow={250}/>
             <AppBar/>
             <Sup/>
             <News newsDB={newsDB} />
