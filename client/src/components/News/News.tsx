@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
-import { createStyles, makeStyles, ThemeProvider, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
@@ -71,7 +70,7 @@ export default function News({newsDB}: Props) : JSX.Element {
 
     const classes = useStyles();
 
-    const newsArr:object[] = [];
+    // const newsArr:object[] = [];
     // Props.map(item =>{
     //     console.log('item.newsCreator', item.newsCreator)
     //     newsArr.push(
@@ -125,6 +124,278 @@ export default function News({newsDB}: Props) : JSX.Element {
                 component="p"
               >
                   Angie
+              </Typography>
+              </CardContent>
+              <CardActions disableSpacing = {false}>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <Button size="small" onClick={handleOpen}>react</Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500,
+                  }}
+                >
+                <Fade in={open}>
+                  <div className={classes.paper}>
+                    <Button size="small">❤️️</Button>
+                    <Button size="small">😜️</Button>
+                    <Button size="small">😈</Button>
+                    <Button size="small">😍</Button>
+                    <Button size="small">😂</Button>
+                    <Button size="small">😊</Button>
+                  </div>
+                </Fade>
+              </Modal>
+              </CardActions>
+              <div
+                className="News-cards-comment"
+              >
+                <TextField
+                  id="filled-multiline-static"
+                  label="comment"
+                  variant="filled"
+                  className={classes.textField}
+                />
+              </div>
+              
+         </Card>
+          <Card 
+            className="News-cards-root" 
+            variant="outlined"  
+          >
+              <CardContent>
+              <Typography 
+                className="News-cards-category" 
+                color="textSecondary" 
+                gutterBottom>
+                  travel
+              </Typography>
+              <Typography 
+                variant="h5" 
+                component="h2"
+              >
+                I am thinking of going to cuba, any recs?
+              </Typography>
+              <Typography 
+                variant="body2" 
+                component="p"
+              >
+                  fred
+              </Typography>
+              </CardContent>
+              <CardActions disableSpacing = {false}>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <Button size="small" onClick={handleOpen}>react</Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500,
+                  }}
+                >
+                <Fade in={open}>
+                  <div className={classes.paper}>
+                    <Button size="small">❤️️</Button>
+                    <Button size="small">😜️</Button>
+                    <Button size="small">😈</Button>
+                    <Button size="small">😍</Button>
+                    <Button size="small">😂</Button>
+                    <Button size="small">😊</Button>
+                  </div>
+                </Fade>
+              </Modal>
+              </CardActions>
+              <div
+                className="News-cards-comment"
+              >
+                <TextField
+                  id="filled-multiline-static"
+                  label="comment"
+                  variant="filled"
+                  className={classes.textField}
+                />
+              </div>
+              
+         </Card>
+          <Card 
+            className="News-cards-root" 
+            variant="outlined"  
+          >
+              <CardContent>
+              <Typography 
+                className="News-cards-category" 
+                color="textSecondary" 
+                gutterBottom>
+                  travel
+              </Typography>
+              <Typography 
+                variant="h5" 
+                component="h2"
+              >
+                I am thinking of going to cuba, any recs?
+              </Typography>
+              <Typography 
+                variant="body2" 
+                component="p"
+              >
+                  fred
+              </Typography>
+              </CardContent>
+              <CardActions disableSpacing = {false}>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <Button size="small" onClick={handleOpen}>react</Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500,
+                  }}
+                >
+                <Fade in={open}>
+                  <div className={classes.paper}>
+                    <Button size="small">❤️️</Button>
+                    <Button size="small">😜️</Button>
+                    <Button size="small">😈</Button>
+                    <Button size="small">😍</Button>
+                    <Button size="small">😂</Button>
+                    <Button size="small">😊</Button>
+                  </div>
+                </Fade>
+              </Modal>
+              </CardActions>
+              <div
+                className="News-cards-comment"
+              >
+                <TextField
+                  id="filled-multiline-static"
+                  label="comment"
+                  variant="filled"
+                  className={classes.textField}
+                />
+              </div>
+              
+         </Card>
+          <Card 
+            className="News-cards-root" 
+            variant="outlined"  
+          >
+              <CardContent>
+              <Typography 
+                className="News-cards-category" 
+                color="textSecondary" 
+                gutterBottom>
+                  travel
+              </Typography>
+              <Typography 
+                variant="h5" 
+                component="h2"
+              >
+                I am thinking of going to cuba, any recs?
+              </Typography>
+              <Typography 
+                variant="body2" 
+                component="p"
+              >
+                  fred
+              </Typography>
+              </CardContent>
+              <CardActions disableSpacing = {false}>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <Button size="small" onClick={handleOpen}>react</Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500,
+                  }}
+                >
+                <Fade in={open}>
+                  <div className={classes.paper}>
+                    <Button size="small">❤️️</Button>
+                    <Button size="small">😜️</Button>
+                    <Button size="small">😈</Button>
+                    <Button size="small">😍</Button>
+                    <Button size="small">😂</Button>
+                    <Button size="small">😊</Button>
+                  </div>
+                </Fade>
+              </Modal>
+              </CardActions>
+              <div
+                className="News-cards-comment"
+              >
+                <TextField
+                  id="filled-multiline-static"
+                  label="comment"
+                  variant="filled"
+                  className={classes.textField}
+                />
+              </div>
+              
+         </Card>
+          <Card 
+            className="News-cards-root" 
+            variant="outlined"  
+          >
+              <CardContent>
+              <Typography 
+                className="News-cards-category" 
+                color="textSecondary" 
+                gutterBottom>
+                  travel
+              </Typography>
+              <Typography 
+                variant="h5" 
+                component="h2"
+              >
+                I am thinking of going to cuba, any recs?
+              </Typography>
+              <Typography 
+                variant="body2" 
+                component="p"
+              >
+                  fred
               </Typography>
               </CardContent>
               <CardActions disableSpacing = {false}>

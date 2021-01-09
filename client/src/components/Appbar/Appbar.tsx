@@ -8,16 +8,18 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import './appbar.css'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    appbar: {
+      backgroundColor: '#a5aaab'
+    },
     grow: {
       flexGrow: 1,
     },
@@ -141,22 +143,10 @@ export default function PrimarySearchAppBar() {
             color="secondary"
             max={999}
           >
-            <MailIcon />
+            <FavoriteIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge 
-            badgeContent={11} 
-            color="secondary"
-            max={999}
-          >
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
+        <p>Favorites</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -174,16 +164,14 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar 
+        position="fixed"
+        className={classes.appbar}
+      >
         <Toolbar>
-          <IconButton
-            edge="start"
-            className="AppBar-menuButton"
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+            <IconButton aria-label="show 4 new mails" color="inherit">
+                    <HomeIcon />
+            </IconButton>
           <Typography 
             className="AppBar-title" 
             variant="h6" 
@@ -208,12 +196,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+                <FavoriteIcon />
               </Badge>
             </IconButton>
             <IconButton

@@ -1,9 +1,7 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
-import Input from '@material-ui/core/Input';
+import {useState} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import API from '../../utils/API';
@@ -26,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         margin: theme.spacing(1),
         width: '25ch',
+        marginTop: '100px'
       },
     },
     input: {

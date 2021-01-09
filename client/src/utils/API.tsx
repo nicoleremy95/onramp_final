@@ -2,7 +2,7 @@
 import axios from 'axios';
 const urlPrefix = 'http://localhost:8080';
 
-export default {
+const apiObj = {
     //NEWS COLLECTION
     getAllNews: function() {
         return axios.get(`${urlPrefix}/news`)
@@ -23,3 +23,5 @@ export default {
         return axios.delete(`${urlPrefix}/news/${newsId}`, news)
     }
 }
+
+export default apiObj;
