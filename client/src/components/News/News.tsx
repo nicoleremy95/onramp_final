@@ -38,8 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[5],
     },
     textField:{
-      width: '55ch',
-      // padding: '5%'
+      width: '80%',
     },
     container: {
       margin: "5%"
