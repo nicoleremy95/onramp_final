@@ -137,6 +137,30 @@ app.set('view engine', 'html');
     })
   })
 
+  //AUTH ROUTES ** DELETE WHEN FILE STRUCTURE WORKS 
+  //Sign up, PASSED POSTMAN TEST: PENDING
+  app.post('/signup', (req, res) =>{
+    const {username, email, password, name} = req.body;
+    db.User.create(
+        {
+            username:username,
+            email: email,
+            password:password,
+            name: {
+                first: name ? name.first : '',
+                last : name ? name.last : ''
+            }
+        }
+        .then(user=>{
+          res.json(user)
+        })
+        .catch((err) =>{
+          console.log('err', err)
+          res.status(500).end();
+        })
+    )
+})
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -156,8 +180,13 @@ app.use(function (err, req, res, next) {
 });
 
 //Connect to MongoDB local host
-mongoose.connect('mongodb://127.0.0.1:27017/news', {useNewUrlParser: true}, 
-// { useUnifiedTopology: true }
+mongoose.connect('mongodb://127.0.0.1:27017/news', 
+  { useNewUrlParser: true, 
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  }
 );
 const connection = mongoose.connection;
 connection.once('open', function(){
