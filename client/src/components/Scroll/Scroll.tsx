@@ -24,6 +24,7 @@ const Scroll = (showBelow:any) =>{
     const classes = useStyles();
     const [show, setShow] = useState(showBelow ? false : true)
 
+    //event handler
     const handleScroll = () =>{
         if(window.pageYOffset > showBelow){
             if(!show) setShow(true)
@@ -32,6 +33,7 @@ const Scroll = (showBelow:any) =>{
         }
     }
 
+    //scroll to top of page
     const handleClick = () =>{
         window[`scrollTo`]({
             top:0,
@@ -48,7 +50,8 @@ const Scroll = (showBelow:any) =>{
 
     return(
         <div>
-            { 
+            {
+            //show &&
                 <IconButton 
                     onClick={handleClick}
                     className={classes.toTop}
