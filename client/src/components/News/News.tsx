@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
-import { createStyles, makeStyles, ThemeProvider, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
@@ -71,7 +70,7 @@ export default function News({newsDB}: Props) : JSX.Element {
 
     const classes = useStyles();
 
-    const newsArr:object[] = [];
+    // const newsArr:object[] = [];
     // Props.map(item =>{
     //     console.log('item.newsCreator', item.newsCreator)
     //     newsArr.push(
