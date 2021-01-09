@@ -1,0 +1,26 @@
+.News-cards {
+    margin: auto;
+    
+}
+.News-cards-root {
+    min-width: 200px;
+    max-width: 600px;
+    margin: 100px;
+    /* align-items: center; */
+    /* border-radius: 2px;
+    overflow: hidden; */
+}
+.News-cards-category {
+    font-size: 14pt;
+}
+
+.News-cards-comment {
+    padding: 10px
+}
+.News-cards-emoji {
+    padding: 5px
+}
+.News-cards-modal{
+    box-shadow: 5px 10px #888888;
+}
+

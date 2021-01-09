@@ -6,6 +6,7 @@ import AppBar from '../components/Appbar/Appbar';
 import News from '../components/News/News'
 import Sup from '../components/Sup/Sup'
 import API from '../utils/API'
+import './home.css'
 
 export default function Home() {
     const [newsDB, setNewsDB] = useState<Array<object>>([]);
@@ -30,7 +31,7 @@ export default function Home() {
     })
     
     return (
-        <div>
+        <div className="Home">
             <AppBar/>
             <Sup/>
             <News newsDB={newsDB} />
