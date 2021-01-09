@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -133,7 +134,9 @@ export default function News({newsDB}: Props) : JSX.Element {
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>
-                <Button size="small" onClick={handleOpen}>react</Button>
+                <IconButton aria-label="share">
+                  <EmojiEmotionsIcon onClick={handleOpen} />
+                </IconButton>
                 <Modal
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
@@ -201,7 +204,9 @@ export default function News({newsDB}: Props) : JSX.Element {
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>
-                <Button size="small" onClick={handleOpen}>react</Button>
+                <IconButton aria-label="share">
+                  <EmojiEmotionsIcon onClick={handleOpen} />
+                </IconButton>
                 <Modal
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
@@ -269,7 +274,9 @@ export default function News({newsDB}: Props) : JSX.Element {
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>
-                <Button size="small" onClick={handleOpen}>react</Button>
+                <IconButton aria-label="share">
+                  <EmojiEmotionsIcon onClick={handleOpen} />
+                </IconButton>
                 <Modal
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
@@ -337,7 +344,9 @@ export default function News({newsDB}: Props) : JSX.Element {
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>
-                <Button size="small" onClick={handleOpen}>react</Button>
+                <IconButton aria-label="share">
+                  <EmojiEmotionsIcon onClick={handleOpen} />
+                </IconButton>
                 <Modal
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
@@ -405,7 +414,9 @@ export default function News({newsDB}: Props) : JSX.Element {
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>
-                <Button size="small" onClick={handleOpen}>react</Button>
+                <IconButton aria-label="share">
+                  <EmojiEmotionsIcon onClick={handleOpen} />
+                </IconButton>
                 <Modal
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
@@ -473,7 +484,9 @@ export default function News({newsDB}: Props) : JSX.Element {
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>
-                <Button size="small" onClick={handleOpen}>react</Button>
+                <IconButton aria-label="share">
+                  <EmojiEmotionsIcon onClick={handleOpen} />
+                </IconButton>
                 <Modal
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
