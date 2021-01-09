@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     textField:{
       width: '80%',
+      marginBottom: '20px'
     },
     cardAction: {
       display: 'flex',
