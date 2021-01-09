@@ -4,6 +4,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import Grid from '@material-ui/core/Grid';
 import API from '../../utils/API';
 import './sup.css'
 
@@ -19,11 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        margin:'auto'
+
     },
     root: {
       '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch',
         marginTop: '100px'
       },
     },
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
         '& > *': {
             background: 'white',
         },
+        width: "100%"
     },
     button: {
         margin: theme.spacing(1),
@@ -71,7 +73,10 @@ export default function Sup(){
     }
     return(
         <div className={classes.container}>
-            <form className={classes.root} noValidate autoComplete="on" onSubmit={inputSubmit}>
+            <Grid container>
+                <Grid item xs={2} md={2} lg={3}></Grid>
+                <Grid item xs={8} md={8} lg={6}>
+                <form className={classes.root} noValidate autoComplete="on" onSubmit={inputSubmit}>
                 <div>
                     <TextField 
                         id="outlined-basic" 
@@ -115,6 +120,9 @@ export default function Sup(){
                     </Button>
                 </div>
             </form>
+                </Grid>
+                <Grid item xs={2} md={2} lg={4}></Grid>
+            </Grid>
         </div>
     )
 }
