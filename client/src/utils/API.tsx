@@ -1,3 +1,4 @@
+//axios allows for an https request from the frontend to the backend server
 import axios from 'axios';
 const urlPrefix = 'http://localhost:8080';
 

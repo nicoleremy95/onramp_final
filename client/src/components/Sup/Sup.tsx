@@ -31,23 +31,29 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Sup(){
     const classes = useStyles();
-    const [newsForm, setNewsForm] = useState({
+
+    //initialize form object state
+    const [newsObj, setNewsObj] = useState<State>({
         newsData: "",
         newsCreator: "",
         newsType: ""
     })
 
-    const inputChange =(e: React.FormEvent<HTMLInputElement>) =>{
+    //input change function
+    function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>){
+        //TODO: refactor any
         const{name, value}: any = e.target;
-        setNewsForm({...newsForm, [name]:value})
+        setNewsObj({ ...newsObj, [name]: value })
     }
-    const inputSubmit =(e: React.FormEvent<HTMLInputElement>) =>{
-        API.postNews(newsForm)
+
+    // input submit function
+    function inputSubmit (e: React.FormEvent<HTMLFormElement>) {
+        API.postNews(newsObj)
         .then(news =>{
             console.log('news', news)
         })
         .catch(err =>console.log('err', err))
-        setNewsForm({
+        setNewsObj({
             newsData: "",
             newsCreator: "",
             newsType: ""
@@ -55,15 +61,35 @@ export default function Sup(){
     }
     return(
         <div>
-            <form className={classes.root} noValidate autoComplete="off">
+            <form className={classes.root} noValidate autoComplete="off" onSubmit={inputSubmit}>
                 <TextField 
                     id="outlined-basic" 
                     label="suP friend?" 
                     variant="outlined" 
                     multiline
                     rows={4}
-                    // onChange={inputChange}
-                    //value
+                    type="textarea"
+                    onChange={inputChange}
+                    value={newsObj.newsData}
+                />
+                <TextField 
+                    id="outlined-basic" 
+                    label="name" 
+                    variant="outlined" 
+                    rows={4}
+                    required= {true}
+                    type="textarea"
+                    onChange={inputChange}
+                    value={newsObj.newsCreator}
+                />
+                <TextField 
+                    id="outlined-basic" 
+                    label="type" 
+                    variant="outlined" 
+                    rows={4}
+                    type="textarea"
+                    onChange={inputChange}
+                    value={newsObj.newsType}
                 />
                  <Button
                     variant="contained"

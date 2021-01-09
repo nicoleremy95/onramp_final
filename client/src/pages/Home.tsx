@@ -8,21 +8,35 @@ import Sup from '../components/Sup/Sup'
 import API from '../utils/API'
 
 export default function Home() {
-    const [newsData, setNewsData] = useState<Array<object>>([]);
+    const [newsDB, setNewsDB] = useState<Array<object>>([]);
 
     useEffect(()=>{
-        API.getAllNews().then(news =>{
-            const newsArr = news.data;
-            setNewsData(newsArr);
+        API.getAllNews()
+        .then(res =>{
+            const newsArr = res.data;
+            console.log('newsData', res.data)
+            setNewsDB(newsArr);
         })
         .catch(err => console.log('err', err))
-    }, [newsData])
-
+    }
+    // , [newsDB]
+    )
+    const arr:object[] = [];
+    newsDB.map(item=>{
+        console.log('item', item)
+        arr.push(
+            <h1>{item}</h1>
+        )
+    })
+    
     return (
         <div>
-           <AppBar/>
-           <Sup/>
-           <News newsData={newsData} />
+            <AppBar/>
+            <Sup/>
+            <News newsDB={newsDB} />
+            <div>
+               {arr.map(news=>{return <h1>{news}</h1>})}
+            </div>
         </div>
     )
 }
