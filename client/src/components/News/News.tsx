@@ -6,6 +6,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import './news.css'
 
 //set up interface for props taken from parent component (Home.jsx)
 interface Props {
@@ -14,19 +16,9 @@ interface Props {
 
 const useStyles = makeStyles({
     root: {
-      minWidth: 275,
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
   });
   
             // const newsId = news.data._id
@@ -36,8 +28,6 @@ const useStyles = makeStyles({
 //take props from parent Home.tsx
 export default function News({newsDB}: Props) : JSX.Element {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
-
 
     const newsArr:object[] = [];
     // Props.map(item =>{
@@ -67,8 +57,76 @@ export default function News({newsDB}: Props) : JSX.Element {
         
     
     return (
-        <div className= 'News-cards'>
-           {newsArr.map(news =>{return news})}
+        <div 
+          className= {classes.root}
+        >
+           {/* {newsArr.map(news =>{return news})} */}
+          <Card 
+            className="News-cards-root" 
+            variant="outlined"  
+          >
+              <CardContent>
+              <Typography 
+                className="News-cards-category" 
+                color="textSecondary" 
+                gutterBottom>
+                  food
+              </Typography>
+              <Typography 
+                variant="h5" 
+                component="h2"
+              >
+                Any one else craving tacos???
+              </Typography>
+              <Typography 
+                variant="body2" 
+                component="p"
+              >
+                  Angie
+              </Typography>
+              </CardContent>
+              <CardActions>
+              <Button size="small">comment</Button>
+              <Button size="small">react</Button>
+              </CardActions>
+         </Card>
+          <Card 
+            className="News-cards-root" 
+            variant="outlined"  
+          >
+              <CardContent>
+              <Typography 
+                className="News-cards-category" 
+                color="textSecondary" 
+                gutterBottom>
+                  travel
+              </Typography>
+              <Typography 
+                variant="h5" 
+                component="h2"
+              >
+                I am thinking of going to cuba, any recs?
+              </Typography>
+              <Typography 
+                variant="body2" 
+                component="p"
+              >
+                  fred
+              </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">comment</Button>
+                <Button size="small">react</Button>
+              </CardActions>
+              <TextField
+                id="filled-multiline-static"
+                label="comment"
+                // multiline
+                rows={4}
+                // defaultValue="hey there friend"
+                variant="filled"
+              />
+         </Card>
         </div>
     )
 }

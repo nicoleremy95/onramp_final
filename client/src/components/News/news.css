@@ -1,0 +1,13 @@
+.News-cards {
+    margin: auto;
+    
+}
+.News-cards-root {
+    min-width: 200px;
+    max-width: 600px;
+    margin: 100px;
+    align-items: center;
+}
+.News-cards-category {
+    font-size: 14pt;
+}
