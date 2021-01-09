@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom'
 import './home.css'
 import AppBar from '../components/Appbar/Appbar';
 import News from '../components/News/News'
@@ -22,13 +21,13 @@ export default function Home() {
     }
     // , [newsDB]
     )
-    const arr:object[] = [];
-    newsDB.map(item=>{
-        console.log('item', item)
-        arr.push(
-            <h1>{item}</h1>
-        )
-    })
+    // const arr:object[] = [];
+    // newsDB.map(item=>{
+    //     console.log('item', item)
+    //     arr.push(
+    //         <h1>{item}</h1>
+    //     )
+    // })
     
     return (
         <div className="Home">
@@ -36,7 +35,7 @@ export default function Home() {
             <Sup/>
             <News newsDB={newsDB} />
             <div>
-               {arr.map(news=>{return <h1>{news}</h1>})}
+               {/* {arr.map(news=>{return <h1>{news}</h1>})} */}
             </div>
         </div>
     )
