@@ -39,7 +39,7 @@ export default function Home() {
             <AppBar/>
             <Sup/>
             <News newsDB={newsDB}/>
-            {/* <Footer/> */}
+            <Footer/>
             {/* <div> */}
                {/* {arr.map(news=>{return <h1>{news}</h1>})} */}
             {/* </div> */}

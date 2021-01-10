@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: '100px'
+      marginBottom: 'auto'
     },
     cards: {
       // minWidth: '100px',

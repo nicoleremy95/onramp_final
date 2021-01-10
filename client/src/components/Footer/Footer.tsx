@@ -15,12 +15,10 @@ import './footer.css'
 const useStyles = makeStyles((theme:Theme) =>({
     footer: {
         display: 'flex',
-        background: '#7a8a8a',
-        bottom: 0,
-        width: '100%',
-        position:"absolute",
+        flexDirection: 'column',
+        backgroundImage: 'linear-gradient(to bottom left, white, #7a8a8a)',
         marginTop:"auto",
-        // minHeight: '100%'
+        minHeight: '10vh'
     },
     root: {
       flexGrow: 1,
@@ -46,8 +44,8 @@ export default function Footer() {
         <CssBaseline />
         <div className ={classes.footer}>
           <Container className={classes.root}>
-              <Grid item xs direction="column">
-                <Grid item xs className="grid">
+              <Grid item xs >
+                <Grid item xs>
                   <Typography gutterBottom align="left">
                     <h2>more talK!</h2>
                   </Typography>
