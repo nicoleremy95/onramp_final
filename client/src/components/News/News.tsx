@@ -105,7 +105,7 @@ export default function News({newsDB}: Props) : JSX.Element {
               <div className="news-bubble">
               <div className="news-arrow news-bottom left"></div>
                 <Typography align="left">
-                    <h2 className="sup">more talK!</h2>
+                    <h2 className="sup">...more talK!</h2>
                 </Typography>
                   <Card 
                     className={classes.cards} 

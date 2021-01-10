@@ -47,7 +47,7 @@ export default function Footer() {
               <Grid item xs >
                 <Grid item xs>
                   <Typography gutterBottom align="left">
-                    <h2>more talK!</h2>
+                    <h2>more talK with friendS</h2>
                   </Typography>
                  
                   <Typography color="textSecondary" align="left">
