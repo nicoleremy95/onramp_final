@@ -140,16 +140,16 @@ app.set('view engine', 'html');
   //AUTH ROUTES ** DELETE WHEN FILE STRUCTURE WORKS 
   //Sign up, PASSED POSTMAN TEST: PENDING
   app.post('/signup', (req, res) =>{
-    const {username, email, password, name} = req.body;
+    // const {username, email, password, name} = req.body;
     db.User.create(
         {
-            username:username,
-            email: email,
-            password:password,
-            name: {
-                first: name ? name.first : '',
-                last : name ? name.last : ''
-            }
+            username:req.body.username,
+            email: req.body.email,
+            password:req.body.password,
+            // name: {
+            //     first: req.body.name ? req.body.name.first : '',
+            //     last : req.body.name ? req.body.name.last : ''
+            // }
         }
         .then(user=>{
           res.json(user)
