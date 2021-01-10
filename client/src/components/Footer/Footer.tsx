@@ -56,14 +56,14 @@ export default function Footer() {
 
                   <Tooltip title="Linkedin">
                     <IconButton aria-label="delete" edge="start">
-                      <Link  href="https://www.linkedin.com/in/nicole-remy-190202166/" target="blank">
+                      <Link  href="https://www.linkedin.com/in/nicole-remy-190202166/" target="blank" className="Footer-link-white">
                         <LinkedInIcon  fontSize="large" />
                       </Link>
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="GitHub">
                     <IconButton aria-label="delete">
-                      <Link  href="https://github.com/nicoleremy95" target="blank">
+                      <Link  href="https://github.com/nicoleremy95" target="blank" className="Footer-link-white">
                         <GitHubIcon fontSize="large"/>
                       </Link>
                     </IconButton>

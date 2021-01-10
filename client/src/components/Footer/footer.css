@@ -4,3 +4,9 @@
     font-size: 250% !important;
     font: 'Pacifico', cursive;
 }
+
+.Footer-link-white {
+    text-decoration: none;
+    color: white !important;
+
+}
