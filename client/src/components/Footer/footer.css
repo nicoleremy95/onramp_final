@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
+
 .more-talk {
-    font-size: 300%;
+    font-size: 250% !important;
+    font: 'Pacifico', cursive;
 }
 
 .grid{

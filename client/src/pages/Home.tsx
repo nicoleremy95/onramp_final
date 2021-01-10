@@ -32,15 +32,17 @@ export default function Home() {
     // })
     
     return (
-        <div className="Home">
+        <div 
+            className="Home-container"
+        >
             <Scroll showBelow={250}/>
             <AppBar/>
             <Sup/>
-            <News newsDB={newsDB} />
-            <Footer/>
-            <div>
+            <News newsDB={newsDB}/>
+            {/* <Footer/> */}
+            {/* <div> */}
                {/* {arr.map(news=>{return <h1>{news}</h1>})} */}
-            </div>
+            {/* </div> */}
         </div>
     )
 }
