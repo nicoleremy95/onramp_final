@@ -173,11 +173,10 @@ export default function PrimarySearchAppBar() {
                     <HomeIcon />
             </IconButton>
           <Typography 
-            className="AppBar-title" 
-            variant="h6" 
+              
             noWrap
           >
-            suP?
+            <h3>suP?</h3>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
