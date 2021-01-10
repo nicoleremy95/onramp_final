@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -22,23 +23,27 @@ interface Props {
     newsDB: object;
 }
 
+interface State {
+  message: string;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: '10px',
-      margin:'auto'
+      marginBottom: '100px'
     },
     cards: {
-      minWidth: '100px',
-      maxWidth: '600px',
+      // minWidth: '100px',
+      // maxWidth: '600px',
       marginTop: '50px',
-      marginBottom: '50px',
+      marginBottom: 'auto',
       boxShadow: theme.shadows[5],
     },
     textField:{
       width: '80%',
+      marginBottom: '20px'
     },
     cardAction: {
       display: 'flex',
@@ -68,6 +73,9 @@ const useStyles = makeStyles((theme: Theme) =>
             
 //take props from parent Home.tsx
 export default function News({newsDB}: Props) : JSX.Element {
+  const [commentObj, setCommentObj] = useState<State>({
+    message:""
+  })
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -78,7 +86,114 @@ export default function News({newsDB}: Props) : JSX.Element {
     setOpen(false);
   };
 
-    const classes = useStyles();
+  const classes = useStyles();
+
+  function inputChange(e: React.ChangeEvent<HTMLTextAreaElement>){
+    //TODO: refactor any
+    const{name,value}: any = e.target;
+    setCommentObj({...commentObj, [name]: value})
+  }
+
+    return (
+      <div 
+        className= {classes.root}
+      >
+        <Container>
+          <Grid container>
+            <Grid item xs={1} lg={3}></Grid>
+            <Grid item xs={10} lg={8}>
+              <div className="news-bubble">
+              <div className="news-arrow news-bottom left"></div>
+                <Typography align="left">
+                    <h2 className="sup">more talK!</h2>
+                </Typography>
+                  <Card 
+                    className={classes.cards} 
+                    variant="outlined"  
+                  >
+                    <CardContent>
+                    <Typography 
+                      className="News-cards-category" 
+                      color="textSecondary" 
+                      gutterBottom>
+                        food
+                    </Typography>
+                    <Typography 
+                      variant="h5" 
+                      component="h2"
+                    >
+                      Any one else craving tacos???
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      component="p"
+                    >
+                        Angie
+                    </Typography>
+                    </CardContent>
+                    <CardActions 
+                      className={classes.cardAction}
+                    >
+                      <IconButton aria-label="add to favorites">
+                        <FavoriteIcon />
+                      </IconButton>
+                      <IconButton aria-label="share">
+                        <ShareIcon />
+                      </IconButton>
+                      <IconButton aria-label="share">
+                        <EmojiEmotionsIcon onClick={handleOpen} />
+                      </IconButton>
+                      <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                        open={open}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                          timeout: 500,
+                        }}
+                      >
+                      <Fade in={open}>
+                        <div 
+                          className={classes.paper}
+                        >
+                          <Button size="small">❤️️</Button>
+                          <Button size="small">😜️</Button>
+                          <Button size="small">😈</Button>
+                          <Button size="small">😍</Button>
+                          <Button size="small">😂</Button>
+                          <Button size="small">😊</Button>
+                        </div>
+                      </Fade>
+                    </Modal>
+                    </CardActions>
+                    <div
+                      className="News-cards-comment"
+                    >
+                      <TextField
+                        id="filled-multiline-static"
+                        label="comment"
+                        variant="filled"
+                        name="message"
+                        value={commentObj.message}
+                        onChange={inputChange}
+                        className={classes.textField}
+                      />
+                    </div>
+                </Card>
+              </div>
+            </Grid>
+            <Grid item xs={1} lg={2}></Grid>
+          </Grid>
+        </Container>
+  {/* {newsArr.map(news =>{return news})} */}
+      </div>
+    )
+}
+
+//loop and render logic 
 
     // const newsArr:object[] = [];
     // Props.map(item =>{
@@ -107,85 +222,8 @@ export default function News({newsDB}: Props) : JSX.Element {
     
         
     
-    return (
-        <div 
-          className= {classes.root}
-        >
-          <Container>
-            <Grid container>
-              <Grid item xs={1} lg={3}></Grid>
-              <Grid item xs={10} lg={8}>
-              <Card 
-            className={classes.cards} 
-            variant="outlined"  
-          >
-              <CardContent>
-              <Typography 
-                className="News-cards-category" 
-                color="textSecondary" 
-                gutterBottom>
-                  food
-              </Typography>
-              <Typography 
-                variant="h5" 
-                component="h2"
-              >
-                Any one else craving tacos???
-              </Typography>
-              <Typography 
-                variant="body2" 
-                component="p"
-              >
-                  Angie
-              </Typography>
-              </CardContent>
-              <CardActions className={classes.cardAction}>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                  <EmojiEmotionsIcon onClick={handleOpen} />
-                </IconButton>
-                <Modal
-                  aria-labelledby="transition-modal-title"
-                  aria-describedby="transition-modal-description"
-                  className={classes.modal}
-                  open={open}
-                  onClose={handleClose}
-                  closeAfterTransition
-                  BackdropComponent={Backdrop}
-                  BackdropProps={{
-                    timeout: 500,
-                  }}
-                >
-                <Fade in={open}>
-                  <div className={classes.paper}>
-                    <Button size="small">❤️️</Button>
-                    <Button size="small">😜️</Button>
-                    <Button size="small">😈</Button>
-                    <Button size="small">😍</Button>
-                    <Button size="small">😂</Button>
-                    <Button size="small">😊</Button>
-                  </div>
-                </Fade>
-              </Modal>
-              </CardActions>
-              <div
-                className="News-cards-comment"
-              >
-                <TextField
-                  id="filled-multiline-static"
-                  label="comment"
-                  variant="filled"
-                  className={classes.textField}
-                />
-              </div>
-              
-         </Card>
-          <Card 
+//filler news 
+  {/* <Card 
             className={classes.cards} 
             variant="outlined" 
           >
@@ -534,13 +572,4 @@ export default function News({newsDB}: Props) : JSX.Element {
                         />
                       </div>
                       
-                </Card>
-              </Grid>
-              <Grid item xs={1} lg={2}></Grid>
-            </Grid>
-          </Container>
-           {/* {newsArr.map(news =>{return news})} */}
-          
-        </div>
-    )
-}
+                </Card> */}

@@ -1,4 +1,4 @@
-.News-cards {
+/* .News-cards {
     margin: auto;
     
 }
@@ -9,7 +9,7 @@
     /* align-items: center; */
     /* border-radius: 2px;
     overflow: hidden; */
-}
+/* }
 .News-cards-category {
     font-size: 14pt;
 }
@@ -22,5 +22,28 @@
 }
 .News-cards-modal{
     box-shadow: 5px 10px #888888;
+} */ 
+
+
+.news-bubble {
+    background-color: #a5aaab;
+    border: 10px solid #7a8a8a;
+    border-radius: 20px;
+    /* width: 60%; */
+    /* text-align: center; */
+    padding: 20px;
+    position: relative;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
+.news-bubble .news-arrow {
+    border-style: solid;
+    position: absolute;
+}
+ 
+.news-bottom {
+    border-color: #7a8a8a transparent transparent transparent;
+    border-width: 16px 16px 0px 16px;
+    bottom: -20px;
+}
