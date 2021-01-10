@@ -8,18 +8,19 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Link from '@material-ui/core/Link';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import './footer.css'
 import { IconButton } from '@material-ui/core';
+import './footer.css'
 
 
 const useStyles = makeStyles((theme:Theme) =>({
     footer: {
         display: 'flex',
-        // height: '150px !important',
         background: '#7a8a8a',
         bottom: 0,
-        width: '1',
-        position:"relative",
+        width: '100%',
+        position:"absolute",
+        marginTop:"auto",
+        // minHeight: '100%'
     },
     root: {
       flexGrow: 1,
@@ -47,12 +48,12 @@ export default function Footer() {
           <Container className={classes.root}>
               <Grid item xs direction="column">
                 <Grid item xs className="grid">
-                  <Typography gutterBottom variant="h5" align="left">
-                    more talK?
+                  <Typography gutterBottom align="left">
+                    <h2>more talK!</h2>
                   </Typography>
                  
-                  <Typography variant="body2" color="textSecondary" align="left">
-                    a product by: nicole remy
+                  <Typography color="textSecondary" align="left">
+                    <p>a product by: nicole remy</p>
                   </Typography>
 
                   <Tooltip title="Linkedin">
@@ -69,8 +70,8 @@ export default function Footer() {
                       </Link>
                     </IconButton>
                   </Tooltip>
-                  <Typography className="more-talk" align="left" variant="h2">
-                    suP?
+                  <Typography className="more-talk" align="left">
+                    <h1>suP?</h1>
                   </Typography>
                 </Grid>
               </Grid>
