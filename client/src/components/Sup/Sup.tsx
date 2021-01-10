@@ -107,7 +107,7 @@ export default function Sup(){
                 <Grid item xs={1} md={3} lg={3} direction="column"></Grid>
                 <Grid item xs ={10} md={6} lg={6}>
                 <div className="sup-bubble">
-                    <div className="sup-arrow sup-bottom left"></div>
+                    <div className="sup-arrow sup-bottom right"></div>
                         <form 
                             // className={classes.root} 
                                 noValidate 
