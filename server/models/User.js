@@ -5,7 +5,7 @@ const User = new Schema (
     {
         username: {
             type: String,
-            // required: true,
+            required: true,
             // unique: true
         },
         email: {
@@ -16,15 +16,15 @@ const User = new Schema (
             type: String,
             // required: true
         },
-        // name: {
-        //     first: {
-        //         type: String,
-        //         // required: true
-        //     },
-        //     last: {
-        //         type: String,
-        //     }
-        // },
+        name: {
+            first: {
+                type: String,
+                // required: true
+            },
+            last: {
+                type: String,
+            }
+        },
         // createdNews: {
         //     type: Schema.Types.ObjectId,
         //     ref: 'News'
@@ -34,3 +34,6 @@ const User = new Schema (
 )
 
 module.exports = mongoose.model('User', User)
+
+
+
