@@ -1,30 +1,55 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
-import Input from '@material-ui/core/Input';
+import {useState} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SendIcon from '@material-ui/icons/Send';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Container from '@material-ui/core/Container';
 import API from '../../utils/API';
+import { Typography } from '@material-ui/core';
+import './sup.css'
 
 interface State {
     newsData: string,
     newsCreator: string,
-    newsType: string
+    newsType: string,
 }
+// interface Icon {
+//     icon: boolean
+// }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
+        // display: 'flex',
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        marginTop:'auto',
     },
-    button: {
-        margin: theme.spacing(1),
+    input: {
+        '& > *': {
+            background: 'white',
+        },
+        width: "100%",
+        marginRight: '100px'
     },
+    formControl: {
+        minWidth: "60%",
+    },
+    send:{
+        marginTop: '50px',
+        marginRight: "0px"
+    }
   }),
 );
 
@@ -34,16 +59,30 @@ export default function Sup(){
 
     //initialize form object state
     const [newsObj, setNewsObj] = useState<State>({
-        newsData: "",
-        newsCreator: "",
-        newsType: ""
+        newsData:"",
+        newsCreator:"",
+        newsType:""
     })
+
+    const [state, setState] = React.useState<{ age: string | number; name: string }>({
+        age: '',
+        name: 'hai',
+      });
+    
+    const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    const name = event.target.name as keyof typeof state;
+    setState({
+        ...state,
+        [name]: event.target.value,
+    });
+    };
 
     //input change function
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>){
         //TODO: refactor any
-        const{name, value}: any = e.target;
-        setNewsObj({ ...newsObj, [name]: value })
+        const{ name, value}: any = e.target;
+        setNewsObj({ ...newsObj,[name]: value})
+        // setIcon(true)
     }
 
     // input submit function
@@ -60,47 +99,76 @@ export default function Sup(){
         })
     }
     return(
-        <div>
-            <form className={classes.root} noValidate autoComplete="off" onSubmit={inputSubmit}>
-                <TextField 
-                    id="outlined-basic" 
-                    label="suP friend?" 
-                    variant="outlined" 
-                    multiline
-                    rows={4}
-                    type="textarea"
-                    onChange={inputChange}
-                    value={newsObj.newsData}
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="name" 
-                    variant="outlined" 
-                    rows={4}
-                    required= {true}
-                    type="textarea"
-                    onChange={inputChange}
-                    value={newsObj.newsCreator}
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="type" 
-                    variant="outlined" 
-                    rows={4}
-                    type="textarea"
-                    onChange={inputChange}
-                    value={newsObj.newsType}
-                />
-                 <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    endIcon={<Icon>send</Icon>}
-                >
-                    Send
-                </Button>
-                
-            </form>
+        <div 
+            className={classes.root}
+        >
+            <Container>
+            <Grid container >
+                <Grid item xs={1} md={3} lg={3} direction="column"></Grid>
+                <Grid item xs ={10} md={6} lg={6}>
+                <div className="sup-bubble">
+                    <div className="sup-arrow sup-bottom right"></div>
+                        <form 
+                            // className={classes.root} 
+                                noValidate 
+                                autoComplete="on" 
+                                onSubmit={inputSubmit}
+                            >
+                                <Typography align="right">
+                                    <h2 className="sup">tell me...suP?</h2>
+                                </Typography>
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="suP friend?" 
+                                    variant="outlined" 
+                                    multiline
+                                    rows={4}
+                                    type="textarea"
+                                    name="newsData"
+                                    value={newsObj.newsData}
+                                    onChange={inputChange}
+                                    className={classes.input}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <IconButton className={classes.send}>
+                                                <SendIcon/>
+                                            </IconButton>
+
+                                        )
+                                    
+                                    }}
+                                />
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="age-native-simple">Category</InputLabel>
+                                    <Select
+                                        native
+                                        value={state.age}
+                                        onChange={handleChange}
+                                        inputProps={{
+                                            name: 'category',
+                                            id: 'age-native-simple',
+                                        }}
+                                        >
+                                        <option aria-label="None" value="" />
+                                        <option value={10}>Travel</option>
+                                        <option value={20}>Food</option>
+                                        <option value={30}>Entertainment</option>
+                                        <option value={30}>Fashion</option>
+                                        <option value={30}>Sports</option>
+                                        <option value={30}>Music</option>
+                                        <option value={30}>Misc</option>
+                                    </Select>
+                                </FormControl>
+                                            
+                        </form>
+                        </div>
+                    </Grid>                 
+                    <Grid item xs={1} md={2} lg={2} direction="column"></Grid>
+                </Grid>
+            </Container>
         </div>
     )
 }
+
+           
+                     

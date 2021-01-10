@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from "react-router-dom";
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,16 +9,18 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import './appbar.css'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    appbar: {
+      backgroundColor: '#a5aaab'
+    },
     grow: {
       flexGrow: 1,
     },
@@ -38,8 +41,8 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: fade(theme.palette.common.white, 0.25),
       },
       marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
+      marginLeft: 10,
+      width: '50%',
       [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
         width: 'auto',
@@ -141,55 +144,44 @@ export default function PrimarySearchAppBar() {
             color="secondary"
             max={999}
           >
-            <MailIcon />
+            <FavoriteIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Favorites</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge 
-            badgeContent={11} 
-            color="secondary"
-            max={999}
-          >
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem >
+      
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <Link to="/user" className="Appbar-link-black">
+         <AccountCircle/>
+         </Link>
         </IconButton>
         <p>Profile</p>
+        
       </MenuItem>
     </Menu>
   );
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar 
+        position="fixed"
+        className={classes.appbar}
+      >
         <Toolbar>
-          <IconButton
-            edge="start"
-            className="AppBar-menuButton"
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+            <IconButton aria-label="show 4 new mails" color="inherit">
+                    <Link  to="/" className="Appbar-link-white" ><HomeIcon/></Link>
+            </IconButton>
           <Typography 
-            className="AppBar-title" 
-            variant="h6" 
+              
             noWrap
           >
-            suP?
+            <Link to="/" className="Appbar-link-white"><h3>suP?</h3></Link>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -208,12 +200,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+                <FavoriteIcon />
               </Badge>
             </IconButton>
             <IconButton
@@ -221,10 +208,11 @@ export default function PrimarySearchAppBar() {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Link to="/user" className="Appbar-link-white">
+                <AccountCircle />
+              </Link>
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
