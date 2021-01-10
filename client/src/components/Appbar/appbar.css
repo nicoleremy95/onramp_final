@@ -1,6 +1,12 @@
-.Appbar {
-    color: green;
-    background-color: blue;
+.Appbar-link-white {
+    text-decoration: none;
+    color: white !important;
+
+}
+.Appbar-link-black {
+    text-decoration: none;
+    color: black !important;
+
 }
 
 .title{
@@ -14,3 +20,5 @@
 .AppBar-menuButton{
     margin-right: 20px;
 }
+
+

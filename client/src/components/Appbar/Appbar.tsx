@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from "react-router-dom";
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -148,16 +149,20 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Favorites</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem >
+      
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <Link to="/user" className="Appbar-link-black">
+         <AccountCircle/>
+         </Link>
         </IconButton>
         <p>Profile</p>
+        
       </MenuItem>
     </Menu>
   );
@@ -170,13 +175,13 @@ export default function PrimarySearchAppBar() {
       >
         <Toolbar>
             <IconButton aria-label="show 4 new mails" color="inherit">
-                    <HomeIcon />
+                    <Link  to="/" className="Appbar-link-white" ><HomeIcon/></Link>
             </IconButton>
           <Typography 
               
             noWrap
           >
-            <h3>suP?</h3>
+            <Link to="/" className="Appbar-link-white"><h3>suP?</h3></Link>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -203,10 +208,11 @@ export default function PrimarySearchAppBar() {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Link to="/user" className="Appbar-link-white">
+                <AccountCircle />
+              </Link>
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
