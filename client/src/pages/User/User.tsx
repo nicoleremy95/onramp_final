@@ -7,7 +7,6 @@ export default function User() {
         <div>
             <Appbar/>
             <Footer/>
-            <h1>sup</h1>
         </div>
     )
 }
