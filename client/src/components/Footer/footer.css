@@ -5,6 +5,8 @@
     font: 'Pacifico', cursive;
 }
 
-.grid{
-    margin:20px
+.Footer-link-white {
+    text-decoration: none;
+    color: white !important;
+
 }

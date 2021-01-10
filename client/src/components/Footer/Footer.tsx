@@ -15,12 +15,10 @@ import './footer.css'
 const useStyles = makeStyles((theme:Theme) =>({
     footer: {
         display: 'flex',
-        background: '#7a8a8a',
-        bottom: 0,
-        width: '100%',
-        position:"absolute",
+        flexDirection: 'column',
+        backgroundImage: 'linear-gradient(to bottom left, white, #7a8a8a)',
         marginTop:"auto",
-        // minHeight: '100%'
+        minHeight: '10vh'
     },
     root: {
       flexGrow: 1,
@@ -46,10 +44,10 @@ export default function Footer() {
         <CssBaseline />
         <div className ={classes.footer}>
           <Container className={classes.root}>
-              <Grid item xs direction="column">
-                <Grid item xs className="grid">
+              <Grid item xs >
+                <Grid item xs>
                   <Typography gutterBottom align="left">
-                    <h2>more talK!</h2>
+                    <h2>more talK with friendS</h2>
                   </Typography>
                  
                   <Typography color="textSecondary" align="left">
@@ -58,14 +56,14 @@ export default function Footer() {
 
                   <Tooltip title="Linkedin">
                     <IconButton aria-label="delete" edge="start">
-                      <Link  href="https://www.linkedin.com/in/nicole-remy-190202166/" target="blank">
+                      <Link  href="https://www.linkedin.com/in/nicole-remy-190202166/" target="blank" className="Footer-link-white">
                         <LinkedInIcon  fontSize="large" />
                       </Link>
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="GitHub">
                     <IconButton aria-label="delete">
-                      <Link  href="https://github.com/nicoleremy95" target="blank">
+                      <Link  href="https://github.com/nicoleremy95" target="blank" className="Footer-link-white">
                         <GitHubIcon fontSize="large"/>
                       </Link>
                     </IconButton>
