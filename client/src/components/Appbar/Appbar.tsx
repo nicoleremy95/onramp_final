@@ -14,6 +14,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import './appbar.css'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -164,6 +166,32 @@ export default function PrimarySearchAppBar() {
         <p>Profile</p>
         
       </MenuItem>
+      <MenuItem>
+        <IconButton
+          edge="end"
+          aria-label="login"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <Link to="/login" className="Appbar-link-black">
+            <VpnKeyIcon />
+          </Link>
+        </IconButton>
+        <p>Login</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          edge="end"
+          aria-label="logout"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          color="inherit"
+        >
+            <ExitToAppIcon />
+        </IconButton>
+        <p>Logout</p>
+      </MenuItem>
     </Menu>
   );
 
@@ -213,6 +241,26 @@ export default function PrimarySearchAppBar() {
               <Link to="/user" className="Appbar-link-white">
                 <AccountCircle />
               </Link>
+            </IconButton>
+            <IconButton
+              edge="end"
+              aria-label="login"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <Link to="/login" className="Appbar-link-white">
+                <VpnKeyIcon />
+              </Link>
+            </IconButton>
+            <IconButton
+              edge="end"
+              aria-label="logout"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              color="inherit"
+            >
+                <ExitToAppIcon />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>

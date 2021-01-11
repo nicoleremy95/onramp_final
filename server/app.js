@@ -1,7 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var mongoose = require('mongoose');
+const createError = require('http-errors');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose');
+const cors = require("cors");
+
+//sesions 
+const session = require("express-session");
+
+//password encryption
+const bcrypt = require("bcrypt");
 
 //Middleware similar to cors
 var logger = require('morgan');
@@ -25,6 +32,32 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set('view engine', 'html');
+
+// CORS
+// Uncomment for development
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    // origin: "https://travelplanit.herokuapp.com",
+    credentials: false,
+  })
+);
+
+//SESSION
+// for heroku deploy uncomment proxy, samesite and secure
+app.use(
+  session({
+    secret: "sup app",
+    resave: false,
+    saveUninitialized: true,
+    // proxy: true,
+    cookie: {
+      maxAge: 2 * 60 * 60 * 1000,
+      // sameSite: "none",
+      // secure: true,
+    },
+  })
+);
 
 //NEWS ROUTES ** DELETE WHEN FILE STRUCTURE WORKS  
   //Get all news in database, PASSED POSTMAN TEST: PASSED
@@ -138,19 +171,32 @@ app.set('view engine', 'html');
   })
 
   //AUTH ROUTES ** DELETE WHEN FILE STRUCTURE WORKS 
-  //Sign up, PASSED POSTMAN TEST: PENDING
+  //Get all users, PASSED POSTMAN TEST: PENDING 
+  app.get("/users", (req, res) => {
+    db.User.find({})
+      .then((allUsers) => {
+        res.json(allUsers);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).end();
+      });
+  });
+
+  //Sign up, PASSED POSTMAN TEST: PASSED
   app.post('/signup', (req, res) =>{
+    console.log('req', req);
     // const {username, email, password, name} = req.body;
     db.User.create(
         {
             username:req.body.username,
             email: req.body.email,
             password:req.body.password,
-            // name: {
-            //     first: req.body.name ? req.body.name.first : '',
-            //     last : req.body.name ? req.body.name.last : ''
-            // }
-        }
+            name: {
+                first: req.body.name ? req.body.name.first : '',
+                last : req.body.name ? req.body.name.last : ''
+            }
+        })
         .then(user=>{
           res.json(user)
         })
@@ -158,8 +204,53 @@ app.set('view engine', 'html');
           console.log('err', err)
           res.status(500).end();
         })
-    )
-})
+    
+  })
+
+  //TODO: 
+  //Signout, PASSED POSTMAN TEST: PENDING 
+  app.post("/login", (req, res) => {
+    console.log("here is the password", req.body.password)
+    db.User.findOne({
+      username: req.body.username,
+    })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send("no such user");
+      } else {
+        console.log('console user', user);
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          // console.log('console res.session', res.session);
+          console.log('console req.session', req.session);
+          // res.session.user = {
+          //   id: user._id,
+          //   username: user.username,
+          //   email: user.email
+          // };
+          // res.send(req.session);
+        } else {
+          res.status(401).send("wrong password");
+        }
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).end();
+    });
+  });
+  
+  //TODO: 
+  //Log out, PASSED POSTMAN TEST: PENDING 
+  app.get('/logout', (req,res) =>{
+    res.session.destroy();
+    res.send("You have been logged out");
+  })
+
+  //TODO: 
+  //read session, PASSED POSTMAN TEST: PENDING 
+  app.get('/readsession', (req,res) =>{
+    res.json(req.session)
+  })
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -192,6 +283,8 @@ const connection = mongoose.connection;
 connection.once('open', function(){
   console.log('MongoDB database connection established success')
 })
+
+
 
 //Use routes
 app.use('/', allRoutes);
