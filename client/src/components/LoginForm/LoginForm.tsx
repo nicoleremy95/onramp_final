@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -8,6 +9,7 @@ import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import API from '../../utils/API';
 import './loginForm.css'
+import { History } from '@material-ui/icons';
 
 
 interface State {
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 export default function Login() {
+    
     const classes = useStyles();
 
     //initialize form object state
@@ -50,6 +53,8 @@ export default function Login() {
         username:"",
         password:""
     })
+
+    const history = useHistory();
 
     //input change function
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -62,13 +67,14 @@ export default function Login() {
         e.preventDefault();        
         API.login(loginObj)
         .then(loginObj =>{
-            console.log('loginObj', loginObj)
+            history.push("/")
+            // console.log('loginObj', loginObj)
         })
         .catch(err =>console.log('err', err))
-        setLoginObject({
-            username: "",
-            password:""
-        })
+        // setLoginObject({
+        //     username: "",
+        //     password:""
+        // })
         return true;
     }
     return (
@@ -84,7 +90,7 @@ export default function Login() {
                     <form 
                     // className={classes.root} 
                         noValidate 
-                        autoComplete="off" 
+                        autoComplete="on" 
                         onClick={inputSubmit}
                     >
                         <Typography align="right">

@@ -124,7 +124,8 @@ export default function UserComp() {
                         <TextField 
                             id="outlined-basic" 
                             label="email" 
-                            variant="outlined"                                     type="textarea"
+                            variant="outlined"  
+                            type="textarea"                                   
                             name="email"
                             value={userObj.email}
                             onChange={inputChange}
