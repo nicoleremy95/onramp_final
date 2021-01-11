@@ -3,7 +3,7 @@ import axios from 'axios';
 const urlPrefix = 'http://localhost:8080';
 
 //TODO: 
-const apiObj = {
+const API = {
     //NEWS COLLECTION
     getAllNews: function() {
         return axios.get(`${urlPrefix}/news`)
@@ -37,4 +37,4 @@ const apiObj = {
     }
 }
 
-export default apiObj;
+export default API;

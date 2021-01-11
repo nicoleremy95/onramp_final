@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,6 +18,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import './appbar.css'
+import API from '../../utils/API';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -88,6 +90,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function PrimarySearchAppBar() {
+
+  const history = useHistory();
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -111,6 +116,14 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const logOut = () => {
+    API.logout()
+    .then(req =>{
+      history.push('/')
+    })
+    
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -260,7 +273,7 @@ export default function PrimarySearchAppBar() {
               aria-haspopup="true"
               color="inherit"
             >
-                <ExitToAppIcon />
+                <ExitToAppIcon onClick={logOut}/>
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
