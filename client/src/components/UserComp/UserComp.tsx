@@ -10,6 +10,14 @@ import IconButton from "@material-ui/core/IconButton";
 import SendIcon from '@material-ui/icons/Send';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import './UserComp.css'
+
+interface State {
+    username: string,
+    name: string,
+    email: string,
+    password: string 
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,25 +48,24 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function UserComp() {
     const classes = useStyles();
 
+    const [userObj, setUserObj] = useState<State>({
+        username:'',
+        name: '',
+        email: '',
+        password: ''
+    })
+
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>){
         //TODO: refactor any
         const{ name, value}: any = e.target;
-        setNewsObj({ ...newsObj,[name]: value})
+        setUserObj({ ...userObj,[name]: value})
         // setIcon(true)
     }
 
+    //TODO:
     // input submit function
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) {
-        API.postNews(newsObj)
-        .then(news =>{
-            console.log('news', news)
-        })
-        .catch(err =>console.log('err', err))
-        setNewsObj({
-            newsData: "",
-            newsCreator: "",
-            newsType: ""
-        })
+
     }
 
     return (
@@ -76,50 +83,50 @@ export default function UserComp() {
                                 onSubmit={inputSubmit}
                             >
                                 <Typography align="right">
-                                    <h2 className="sup">tell me...suP?</h2>
+                                    <h2 className="sup">new account</h2>
                                 </Typography>
                                 <TextField 
                                     id="outlined-basic" 
-                                    label="suP friend?" 
+                                    label="username" 
                                     variant="outlined" 
-                                    multiline
-                                    rows={4}
                                     type="textarea"
-                                    name="newsData"
-                                    value={newsObj.newsData}
+                                    name="username"
+                                    value={userObj.username}
                                     onChange={inputChange}
                                     className={classes.input}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <IconButton className={classes.send}>
-                                                <SendIcon/>
-                                            </IconButton>
-
-                                        )
-                                    
-                                    }}
+                            
                                 />
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="age-native-simple">Category</InputLabel>
-                                    <Select
-                                        native
-                                        value={state.age}
-                                        onChange={handleChange}
-                                        inputProps={{
-                                            name: 'category',
-                                            id: 'age-native-simple',
-                                        }}
-                                        >
-                                        <option aria-label="None" value="" />
-                                        <option value={10}>Travel</option>
-                                        <option value={20}>Food</option>
-                                        <option value={30}>Entertainment</option>
-                                        <option value={30}>Fashion</option>
-                                        <option value={30}>Sports</option>
-                                        <option value={30}>Music</option>
-                                        <option value={30}>Misc</option>
-                                    </Select>
-                                </FormControl>
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="password" 
+                                    variant="outlined" 
+                                    type="textarea"
+                                    name="password"
+                                    value={userObj.password}
+                                    onChange={inputChange}
+                                    className={classes.input}
+                                    
+                                />
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="name" 
+                                    variant="outlined" 
+                                    type="textarea"
+                                    name="name"
+                                    value={userObj.name}
+                                    onChange={inputChange}
+                                    className={classes.input}
+                                    
+                                />
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="email" 
+                                    variant="outlined"                                     type="textarea"
+                                    name="email"
+                                    value={userObj.email}
+                                    onChange={inputChange}
+                                    className={classes.input}
+                                />
                                             
                         </form>
                             </div>

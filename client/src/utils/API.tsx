@@ -2,6 +2,7 @@
 import axios from 'axios';
 const urlPrefix = 'http://localhost:8080';
 
+//TODO: 
 const apiObj = {
     //NEWS COLLECTION
     getAllNews: function() {
@@ -21,7 +22,10 @@ const apiObj = {
     },
     deleteNews: function(news: object, newsId: string){
         return axios.delete(`${urlPrefix}/news/${newsId}`, news)
-    }
+    },
+    postUser: function(user: object, userId: string){
+        return axios.post(`${urlPrefix}/signup`, user )
+    }, 
 }
 
 export default apiObj;

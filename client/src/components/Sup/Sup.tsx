@@ -20,8 +20,8 @@ import './sup.css'
 
 interface State {
     newsData: string,
-    newsCreator: string,
-    newsType: string,
+    // newsCreator: string,
+    // newsType: string,
 }
 // interface Icon {
 //     icon: boolean
@@ -60,25 +60,25 @@ export default function Sup(){
     //initialize form object state
     const [newsObj, setNewsObj] = useState<State>({
         newsData:"",
-        newsCreator:"",
-        newsType:""
+        // newsCreator:"",
+        // newsType:""
     })
 
-    const [state, setState] = React.useState<{ age: string | number; name: string }>({
-        age: '',
-        name: 'hai',
-      });
+    // const [state, setState] = React.useState<{ age: string | number; name: string }>({
+    //     age: '',
+    //     name: 'hai',
+    //   });
     
-    const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    const name = event.target.name as keyof typeof state;
-    setState({
-        ...state,
-        [name]: event.target.value,
-    });
-    };
+    // const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    // const name = event.target.name as keyof typeof state;
+    // setState({
+    //     ...state,
+    //     [name]: event.target.value,
+    // });
+    // };
 
     //input change function
-    function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>){
+    function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
         //TODO: refactor any
         const{ name, value}: any = e.target;
         setNewsObj({ ...newsObj,[name]: value})
@@ -86,17 +86,21 @@ export default function Sup(){
     }
 
     // input submit function
-    function inputSubmit (e: React.FormEvent<HTMLFormElement>) {
+    function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
+        e.preventDefault();
+        // alert('clicked');
+        
         API.postNews(newsObj)
         .then(news =>{
             console.log('news', news)
         })
         .catch(err =>console.log('err', err))
-        setNewsObj({
-            newsData: "",
-            newsCreator: "",
-            newsType: ""
-        })
+        // setNewsObj({
+        //     newsData: ""
+        //     // newsCreator: "",
+        //     // newsType: ""
+        // })
+        return true;
     }
     return(
         <div 
@@ -112,7 +116,7 @@ export default function Sup(){
                             // className={classes.root} 
                                 noValidate 
                                 autoComplete="on" 
-                                onSubmit={inputSubmit}
+                                onClick={inputSubmit}
                             >
                                 <Typography align="right">
                                     <h2 className="sup">tell me...suP?</h2>
@@ -128,37 +132,41 @@ export default function Sup(){
                                     value={newsObj.newsData}
                                     onChange={inputChange}
                                     className={classes.input}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <IconButton className={classes.send}>
-                                                <SendIcon/>
-                                            </IconButton>
+                                    // InputProps={{
+                                    //     endAdornment: (
+                                    //         <IconButton className={classes.send}>
+                                    //             <SendIcon />                                                
+                                    //         </IconButton>
 
-                                        )
+                                    //     )
                                     
-                                    }}
+                                    // }}
                                 />
-                                <FormControl className={classes.formControl}>
+                                <Button variant="contained" color="primary" type="submit">
+                                    send
+                                </Button>
+                                {/* <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="age-native-simple">Category</InputLabel>
                                     <Select
                                         native
-                                        value={state.age}
+                                        value={newsObj.newsType}
+                                        name="newsType"
                                         onChange={handleChange}
                                         inputProps={{
                                             name: 'category',
                                             id: 'age-native-simple',
                                         }}
                                         >
-                                        <option aria-label="None" value="" />
-                                        <option value={10}>Travel</option>
-                                        <option value={20}>Food</option>
-                                        <option value={30}>Entertainment</option>
-                                        <option value={30}>Fashion</option>
-                                        <option value={30}>Sports</option>
-                                        <option value={30}>Music</option>
-                                        <option value={30}>Misc</option>
+                                        <option aria-label="None" value="none" />
+                                        <option value="Travel">Travel</option>
+                                        <option value="Food">Food</option>
+                                        <option value="Entertainment">Entertainment</option>
+                                        <option value="Fashion">Fashion</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Misc">Misc</option>
                                     </Select>
-                                </FormControl>
+                                </FormControl> */}
                                             
                         </form>
                         </div>
