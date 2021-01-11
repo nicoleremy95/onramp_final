@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import Home from '../../pages/Home/Home';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -20,6 +21,9 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import './appbar.css'
 import API from '../../utils/API';
 
+interface currentUserProps {
+  currentUser: boolean
+}
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appbar: {
@@ -89,8 +93,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PrimarySearchAppBar() {
-
+// export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({currentUser}: currentUserProps) {
+  console.log('appbar.tsx currentUser', currentUser)
   const history = useHistory();
 
   const classes = useStyles();
@@ -117,7 +122,9 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  //TODO: move to app.tsx and pass down 
   const logOut = () => {
+    history.push('/');
     API.logout()
     .then(req =>{
       history.push('/')
@@ -179,7 +186,19 @@ export default function PrimarySearchAppBar() {
         <p>Profile</p>
         
       </MenuItem>
-      <MenuItem>
+      
+      {currentUser? <MenuItem>
+        <IconButton
+          edge="end"
+          aria-label="logout"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          color="inherit"
+        >
+            <ExitToAppIcon onClick={logOut}/>
+        </IconButton>
+        <p>Logout</p>
+      </MenuItem> : <MenuItem>
         <IconButton
           edge="end"
           aria-label="login"
@@ -192,19 +211,8 @@ export default function PrimarySearchAppBar() {
           </Link>
         </IconButton>
         <p>Login</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          edge="end"
-          aria-label="logout"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          color="inherit"
-        >
-            <ExitToAppIcon />
-        </IconButton>
-        <p>Logout</p>
-      </MenuItem>
+      </MenuItem>}
+      
     </Menu>
   );
 
@@ -255,26 +263,28 @@ export default function PrimarySearchAppBar() {
                 <AccountCircle />
               </Link>
             </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="login"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <Link to="/login" className="Appbar-link-white">
-                <VpnKeyIcon />
-              </Link>
-            </IconButton>
-            <IconButton
+            {currentUser?   <IconButton
               edge="end"
               aria-label="logout"
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"
             >
+              
                 <ExitToAppIcon onClick={logOut}/>
-            </IconButton>
+                
+            </IconButton> :
+            <IconButton
+            edge="end"
+            aria-label="login"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <Link to="/login" className="Appbar-link-white">
+              <VpnKeyIcon />
+            </Link>
+          </IconButton> }
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

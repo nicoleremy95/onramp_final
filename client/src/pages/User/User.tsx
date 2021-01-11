@@ -3,10 +3,14 @@ import Appbar from '../../components/Appbar/Appbar';
 import Footer from '../../components/Footer/Footer'
 import UserComp from '../../components/UserComp/UserComp'
 
-export default function User() {
+interface currentUserProps {
+    currentUser: boolean
+}
+
+export default function User({currentUser}: currentUserProps) {
     return (
         <div>
-            <Appbar/>
+            <Appbar currentUser={currentUser}/>
             <UserComp/>
             <Footer/>
         </div>

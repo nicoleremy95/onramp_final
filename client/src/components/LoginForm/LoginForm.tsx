@@ -56,6 +56,7 @@ export default function Login() {
 
     const history = useHistory();
 
+    //TODO: move to app.tsx and pass down with props 
     //input change function
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
         //TODO: refactor any
@@ -63,6 +64,7 @@ export default function Login() {
         setLoginObject({ ...loginObj,[name]: value})
     }
 
+    //TODO: move to app.tsx and pass down with props 
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
         e.preventDefault();        
         API.login(loginObj)
@@ -71,10 +73,6 @@ export default function Login() {
             // console.log('loginObj', loginObj)
         })
         .catch(err =>console.log('err', err))
-        // setLoginObject({
-        //     username: "",
-        //     password:""
-        // })
         return true;
     }
     return (

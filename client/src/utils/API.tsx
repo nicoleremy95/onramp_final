@@ -34,6 +34,9 @@ const API = {
     },
     logout: function(){
         return axios.get(`${urlPrefix}/logout`, { withCredentials: true })
+    },
+    getCurrentUser: function (){
+        return axios.get(`${urlPrefix}/readsession`, { withCredentials: true })
     }
 }
 

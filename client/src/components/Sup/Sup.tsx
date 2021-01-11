@@ -76,6 +76,7 @@ export default function Sup(){
     // });
     // };
 
+    //TODO: move to app.tsx and pass down with props 
     //input change function
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
         //TODO: refactor any
@@ -84,6 +85,7 @@ export default function Sup(){
         // setIcon(true)
     }
 
+    //TODO: move to app.tsx and pass down with props 
     // input submit function
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
         e.preventDefault();        
