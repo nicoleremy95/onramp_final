@@ -9,6 +9,7 @@ import { Typography } from '@material-ui/core';
 import IconButton from "@material-ui/core/IconButton";
 import SendIcon from '@material-ui/icons/Send';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import './UserComp.css'
 
@@ -82,7 +83,7 @@ export default function UserComp() {
                     // className={classes.root} 
                         noValidate 
                         autoComplete="on" 
-                        onSubmit={inputSubmit}
+                        onClick={inputSubmit}
                     >
                         <Typography align="right">
                             <h2 className="user">new account</h2>
@@ -129,6 +130,9 @@ export default function UserComp() {
                             onChange={inputChange}
                             className={classes.input}
                         />
+                        <Button variant="contained" color="primary" type="submit">
+                            create account
+                        </Button>
                     </form>
                 </div>
                 </Grid>                 

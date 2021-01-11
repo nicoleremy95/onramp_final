@@ -30,7 +30,7 @@ const apiObj = {
         return axios.post(`${urlPrefix}/signup`, user, { withCredentials: true })
     },
     login: function(user: object){
-        return axios.get(`${urlPrefix}/login`, { withCredentials: true })
+        return axios.post(`${urlPrefix}/login`, user, { withCredentials: true })
     },
     logout: function(){
         return axios.get(`${urlPrefix}/logout`, { withCredentials: true })

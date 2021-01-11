@@ -73,7 +73,7 @@ export default function Login() {
     }
     return (
         <div 
-        className={classes.root}
+            className={classes.root}
         >
         <Container>
         <Grid container >
@@ -82,27 +82,37 @@ export default function Login() {
             <div className="login-bubble">
                 <div className="login-arrow login-bottom right"></div>
                     <form 
-                        // className={classes.root} 
-                            noValidate 
-                            autoComplete="on" 
-                            onClick={inputSubmit}
-                        >
-                            <Typography align="right">
-                                <h2 className="login">...login?</h2>
-                            </Typography>
-                            <TextField 
-                                id="outlined-basic" 
-                                label="username" 
-                                variant="outlined" 
-                                type="textarea"
-                                name="username"
-                                value={loginObj.username}
-                                onChange={inputChange}
-                                className={classes.input}
-                            />
-                            <Button variant="contained" color="primary" type="submit">
-                                login
-                            </Button>
+                    // className={classes.root} 
+                        noValidate 
+                        autoComplete="off" 
+                        onClick={inputSubmit}
+                    >
+                        <Typography align="right">
+                            <h2 className="login">...login?</h2>
+                        </Typography>
+                        <TextField 
+                            id="outlined-basic" 
+                            label="username" 
+                            variant="outlined" 
+                            type="textarea"
+                            name="username"
+                            value={loginObj.username}
+                            onChange={inputChange}
+                            className={classes.input}
+                        />
+                        <TextField 
+                            id="outlined-basic" 
+                            label="password" 
+                            variant="outlined" 
+                            type="textarea"
+                            name="password"
+                            value={loginObj.password}
+                            onChange={inputChange}
+                            className={classes.input}
+                        />
+                        <Button variant="contained" color="primary" type="submit">
+                            login
+                        </Button>
                     </form>
                     </div>
                 </Grid>                 
