@@ -87,19 +87,17 @@ export default function Sup(){
 
     // input submit function
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
-        e.preventDefault();
-        // alert('clicked');
-        
+        e.preventDefault();        
         API.postNews(newsObj)
         .then(news =>{
             console.log('news', news)
         })
         .catch(err =>console.log('err', err))
-        // setNewsObj({
-        //     newsData: ""
-        //     // newsCreator: "",
-        //     // newsType: ""
-        // })
+        setNewsObj({
+            newsData: ""
+            // newsCreator: "",
+            // newsType: ""
+        })
         return true;
     }
     return(
