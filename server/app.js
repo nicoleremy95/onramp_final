@@ -80,7 +80,7 @@ app.use(
     } else {
     db.News.create({
         newsData: req.body.newsData,
-        newsCreator: req.session.user.id
+        userId: req.session.user.id
     })
     .then((newNews) =>{
         res.json(newNews);
@@ -272,6 +272,7 @@ app.use(
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
+  
 });
 
 // error handler
