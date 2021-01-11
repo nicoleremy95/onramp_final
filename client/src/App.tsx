@@ -7,17 +7,33 @@ import Login from './pages/Login/Login'
 import './App.css';
 import API from './utils/API';
 
+
+// interface userData {
+//   username: string,
+//   email: string
+// }
+
 function App(){
-  const [currentUser, setCurrentUser] = useState<boolean>(true)
+  const [currentUser, setCurrentUser] = useState<boolean>(true);
+
+  const [currentUserData, setCurrentUserData] = useState<any>({
+    username: '',
+    email: ''
+  });
 
   useEffect(()=>{
     API.getCurrentUser()
     .then(res => {
-          console.log('app.tsx res.data.user', res.data.user)
+          // console.log('app.tsx res.data.user.email', res.data.user.email)
           if(!res.data.user){
-            setCurrentUser(false)
+            setCurrentUser(false);
           } else {
-            setCurrentUser(true)
+            // const sessionUser = res.data.user;
+            setCurrentUser(true);
+            setCurrentUserData({
+              username: res.data.user.username,
+              email: res.data.user.email
+            })
           }
 
     })
@@ -34,13 +50,13 @@ function App(){
       <Router>
         <Switch>
           <Route exact path = '/'>
-            <Home currentUser={currentUser}/>
+            <Home currentUser={currentUser} currentUserData={currentUserData}/>
           </Route>
           <Route exact path = '/user'>
-            <User currentUser={currentUser}/>
+            <User currentUser={currentUser} currentUserData={currentUserData}/>
           </Route>
           <Route exact path = '/login'>
-            <Login currentUser={currentUser}/>
+            <Login currentUser={currentUser} currentUserData={currentUserData} />
           </Route>
         </Switch>
       </Router>

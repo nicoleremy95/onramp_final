@@ -4,13 +4,14 @@ import Footer from '../../components/Footer/Footer'
 import UserComp from '../../components/UserComp/UserComp'
 
 interface currentUserProps {
-    currentUser: boolean
+    currentUser: boolean,
+    currentUserData: any
 }
 
-export default function User({currentUser}: currentUserProps) {
+export default function User({currentUser, currentUserData}: currentUserProps) {
     return (
         <div>
-            <Appbar currentUser={currentUser}/>
+            <Appbar currentUser={currentUser} currentUserData={currentUserData}/>
             <UserComp/>
             <Footer/>
         </div>

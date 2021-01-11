@@ -12,9 +12,15 @@ import './home.css'
 
 interface currentUserProps {
     currentUser: boolean
+    currentUserData: any
 }
+
+// interface currentUserDataProps {
+    
+// }
 // export default function Home() {
-export default function Home({currentUser}: currentUserProps) {
+export default function Home({currentUser, currentUserData}: currentUserProps) {
+    console.log('Home.tsx currentUserData', currentUserData)
     const [newsDB, setNewsDB] = useState([]);
     
     // console.log("FunctionHome")
@@ -38,9 +44,9 @@ export default function Home({currentUser}: currentUserProps) {
         >
             <Scroll showBelow={250}/>
             {/* <AppBar /> */}
-            <AppBar currentUser={currentUser}/>
+            <AppBar currentUser={currentUser} currentUserData={currentUserData}/>
             <Sup/>
-            <News newsDB ={newsDB}/>
+            <News newsDB ={newsDB} />
             <Footer/>
         </div>
     )

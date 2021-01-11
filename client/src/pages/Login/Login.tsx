@@ -4,13 +4,14 @@ import Footer from '../../components/Footer/Footer'
 import LoginForm from '../../components/LoginForm/LoginForm'
 
 interface currentUserProps {
-    currentUser: boolean
+    currentUser: boolean,
+    currentUserData: any
 }
 
-export default function Login({currentUser}: currentUserProps) {
+export default function Login({currentUser, currentUserData}: currentUserProps) {
     return (
         <div>
-            <Appbar currentUser={currentUser}/>
+            <Appbar currentUser={currentUser} currentUserData={currentUserData}/>
             <LoginForm/>
             <Footer/>
         </div>

@@ -22,7 +22,8 @@ import './appbar.css'
 import API from '../../utils/API';
 
 interface currentUserProps {
-  currentUser: boolean
+  currentUser: boolean,
+  currentUserData: any
 }
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -94,8 +95,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 // export default function PrimarySearchAppBar() {
-export default function PrimarySearchAppBar({currentUser}: currentUserProps) {
+export default function PrimarySearchAppBar({currentUser, currentUserData}: currentUserProps) {
   console.log('appbar.tsx currentUser', currentUser)
+  console.log('Appbar.tsx currentUserData.username', currentUserData.username)
   const history = useHistory();
 
   const classes = useStyles();
@@ -232,7 +234,7 @@ export default function PrimarySearchAppBar({currentUser}: currentUserProps) {
           >
             <Link to="/" className="Appbar-link-white"><h3>suP?</h3></Link>
           </Typography>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -244,9 +246,10 @@ export default function PrimarySearchAppBar({currentUser}: currentUserProps) {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          {currentUser? <Typography noWrap><p>welcome back...{currentUserData.username}!</p></Typography>: <Typography noWrap><p>...welcome to suP!</p></Typography>}
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <FavoriteIcon />
@@ -287,6 +290,8 @@ export default function PrimarySearchAppBar({currentUser}: currentUserProps) {
           </IconButton> }
           </div>
           <div className={classes.sectionMobile}>
+            {currentUser? <Typography noWrap><p >welcome back...{currentUserData.username}!</p></Typography>: <Typography noWrap><p>...welcome to suP!</p></Typography>}
+
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}

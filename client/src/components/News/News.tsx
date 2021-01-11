@@ -22,6 +22,8 @@ interface State {
   message: string;
 }
 
+
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -61,14 +63,15 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
   interface Props {
-    newsDB: any[]
+    newsDB: any[],
+    // currentUserData: object
   }
 
 
 console.log ("Function News running");
 
 export default function News({newsDB}: Props) : JSX.Element {
-  // console.log('newsDB', newsDB)
+  // console.log('News.tsx newsDB', newsDB)
   const [commentObj, setCommentObj] = useState<State>({
     message:""
   })
