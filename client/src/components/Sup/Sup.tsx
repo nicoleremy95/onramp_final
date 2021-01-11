@@ -105,8 +105,8 @@ export default function Sup(){
         >
             <Container>
             <Grid container >
-                <Grid item xs={1} md={3} lg={3} direction="column"></Grid>
-                <Grid item xs ={10} md={6} lg={6}>
+                <Grid item xs={1} sm={1} md={3} lg={3} direction="column"></Grid>
+                <Grid item xs ={10} sm={10} md={6} lg={6}>
                 <div className="sup-bubble">
                     <div className="sup-arrow sup-bottom right"></div>
                         <form 
@@ -160,7 +160,7 @@ export default function Sup(){
                         </form>
                         </div>
                     </Grid>                 
-                    <Grid item xs={1} md={2} lg={2} direction="column"></Grid>
+                    <Grid item xs={1} sm={1} md={2} lg={2} direction="column"></Grid>
                 </Grid>
             </Container>
         </div>

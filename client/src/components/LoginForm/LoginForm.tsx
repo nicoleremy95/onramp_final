@@ -77,8 +77,8 @@ export default function Login() {
         >
         <Container>
         <Grid container >
-            <Grid item xs={1} md={3} lg={3} direction="column"></Grid>
-            <Grid item xs ={10} md={6} lg={6}>
+            <Grid item xs={1} sm={1} md={3} lg={3} direction="column"></Grid>
+            <Grid item xs ={10} sm={10} md={6} lg={6}>
             <div className="login-bubble">
                 <div className="login-arrow login-bottom right"></div>
                     <form 
@@ -116,7 +116,7 @@ export default function Login() {
                     </form>
                     </div>
                 </Grid>                 
-                <Grid item xs={1} md={2} lg={2} direction="column"></Grid>
+                <Grid item xs={1} sm={1} md={2} lg={2} direction="column"></Grid>
             </Grid>
         </Container>
     </div>

@@ -96,7 +96,7 @@ export default function News({newsDB}: Props) : JSX.Element {
       <div className="news-bubble">
       <div className="news-arrow news-bottom left"></div>
         <Typography align="left">
-            <h2 className="sup">...more talK!</h2>
+            <h2 className="news">...more talK!</h2>
         </Typography>
          <Card 
             className={classes.cards} 
@@ -179,11 +179,11 @@ export default function News({newsDB}: Props) : JSX.Element {
       >
          <Container>
            <Grid container>
-             <Grid item xs={1} lg={3}></Grid>
-             <Grid item xs={10} lg={8}>
+             <Grid item xs={1} sm={1} md={3} lg={3}></Grid>
+             <Grid item xs={10} sm={10} md={6} lg={6}>
               {newsArr.map(news =>{return news})}
              </Grid>
-             <Grid item xs={1} lg={2}></Grid>
+             <Grid item xs={1} sm={1} md={2} lg={2}></Grid>
            </Grid>
          </Container>
        </div>

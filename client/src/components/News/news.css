@@ -48,3 +48,8 @@
     border-width: 16px 16px 0px 16px;
     bottom: -20px;
 }
+
+.news {
+    /* font-size: 200% !important; */
+    margin-top: 1px
+}

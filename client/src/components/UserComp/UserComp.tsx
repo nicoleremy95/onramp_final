@@ -75,8 +75,8 @@ export default function UserComp() {
             >
             <Container>
             <Grid container >
-                <Grid item xs={1} md={3} lg={3} direction="column"></Grid>
-                <Grid item xs ={10} md={6} lg={6}>
+                <Grid item xs={1} sm={1} md={3} lg={3} direction="column"></Grid>
+                <Grid item xs ={10} sm={10} md={6} lg={6}>
                 <div className="user-bubble">
                     <div className="user-arrow user-bottom right"></div>
                     <form 
@@ -86,7 +86,7 @@ export default function UserComp() {
                         onClick={inputSubmit}
                     >
                         <Typography align="right">
-                            <h2 className="user">new account</h2>
+                            <h2 className="user">...new account!</h2>
                         </Typography>
                         <TextField 
                             id="outlined-basic" 
@@ -136,7 +136,7 @@ export default function UserComp() {
                     </form>
                 </div>
                 </Grid>                 
-                <Grid item xs={1} md={2} lg={2} direction="column"></Grid>
+                <Grid item xs={1} sm={1} md={2} lg={2} direction="column"></Grid>
             </Grid>
             </Container>
         </div>
