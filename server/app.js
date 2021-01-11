@@ -23,8 +23,9 @@ const port = 8080;
 // TEMPORARY
 var db = require('./models');
 
+//TODO: uncomment for proper file structure
 //API Routes 
-var allRoutes = require('./controllers');
+// var allRoutes = require('./controllers');
 
 //Define middleware
 app.use(logger('dev'));
@@ -39,7 +40,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     // origin: "https://travelplanit.herokuapp.com",
-    credentials: false,
+    credentials: true,
   })
 );
 
@@ -74,9 +75,12 @@ app.use(
 
   //Add news to the database, PASSED POSTMAN TEST: PASSED
   app.post('/news', (req, res) =>{
+    if (!req.session.user) {
+      res.status(401).send("login required")
+    } else {
     db.News.create({
         newsData: req.body.newsData,
-        newsCreator: req.body.newsCreator
+        newsCreator: req.session.user.id
     })
     .then((newNews) =>{
         res.json(newNews);
@@ -85,10 +89,16 @@ app.use(
         console.log('err', err);
         res.status(500).end();
     })
+    }
   })
 
   //Add comment to news, PASSWED POSTMAN TEST: PASSED
   app.post('/comment/:newsId',(req, res) =>{
+    if(!req.session.user){
+      res.status(401).send("login required")
+    } else {
+
+    
     db.News.findOne({
       _id: req.params.newsId
     })
@@ -103,10 +113,14 @@ app.use(
       console.log('err', err)
       res.status(500).end();
     })
+  }
   })
 
   //Add reaction to news, PASSED POSTMAN TEST: PASSED 
   app.post('/reaction/:newsId', (req, res) =>{
+    if (!req.session.user) {
+      res.status(401).send("login required")
+    } else {
     db.News.findOne({
       _id: req.params.newsId
     })
@@ -121,10 +135,14 @@ app.use(
       console.log('err', err)
       res.status(500).end();
     })
+    }
   })
 
   //Update news in the database, PASSED POSTMAN TEST: PASSED
   app.put('/news/:newsId', (req, res) =>{
+    if (!req.session.user) {
+      res.status(401).send("login required")
+    } else {
     db.News.findOne({
       _id: req.params.newsId
     }) 
@@ -147,10 +165,14 @@ app.use(
       console.log('err', err)
       res.status(500).end();
     })
+    }
   })
 
   //Delete news in database, PASSED POSTMAN TEST: PASSED
   app.delete('/news/:newsId', (req, res) =>{
+    if (!req.session.user) {
+      res.status(401).send("login required")
+    } else {
     db.News.findOne({
       _id: req.params.newsId
     })
@@ -168,10 +190,11 @@ app.use(
         })
       }
     })
+    }
   })
 
   //AUTH ROUTES ** DELETE WHEN FILE STRUCTURE WORKS 
-  //Get all users, PASSED POSTMAN TEST: PENDING 
+  //Get all users, PASSED POSTMAN TEST: PASSED 
   app.get("/users", (req, res) => {
     db.User.find({})
       .then((allUsers) => {
@@ -186,7 +209,6 @@ app.use(
   //Sign up, PASSED POSTMAN TEST: PASSED
   app.post('/signup', (req, res) =>{
     console.log('req', req);
-    // const {username, email, password, name} = req.body;
     db.User.create(
         {
             username:req.body.username,
@@ -204,13 +226,10 @@ app.use(
           console.log('err', err)
           res.status(500).end();
         })
-    
   })
 
-  //TODO: 
-  //Signout, PASSED POSTMAN TEST: PENDING 
+  //login, PASSED POSTMAN TEST: PASSED 
   app.post("/login", (req, res) => {
-    console.log("here is the password", req.body.password)
     db.User.findOne({
       username: req.body.username,
     })
@@ -220,14 +239,12 @@ app.use(
       } else {
         console.log('console user', user);
         if (bcrypt.compareSync(req.body.password, user.password)) {
-          // console.log('console res.session', res.session);
-          console.log('console req.session', req.session);
-          // res.session.user = {
-          //   id: user._id,
-          //   username: user.username,
-          //   email: user.email
-          // };
-          // res.send(req.session);
+          req.session.user = {
+            id: user._id,
+            username: user.username,
+            email: user.email
+          };
+          res.send(req.session);
         } else {
           res.status(401).send("wrong password");
         }
@@ -239,16 +256,16 @@ app.use(
     });
   });
   
-  //TODO: 
-  //Log out, PASSED POSTMAN TEST: PENDING 
+  //Log out, PASSED POSTMAN TEST: PASSED 
   app.get('/logout', (req,res) =>{
-    res.session.destroy();
+    console.log('console req', req)
+    req.session.destroy();
     res.send("You have been logged out");
   })
 
-  //TODO: 
-  //read session, PASSED POSTMAN TEST: PENDING 
+  //read session, PASSED POSTMAN TEST: PASSED 
   app.get('/readsession', (req,res) =>{
+    console.log('req.session.user', req.session.user)
     res.json(req.session)
   })
 
@@ -285,9 +302,9 @@ connection.once('open', function(){
 })
 
 
-
+//TODO: separate files
 //Use routes
-app.use('/', allRoutes);
+// app.use('/', allRoutes);
 
 //Initialize server
 app.listen(port, () => {

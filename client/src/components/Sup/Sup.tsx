@@ -20,12 +20,9 @@ import './sup.css'
 
 interface State {
     newsData: string,
-    // newsCreator: string,
+    //TODO: add in newstype in form
     // newsType: string,
 }
-// interface Icon {
-//     icon: boolean
-// }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,11 +61,13 @@ export default function Sup(){
         // newsType:""
     })
 
+    //TODO: add in newstype to form
     // const [state, setState] = React.useState<{ age: string | number; name: string }>({
     //     age: '',
     //     name: 'hai',
     //   });
     
+    //TODO: add in newstype to form
     // const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     // const name = event.target.name as keyof typeof state;
     // setState({
@@ -95,7 +94,7 @@ export default function Sup(){
         .catch(err =>console.log('err', err))
         setNewsObj({
             newsData: ""
-            // newsCreator: "",
+            //TODO: add in newstype to form
             // newsType: ""
         })
         return true;
@@ -130,19 +129,11 @@ export default function Sup(){
                                     value={newsObj.newsData}
                                     onChange={inputChange}
                                     className={classes.input}
-                                    // InputProps={{
-                                    //     endAdornment: (
-                                    //         <IconButton className={classes.send}>
-                                    //             <SendIcon />                                                
-                                    //         </IconButton>
-
-                                    //     )
-                                    
-                                    // }}
                                 />
                                 <Button variant="contained" color="primary" type="submit">
                                     send
                                 </Button>
+                                {/* TODO: add in newstype to form */}
                                 {/* <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="age-native-simple">Category</InputLabel>
                                     <Select
