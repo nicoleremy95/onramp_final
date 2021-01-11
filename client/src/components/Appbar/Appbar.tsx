@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import Home from '../../pages/Home/Home';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
+import Tooltip from '@material-ui/core/Tooltip';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import HomeIcon from '@material-ui/icons/Home';
@@ -17,7 +20,12 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import './appbar.css'
+import API from '../../utils/API';
 
+interface currentUserProps {
+  currentUser: boolean,
+  currentUserData: any
+}
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appbar: {
@@ -87,17 +95,18 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PrimarySearchAppBar() {
+// export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({currentUser, currentUserData}: currentUserProps) {
+  console.log('appbar.tsx currentUser', currentUser)
+  console.log('Appbar.tsx currentUserData.username', currentUserData.username)
+  const history = useHistory();
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -111,6 +120,16 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  //TODO: move to app.tsx and pass down 
+  const logOut = () => {
+    history.push('/');
+    API.logout()
+    .then(req =>{
+      // history.push('/')
+    })
+    
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -159,39 +178,44 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <Link to="/user" className="Appbar-link-black">
-         <AccountCircle/>
-         </Link>
+          <Tooltip title="New Account" aria-label="New Account">
+            <Link to="/user" className="Appbar-link-black">
+              <AccountCircle/>
+            </Link>
+          </Tooltip>
         </IconButton>
-        <p>Profile</p>
+        <p>New Account</p>
         
       </MenuItem>
-      <MenuItem>
+      
+      {currentUser? <MenuItem>
         <IconButton
-          edge="end"
-          aria-label="login"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <Link to="/login" className="Appbar-link-black">
-            <VpnKeyIcon />
-          </Link>
-        </IconButton>
-        <p>Login</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          edge="end"
           aria-label="logout"
           aria-controls={menuId}
           aria-haspopup="true"
           color="inherit"
         >
-            <ExitToAppIcon />
+          <Tooltip title="Logout" aria-label="Logout">
+            <ExitToAppIcon onClick={logOut}/>
+          </Tooltip>
         </IconButton>
         <p>Logout</p>
-      </MenuItem>
+      </MenuItem> : <MenuItem>
+        <IconButton
+          aria-label="login"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <Tooltip title="Login" aria-label="Login">
+            <Link to="/login" className="Appbar-link-black">
+              <VpnKeyIcon />
+            </Link>
+          </Tooltip>
+        </IconButton>
+        <p>Login</p>
+      </MenuItem>}
+      
     </Menu>
   );
 
@@ -211,7 +235,7 @@ export default function PrimarySearchAppBar() {
           >
             <Link to="/" className="Appbar-link-white"><h3>suP?</h3></Link>
           </Typography>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -223,9 +247,10 @@ export default function PrimarySearchAppBar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          {currentUser? <Typography noWrap><p>welcome back...{currentUserData.username}!</p></Typography>: <Typography noWrap><p>...welcome to suP!</p></Typography>}
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <FavoriteIcon />
@@ -238,32 +263,40 @@ export default function PrimarySearchAppBar() {
               aria-haspopup="true"
               color="inherit"
             >
-              <Link to="/user" className="Appbar-link-white">
-                <AccountCircle />
-              </Link>
+              <Tooltip title="New Account" aria-label="New Account">
+            <Link to="/user" className="Appbar-link-white">
+              <AccountCircle/>
+            </Link>
+          </Tooltip>
             </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="login"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <Link to="/login" className="Appbar-link-white">
-                <VpnKeyIcon />
-              </Link>
-            </IconButton>
-            <IconButton
+            {currentUser?   <IconButton
               edge="end"
               aria-label="logout"
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"
             >
-                <ExitToAppIcon />
-            </IconButton>
+              <Tooltip title="Logout" aria-label="Logout">
+                <ExitToAppIcon onClick={logOut}/>
+              </Tooltip> 
+            </IconButton> :
+            <IconButton
+            edge="end"
+            aria-label="login"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <Tooltip title="Login" aria-label="Login">
+              <Link to="/login" className="Appbar-link-white">
+                <VpnKeyIcon />
+              </Link>
+          </Tooltip>
+          </IconButton> }
           </div>
           <div className={classes.sectionMobile}>
+            {currentUser? <Typography noWrap><p >welcome back...{currentUserData.username}!</p></Typography>: <Typography noWrap><p>...welcome to suP!</p></Typography>}
+
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}

@@ -3,7 +3,7 @@ import axios from 'axios';
 const urlPrefix = 'http://localhost:8080';
 
 //TODO: 
-const apiObj = {
+const API = {
     //NEWS COLLECTION
     getAllNews: function() {
         return axios.get(`${urlPrefix}/news`)
@@ -22,9 +22,6 @@ const apiObj = {
     },
     deleteNews: function(news: object, newsId: string){
         return axios.delete(`${urlPrefix}/news/${newsId}`, news)
-    },
-    postUser: function(user: object, userId: string){
-        return axios.post(`${urlPrefix}/signup`, user, { withCredentials: true } )
     }, 
     signup: function(user: object){
         return axios.post(`${urlPrefix}/signup`, user, { withCredentials: true })
@@ -34,7 +31,10 @@ const apiObj = {
     },
     logout: function(){
         return axios.get(`${urlPrefix}/logout`, { withCredentials: true })
+    },
+    getCurrentUser: function (){
+        return axios.get(`${urlPrefix}/readsession`, { withCredentials: true })
     }
 }
 
-export default apiObj;
+export default API;

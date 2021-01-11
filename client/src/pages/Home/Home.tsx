@@ -4,62 +4,50 @@ import './home.css'
 import AppBar from '../../components/Appbar/Appbar';
 import News from '../../components/News/News'
 import Sup from '../../components/Sup/Sup'
+import App from '../../App';
 import API from '../../utils/API'
 import Scroll from '../../components/Scroll/Scroll'
 import Footer from '../../components/Footer/Footer'
 import './home.css'
 
-// interface newsDef {
-//     //TODO: change type any 
-//       newsDB: string,
-  
-// }
-// let myObj = [{size: 10, label: 'hllo' }];
-
-/*function printLabel(labeledObj: ArrayDef) {
-    console.log('labeledObj', labeledObj[0].label);
+interface currentUserProps {
+    currentUser: boolean
+    currentUserData: any
 }
-printLabel(myObj);*/
+// interface news {
+//     thing: 
+// }
 
-
-export default function Home() {
-    // const [newsDB, setNewsDB] = useState([]);
+// export default function Home() {
+export default function Home({currentUser, currentUserData}: currentUserProps) {
+    console.log('Home.tsx currentUserData', currentUserData)
     const [newsDB, setNewsDB] = useState([]);
-    //useState<Array<any>>([]);
-    // const [newsDB, setNewsDB] = useState<newsDef>();
-    // const [newsDB, setNewsDB] = useState<Array<object>>([{}]);
-    console.log("FunctionHome")
+    
+    // console.log("FunctionHome")
+    // console.log('home tsx currentUser.username', currentUser.username)
+
+    //TODO: move to app.tsx and pass down with props 
     useEffect(()=>{
         API.getAllNews()
         .then(res =>{
-            console.log('res.data[0].newsCreator', res.data[0].newsCreator)
-            console.log('res.data', res.data)
+            // console.log('res.data[0].newsCreator', res.data[0].newsCreator)
+            // console.log('res.data', res.data)
             setNewsDB(res.data);
-            console.log('newsDB', newsDB)
+            // console.log('newsDB', newsDB)
         })
         .catch(err => console.log('err', err))
     }, [])
-    // const arr:object[] = [];
-    // newsDB.map(item=>{
-    //     console.log('item', item)
-    //     arr.push(
-    //         <h1>{item}</h1>
-    //     )
-    // })
-    
+   
     return (
         <div 
             className="Home-container"
         >
             <Scroll showBelow={250}/>
-            <AppBar/>
+            {/* <AppBar /> */}
+            <AppBar currentUser={currentUser} currentUserData={currentUserData}/>
             <Sup/>
-            {/* <News {...newsDB}/> */}
-            <News newsDB ={newsDB}/>
+            <News newsDB ={newsDB} />
             <Footer/>
-            {/* <div> */}
-               {/* {arr.map(news=>{return <h1>{news}</h1>})} */}
-            {/* </div> */}
         </div>
     )
 }
