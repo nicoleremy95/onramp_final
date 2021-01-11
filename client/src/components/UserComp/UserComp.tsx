@@ -69,72 +69,71 @@ export default function UserComp() {
     }
 
     return (
-        <div>
+        <div 
+            className={classes.root}
+            >
             <Container>
-                <Grid container>
-                    <Grid item xs={1} md={3} lg={3} direction="column"></Grid>
-                    <Grid item xs ={10} md={6} lg={6}>
-                        <div className="user-bubble">
-                            <div className="user-bubble user-bottom right">
-                            <form 
-                            // className={classes.root} 
-                                noValidate 
-                                autoComplete="on" 
-                                onSubmit={inputSubmit}
-                            >
-                                <Typography align="right">
-                                    <h2 className="sup">new account</h2>
-                                </Typography>
-                                <TextField 
-                                    id="outlined-basic" 
-                                    label="username" 
-                                    variant="outlined" 
-                                    type="textarea"
-                                    name="username"
-                                    value={userObj.username}
-                                    onChange={inputChange}
-                                    className={classes.input}
+            <Grid container >
+                <Grid item xs={1} md={3} lg={3} direction="column"></Grid>
+                <Grid item xs ={10} md={6} lg={6}>
+                <div className="user-bubble">
+                    <div className="user-arrow user-bottom right"></div>
+                    <form 
+                    // className={classes.root} 
+                        noValidate 
+                        autoComplete="on" 
+                        onSubmit={inputSubmit}
+                    >
+                        <Typography align="right">
+                            <h2 className="user">new account</h2>
+                        </Typography>
+                        <TextField 
+                            id="outlined-basic" 
+                            label="username" 
+                            variant="outlined" 
+                            type="textarea"
+                            name="username"
+                            value={userObj.username}
+                            onChange={inputChange}
+                            className={classes.input}
+                    
+                        />
+                        <TextField 
+                            id="outlined-basic" 
+                            label="password" 
+                            variant="outlined" 
+                            type="textarea"
+                            name="password"
+                            value={userObj.password}
+                            onChange={inputChange}
+                            className={classes.input}
                             
-                                />
-                                <TextField 
-                                    id="outlined-basic" 
-                                    label="password" 
-                                    variant="outlined" 
-                                    type="textarea"
-                                    name="password"
-                                    value={userObj.password}
-                                    onChange={inputChange}
-                                    className={classes.input}
-                                    
-                                />
-                                <TextField 
-                                    id="outlined-basic" 
-                                    label="name" 
-                                    variant="outlined" 
-                                    type="textarea"
-                                    name="name"
-                                    value={userObj.name}
-                                    onChange={inputChange}
-                                    className={classes.input}
-                                    
-                                />
-                                <TextField 
-                                    id="outlined-basic" 
-                                    label="email" 
-                                    variant="outlined"                                     type="textarea"
-                                    name="email"
-                                    value={userObj.email}
-                                    onChange={inputChange}
-                                    className={classes.input}
-                                />
-                                            
-                        </form>
-                            </div>
-
-                        </div>
-                    </Grid>
-                    <Grid item xs={1} md={2} lg={2} direction="column"></Grid>
-                </Grid>
+                        />
+                        <TextField 
+                            id="outlined-basic" 
+                            label="name" 
+                            variant="outlined" 
+                            type="textarea"
+                            name="name"
+                            value={userObj.name}
+                            onChange={inputChange}
+                            className={classes.input}
+                            
+                        />
+                        <TextField 
+                            id="outlined-basic" 
+                            label="email" 
+                            variant="outlined"                                     type="textarea"
+                            name="email"
+                            value={userObj.email}
+                            onChange={inputChange}
+                            className={classes.input}
+                        />
+                    </form>
+                </div>
+                </Grid>                 
+                <Grid item xs={1} md={2} lg={2} direction="column"></Grid>
+            </Grid>
             </Container>
         </div>
     )
