@@ -14,10 +14,10 @@ interface currentUserProps {
     currentUser: boolean
     currentUserData: any
 }
-
-// interface currentUserDataProps {
-    
+// interface news {
+//     thing: 
 // }
+
 // export default function Home() {
 export default function Home({currentUser, currentUserData}: currentUserProps) {
     console.log('Home.tsx currentUserData', currentUserData)

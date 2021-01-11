@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Grid from '@material-ui/core/Grid';
 import {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import FormControl from '@material-ui/core/FormControl';
@@ -11,6 +12,7 @@ import SendIcon from '@material-ui/icons/Send';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
+import API from '../../utils/API';
 import './UserComp.css'
 
 interface State {
@@ -28,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
         alignContent: 'center',
         justifyContent: 'center',
         marginTop:'auto',
+        marginBottom: '100px'
     },
     input: {
         '& > *': {
@@ -49,6 +52,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function UserComp() {
     const classes = useStyles();
 
+    const history = useHistory();
+
     const [userObj, setUserObj] = useState<State>({
         username:'',
         name: '',
@@ -65,8 +70,14 @@ export default function UserComp() {
 
     //TODO:
     // input submit function
-    function inputSubmit (e: React.FormEvent<HTMLFormElement>) {
-
+    function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean {
+        API.signup(userObj)
+        .then(user =>{
+            console.log('UserComp.tsx user', user)
+            history.push("/")
+        })
+        .catch(err=> console.log('err', err))
+        return true;
     }
 
     return (

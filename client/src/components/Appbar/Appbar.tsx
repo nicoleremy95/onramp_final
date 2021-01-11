@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
+import Tooltip from '@material-ui/core/Tooltip';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import HomeIcon from '@material-ui/icons/Home';
@@ -107,10 +108,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -129,7 +126,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
     history.push('/');
     API.logout()
     .then(req =>{
-      history.push('/')
+      // history.push('/')
     })
     
   }
@@ -181,36 +178,40 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
           aria-haspopup="true"
           color="inherit"
         >
-          <Link to="/user" className="Appbar-link-black">
-         <AccountCircle/>
-         </Link>
+          <Tooltip title="New Account" aria-label="New Account">
+            <Link to="/user" className="Appbar-link-black">
+              <AccountCircle/>
+            </Link>
+          </Tooltip>
         </IconButton>
-        <p>Profile</p>
+        <p>New Account</p>
         
       </MenuItem>
       
       {currentUser? <MenuItem>
         <IconButton
-          edge="end"
           aria-label="logout"
           aria-controls={menuId}
           aria-haspopup="true"
           color="inherit"
         >
+          <Tooltip title="Logout" aria-label="Logout">
             <ExitToAppIcon onClick={logOut}/>
+          </Tooltip>
         </IconButton>
         <p>Logout</p>
       </MenuItem> : <MenuItem>
         <IconButton
-          edge="end"
           aria-label="login"
           aria-controls={menuId}
           aria-haspopup="true"
           color="inherit"
         >
-          <Link to="/login" className="Appbar-link-black">
-            <VpnKeyIcon />
-          </Link>
+          <Tooltip title="Login" aria-label="Login">
+            <Link to="/login" className="Appbar-link-black">
+              <VpnKeyIcon />
+            </Link>
+          </Tooltip>
         </IconButton>
         <p>Login</p>
       </MenuItem>}
@@ -262,9 +263,11 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
               aria-haspopup="true"
               color="inherit"
             >
-              <Link to="/user" className="Appbar-link-white">
-                <AccountCircle />
-              </Link>
+              <Tooltip title="New Account" aria-label="New Account">
+            <Link to="/user" className="Appbar-link-white">
+              <AccountCircle/>
+            </Link>
+          </Tooltip>
             </IconButton>
             {currentUser?   <IconButton
               edge="end"
@@ -273,9 +276,9 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
               aria-haspopup="true"
               color="inherit"
             >
-              
+              <Tooltip title="Logout" aria-label="Logout">
                 <ExitToAppIcon onClick={logOut}/>
-                
+              </Tooltip> 
             </IconButton> :
             <IconButton
             edge="end"
@@ -284,9 +287,11 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
             aria-haspopup="true"
             color="inherit"
           >
-            <Link to="/login" className="Appbar-link-white">
-              <VpnKeyIcon />
-            </Link>
+            <Tooltip title="Login" aria-label="Login">
+              <Link to="/login" className="Appbar-link-white">
+                <VpnKeyIcon />
+              </Link>
+          </Tooltip>
           </IconButton> }
           </div>
           <div className={classes.sectionMobile}>

@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
         alignContent: 'center',
         justifyContent: 'center',
         marginTop:'auto',
+        marginBottom: '100px'
     },
     input: {
         '& > *': {
