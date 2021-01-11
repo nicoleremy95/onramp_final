@@ -13,7 +13,7 @@ const News = new Schema({
     newsData : {
         type: String
     },
-    newsCreator : {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: "User",
         // required: true,

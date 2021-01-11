@@ -40,7 +40,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     // origin: "https://travelplanit.herokuapp.com",
-    credentials: false,
+    credentials: true,
   })
 );
 
@@ -94,6 +94,11 @@ app.use(
 
   //Add comment to news, PASSWED POSTMAN TEST: PASSED
   app.post('/comment/:newsId',(req, res) =>{
+    if(!req.session.user){
+      res.status(401).send("login required")
+    } else {
+
+    
     db.News.findOne({
       _id: req.params.newsId
     })
@@ -108,10 +113,14 @@ app.use(
       console.log('err', err)
       res.status(500).end();
     })
+  }
   })
 
   //Add reaction to news, PASSED POSTMAN TEST: PASSED 
   app.post('/reaction/:newsId', (req, res) =>{
+    if (!req.session.user) {
+      res.status(401).send("login required")
+    } else {
     db.News.findOne({
       _id: req.params.newsId
     })
@@ -126,10 +135,14 @@ app.use(
       console.log('err', err)
       res.status(500).end();
     })
+    }
   })
 
   //Update news in the database, PASSED POSTMAN TEST: PASSED
   app.put('/news/:newsId', (req, res) =>{
+    if (!req.session.user) {
+      res.status(401).send("login required")
+    } else {
     db.News.findOne({
       _id: req.params.newsId
     }) 
@@ -152,10 +165,14 @@ app.use(
       console.log('err', err)
       res.status(500).end();
     })
+    }
   })
 
   //Delete news in database, PASSED POSTMAN TEST: PASSED
   app.delete('/news/:newsId', (req, res) =>{
+    if (!req.session.user) {
+      res.status(401).send("login required")
+    } else {
     db.News.findOne({
       _id: req.params.newsId
     })
@@ -173,6 +190,7 @@ app.use(
         })
       }
     })
+    }
   })
 
   //AUTH ROUTES ** DELETE WHEN FILE STRUCTURE WORKS 
