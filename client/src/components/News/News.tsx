@@ -1,27 +1,24 @@
 import * as React from 'react';
 import {useState} from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
+import {createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {Container, Card, CardActions, IconButton, CardContent, Button, Typography, TextField, Backdrop} from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 import './news.css'
 
 interface State {
   message: string;
 }
 
+
+interface Props {
+  newsDB: any[],
+  // currentUserData: object
+}
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,13 +59,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-  interface Props {
-    newsDB: any[],
-    // currentUserData: object
-  }
 
-
-console.log ("Function News running");
+// console.log ("Function News running");
 
 export default function News({newsDB}: Props) : JSX.Element {
   // console.log('News.tsx newsDB.newsData', newsDB.newsData)

@@ -3,13 +3,9 @@ import {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
-import { Typography } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import {Container, TextField, Typography, Button} from '@material-ui/core';
 import API from '../../utils/API';
-import './loginForm.css'
-import { History } from '@material-ui/icons';
+import './loginForm.css';
 
 
 interface State {
@@ -56,6 +52,10 @@ export default function Login() {
     })
 
     const history = useHistory();
+
+    // const login = () => {
+        
+    // }
 
     //TODO: move to app.tsx and pass down with props 
     //input change function
