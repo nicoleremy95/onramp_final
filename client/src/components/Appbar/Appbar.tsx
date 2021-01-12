@@ -120,12 +120,13 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
   };
 
   //TODO: move to app.tsx and pass down 
-  const logOut = () => {
+  const logOut = (e: React.FormEvent<SVGSVGElement>) : boolean => {
     history.push('/');
     API.logout()
     .then(req =>{
       history.push('/')
     })
+    return true;
     
   }
 
@@ -262,10 +263,10 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
               color="inherit"
             >
               <Tooltip title="New Account" aria-label="New Account">
-            <Link to="/user" className={classes.appBarLinkWhite}>
-              <AccountCircle/>
-            </Link>
-          </Tooltip>
+                <Link to="/user" className={classes.appBarLinkWhite}>
+                  <AccountCircle/>
+                </Link>
+              </Tooltip>
             </IconButton>
             {currentUser?   <IconButton
               edge="end"
@@ -289,8 +290,8 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
               <Link to="/login" className={classes.appBarLinkWhite}>
                 <VpnKeyIcon />
               </Link>
-          </Tooltip>
-          </IconButton> }
+            </Tooltip>
+            </IconButton> }
           </div>
           <div className={classes.sectionMobile}>
             {currentUser? <Typography noWrap><p >welcome back...{currentUserData.username}!</p></Typography>: <Typography noWrap><p>...welcome to suP!</p></Typography>}

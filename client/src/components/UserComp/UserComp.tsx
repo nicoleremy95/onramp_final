@@ -62,9 +62,10 @@ export default function UserComp() {
     //TODO:
     // input submit function
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean {
+        history.push("/");
         API.signup(userObj)
         .then(user =>{
-            console.log('UserComp.tsx user', user)
+            // console.log('UserComp.tsx user', user)
             history.push("/")
         })
         .catch(err=> console.log('err', err))
@@ -85,7 +86,7 @@ export default function UserComp() {
                     // className={classes.root} 
                         noValidate 
                         autoComplete="on" 
-                        onClick={inputSubmit}
+                        onSubmit={inputSubmit}
                     >
                         <Typography align="right">
                             <h2 className="user">...new account!</h2>
@@ -105,7 +106,7 @@ export default function UserComp() {
                             id="outlined-basic" 
                             label="password" 
                             variant="outlined" 
-                            type="textarea"
+                            type="password"
                             name="password"
                             value={userObj.password}
                             onChange={inputChange}
