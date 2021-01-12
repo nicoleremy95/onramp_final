@@ -1,22 +1,9 @@
 import * as React from 'react';
 import {useState} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SendIcon from '@material-ui/icons/Send';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import Container from '@material-ui/core/Container';
+import {TextField, Button, Grid, Container, Typography} from '@material-ui/core';
 import API from '../../utils/API';
-import { Typography } from '@material-ui/core';
-import './sup.css'
+import './sup.css';
 
 interface State {
     newsData: string,

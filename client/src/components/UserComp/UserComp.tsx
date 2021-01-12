@@ -1,19 +1,10 @@
 import * as React from 'react';
-import Grid from '@material-ui/core/Grid';
 import {useState} from 'react';
-import { useHistory } from "react-router-dom";
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import { Typography } from '@material-ui/core';
-import IconButton from "@material-ui/core/IconButton";
-import SendIcon from '@material-ui/icons/Send';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
+import {useHistory } from "react-router-dom";
+import {createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {Container, TextField, Typography, Button, Grid} from '@material-ui/core';
 import API from '../../utils/API';
-import './UserComp.css'
+import './UserComp.css';
 
 interface State {
     username: string,

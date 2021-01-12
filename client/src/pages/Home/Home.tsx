@@ -1,25 +1,31 @@
-import * as React from 'react'
+import * as React from 'react';
 import {useState, useEffect} from 'react';
-import './home.css'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '../../components/Appbar/Appbar';
-import News from '../../components/News/News'
-import Sup from '../../components/Sup/Sup'
-import App from '../../App';
-import API from '../../utils/API'
-import Scroll from '../../components/Scroll/Scroll'
-import Footer from '../../components/Footer/Footer'
-import './home.css'
+import News from '../../components/News/News';
+import Sup from '../../components/Sup/Sup';
+import API from '../../utils/API';
+import Scroll from '../../components/Scroll/Scroll';
+import Footer from '../../components/Footer/Footer';
 
 interface currentUserProps {
     currentUser: boolean
     currentUserData: any
 }
-// interface news {
-//     thing: 
-// }
+
+const useStyles = makeStyles((theme: Theme)=>
+    createStyles({
+        homeContainer: {
+            backgroundImage: "linear-gradient(to bottom right, white, #d2a295);"
+        }
+    })
+)
+
 
 // export default function Home() {
 export default function Home({currentUser, currentUserData}: currentUserProps) {
+    const classes = useStyles();
+
     console.log('Home.tsx currentUserData', currentUserData)
     const [newsDB, setNewsDB] = useState([]);
     
@@ -40,7 +46,7 @@ export default function Home({currentUser, currentUserData}: currentUserProps) {
    
     return (
         <div 
-            className="Home-container"
+            className={classes.homeContainer}
         >
             <Scroll showBelow={250}/>
             {/* <AppBar /> */}
