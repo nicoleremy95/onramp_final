@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import {TextField, Button, Grid, Container, Typography} from '@material-ui/core';
+import {TextField, Button, Grid, Container, Typography, Link} from '@material-ui/core';
 import API from '../../utils/API';
 import './sup.css';
 
@@ -9,6 +10,16 @@ interface State {
     newsData: string,
     //TODO: add in newstype in form
     // newsType: string,
+}
+
+interface currentUserProps {
+    currentUser: boolean,
+    currentUserData: any
+}
+
+interface LoginProps {
+    username: string,
+    password: string
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,12 +44,20 @@ const useStyles = makeStyles((theme: Theme) =>
     send:{
         marginTop: '50px',
         marginRight: "0px"
+    },
+    welcome: {
+        fontSize: '30px !important',
+        textAlign: 'right'
+    },
+    moreTalk: {
+        fontSize: '30px !important',
+        textAlign: 'left'
     }
   }),
 );
 
 
-export default function Sup(){
+export default function Sup({currentUser, currentUserData}: currentUserProps){
     const classes = useStyles();
 
     //initialize form object state
@@ -47,6 +66,13 @@ export default function Sup(){
         // newsCreator:"",
         // newsType:""
     })
+
+    const [loginObj, setLoginObject] = useState<LoginProps>({
+        username:"",
+        password:""
+    })
+
+    const history = useHistory();
 
     //TODO: add in newstype to form
     // const [state, setState] = React.useState<{ age: string | number; name: string }>({
@@ -63,6 +89,24 @@ export default function Sup(){
     // });
     // };
 
+    function loginInputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
+        //TODO: refactor any
+        const{ name, value}: any = e.target;
+        setLoginObject({ ...loginObj,[name]: value})
+    }
+
+    //TODO: move to app.tsx and pass down with props 
+    function loginInputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
+        // e.preventDefault();   
+        history.push("/")     
+        API.login(loginObj)
+        .then(loginObj =>{
+            history.push("/")
+            // console.log('loginObj', loginObj)
+        })
+        .catch(err =>console.log('err', err))
+        return true;
+    }
     //TODO: move to app.tsx and pass down with props 
     //input change function
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -98,14 +142,16 @@ export default function Sup(){
                 <Grid item xs ={10} sm={10} md={6} lg={6}>
                 <div className="sup-bubble">
                     <div className="sup-arrow sup-bottom right"></div>
-                        <form 
+                        
+                        {currentUser ? 
+                            <form 
                             // className={classes.root} 
                                 noValidate 
                                 autoComplete="on" 
-                                onClick={inputSubmit}
+                                onSubmit={inputSubmit}
                             >
                                 <Typography align="right">
-                                    <h2 className="sup">tell me...suP?</h2>
+                                    <h2 className="sup">tell me {currentUserData.username}...suP?</h2>
                                 </Typography>
                                 <TextField 
                                     id="outlined-basic" 
@@ -147,6 +193,43 @@ export default function Sup(){
                                 </FormControl> */}
                                             
                         </form>
+                        : 
+                        <Typography><h3 className={classes.welcome}>...Welcome to suP!</h3> <h4 className={classes.moreTalk}> where talk is encouraged...</h4>
+                            <form 
+                        // className={classes.root} 
+                            noValidate 
+                            autoComplete="on" 
+                            onSubmit={loginInputSubmit}
+                        >
+                            <Typography align="right">
+                                <h2 className="login">...please login!</h2>
+                            </Typography>
+                            <TextField 
+                                id="outlined-basic" 
+                                label="username" 
+                                variant="outlined" 
+                                type="textarea"
+                                name="username"
+                                value={loginObj.username}
+                                onChange={loginInputChange}
+                                className={classes.input}
+                            />
+                            <TextField 
+                                id="outlined-basic" 
+                                label="password" 
+                                variant="outlined" 
+                                type="password"
+                                name="password"
+                                value={loginObj.password}
+                                onChange={loginInputChange}
+                                className={classes.input}
+                            />
+                            <Button variant="contained" color="primary" type="submit">
+                                login
+                            </Button>
+                            </form>
+                        </Typography>
+                        }
                         </div>
                     </Grid>                 
                     <Grid item xs={1} sm={1} md={2} lg={2} direction="column"></Grid>
