@@ -25,7 +25,6 @@ interface LoginProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        // display: 'flex',
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
@@ -63,8 +62,8 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
     //initialize form object state
     const [newsObj, setNewsObj] = useState<State>({
         newsData:"",
-        // newsCreator:"",
-        // newsType:""
+        //TODO: add in newstype in form
+        // newsType: string,
     })
 
     const [loginObj, setLoginObject] = useState<LoginProps>({
@@ -119,7 +118,6 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
     //TODO: move to app.tsx and pass down with props 
     // input submit function
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
-        // e.preventDefault();        
         API.postNews(newsObj)
         .then(news =>{
             console.log('news', news)
@@ -145,7 +143,7 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                         
                         {currentUser ? 
                             <form 
-                            // className={classes.root} 
+                                className={classes.root} 
                                 noValidate 
                                 autoComplete="on" 
                                 onSubmit={inputSubmit}
@@ -192,43 +190,43 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                                     </Select>
                                 </FormControl> */}
                                             
-                        </form>
-                        : 
-                        <Typography><h3 className={classes.welcome}>...Welcome to suP!</h3> <h4 className={classes.moreTalk}> where talk is encouraged...</h4>
-                            <form 
-                        // className={classes.root} 
-                            noValidate 
-                            autoComplete="on" 
-                            onSubmit={loginInputSubmit}
-                        >
-                            <Typography align="right">
-                                <h2 className="login">...please login!</h2>
-                            </Typography>
-                            <TextField 
-                                id="outlined-basic" 
-                                label="username" 
-                                variant="outlined" 
-                                type="textarea"
-                                name="username"
-                                value={loginObj.username}
-                                onChange={loginInputChange}
-                                className={classes.input}
-                            />
-                            <TextField 
-                                id="outlined-basic" 
-                                label="password" 
-                                variant="outlined" 
-                                type="password"
-                                name="password"
-                                value={loginObj.password}
-                                onChange={loginInputChange}
-                                className={classes.input}
-                            />
-                            <Button variant="contained" color="primary" type="submit">
-                                login
-                            </Button>
                             </form>
-                        </Typography>
+                            : 
+                            <Typography><h3 className={classes.welcome}>...Welcome to suP!</h3> <h4 className={classes.moreTalk}> where talk is encouraged...</h4>
+                            <form 
+                                className={classes.root} 
+                                noValidate 
+                                autoComplete="on" 
+                                onSubmit={loginInputSubmit}
+                            >
+                                <Typography align="right">
+                                    <h2 className="login">...please login!</h2>
+                                </Typography>
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="username" 
+                                    variant="outlined" 
+                                    type="textarea"
+                                    name="username"
+                                    value={loginObj.username}
+                                    onChange={loginInputChange}
+                                    className={classes.input}
+                                />
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="password" 
+                                    variant="outlined" 
+                                    type="password"
+                                    name="password"
+                                    value={loginObj.password}
+                                    onChange={loginInputChange}
+                                    className={classes.input}
+                                />
+                                <Button variant="contained" color="primary" type="submit">
+                                    login
+                                </Button>
+                                </form>
+                            </Typography>
                         }
                         </div>
                     </Grid>                 

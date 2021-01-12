@@ -93,7 +93,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-// export default function PrimarySearchAppBar() {
 export default function PrimarySearchAppBar({currentUser, currentUserData}: currentUserProps) {
   console.log('appbar.tsx currentUser', currentUser)
   console.log('Appbar.tsx currentUserData.username', currentUserData.username)
@@ -120,6 +119,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
   };
 
   //TODO: move to app.tsx and pass down 
+  //TODO: logout no longer refreshing the page since I changed getCurrentUser dependency to [] in the App.tsx file
   const logOut = (e: React.FormEvent<SVGSVGElement>) : boolean => {
     history.push('/');
     API.logout()
@@ -127,7 +127,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
       history.push('/')
     })
     return true;
-    
   }
 
   const menuId = 'primary-search-account-menu';
@@ -170,7 +169,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
         <p>Favorites</p>
       </MenuItem>
       <MenuItem >
-      
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -184,22 +182,23 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
           </Tooltip>
         </IconButton>
         <p>New Account</p>
-        
       </MenuItem>
-      
-      {currentUser? <MenuItem>
-        <IconButton
-          aria-label="logout"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <Tooltip title="Logout" aria-label="Logout">
-            <ExitToAppIcon onClick={logOut}/>
-          </Tooltip>
-        </IconButton>
-        <p>Logout</p>
-      </MenuItem> : <MenuItem>
+      {currentUser? 
+        <MenuItem>
+          <IconButton
+            aria-label="logout"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <Tooltip title="Logout" aria-label="Logout">
+              <ExitToAppIcon onClick={logOut}/>
+            </Tooltip>
+          </IconButton>
+          <p>Logout</p>
+        </MenuItem> 
+        : 
+        <MenuItem>
         <IconButton
           aria-label="login"
           aria-controls={menuId}
@@ -214,7 +213,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
         </IconButton>
         <p>Login</p>
       </MenuItem>}
-      
     </Menu>
   );
 
@@ -228,12 +226,12 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
           <IconButton aria-label="show 4 new mails" color="inherit">
                   <Link  to="/" className={classes.appBarLinkWhite} ><HomeIcon/></Link>
           </IconButton>
-          <Typography 
-              
+          <Typography   
             noWrap
           >
             <Link to="/" className={classes.appBarLinkWhite}><h3>suP?</h3></Link>
           </Typography>
+          {/* //TODO: Add in search bar to search by comment type */}
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -249,7 +247,11 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
           </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-          {currentUser? <Typography noWrap><p>welcome back...{currentUserData.username}!</p></Typography>: <Typography noWrap><p>...welcome to suP!</p></Typography>}
+          {currentUser? 
+            <Typography noWrap><p>welcome back...{currentUserData.username}!</p></Typography>
+            : 
+            <Typography noWrap><p>...welcome to suP!</p></Typography>
+          }
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <FavoriteIcon />
@@ -268,42 +270,48 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
                 </Link>
               </Tooltip>
             </IconButton>
-            {currentUser?   <IconButton
-              edge="end"
-              aria-label="logout"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <Tooltip title="Logout" aria-label="Logout">
-                <ExitToAppIcon onClick={logOut}/>
-              </Tooltip> 
-            </IconButton> :
-            <IconButton
-            edge="end"
-            aria-label="login"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            color="inherit"
-          >
-            <Tooltip title="Login" aria-label="Login">
-              <Link to="/login" className={classes.appBarLinkWhite}>
-                <VpnKeyIcon />
-              </Link>
-            </Tooltip>
-            </IconButton> }
+            {currentUser?   
+              <IconButton
+                edge="end"
+                aria-label="logout"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <Tooltip title="Logout" aria-label="Logout">
+                  <ExitToAppIcon onClick={logOut}/>
+                </Tooltip> 
+              </IconButton> 
+              :
+              <IconButton
+                edge="end"
+                aria-label="login"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <Tooltip title="Login" aria-label="Login">
+                  <Link to="/login" className={classes.appBarLinkWhite}>
+                    <VpnKeyIcon />
+                  </Link>
+                </Tooltip>
+              </IconButton> 
+            }
           </div>
           <div className={classes.sectionMobile}>
-            {currentUser? <Typography noWrap><p >welcome back...{currentUserData.username}!</p></Typography>: <Typography noWrap><p>...welcome to suP!</p></Typography>}
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+            {currentUser? 
+              <Typography noWrap><p >welcome back...{currentUserData.username}!</p></Typography>
+              : 
+              <Typography noWrap><p>...welcome to suP!</p></Typography>}
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
           </div>
         </Toolbar>
       </AppBar>

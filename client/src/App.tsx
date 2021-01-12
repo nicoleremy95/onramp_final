@@ -7,15 +7,11 @@ import Login from './pages/Login/Login'
 import './App.css';
 import API from './utils/API';
 
-
-// interface userData {
-//   username: string,
-//   email: string
-// }
-
 function App(){
+
   const [currentUser, setCurrentUser] = useState<boolean>(true);
 
+  //TODO: refactor any
   const [currentUserData, setCurrentUserData] = useState<any>({
     username: '',
     email: ''
@@ -28,7 +24,6 @@ function App(){
           if(!res.data.user){
             setCurrentUser(false);
           } else {
-            // const sessionUser = res.data.user;
             setCurrentUser(true);
             setCurrentUserData({
               username: res.data.user.username,
@@ -37,16 +32,11 @@ function App(){
           }
 
     })
-    // .then(res=>{
-    //   // console.log('res.data current user', res.data)
-    //   setCurrentUser(res.data.user)
-    //   console.log('app.tsx currentUser', currentUser)
-    // })
-  })
-  
+  }, [])
 
   return (
     <div className="App">
+      {/* TODO: incluude Appbar and Footer here instead of on pages  */}
       <Router>
         <Switch>
           <Route exact path = '/'>

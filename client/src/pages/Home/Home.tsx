@@ -21,12 +21,10 @@ const useStyles = makeStyles((theme: Theme)=>
     })
 )
 
-
-// export default function Home() {
 export default function Home({currentUser, currentUserData}: currentUserProps) {
     const classes = useStyles();
 
-    console.log('Home.tsx currentUserData', currentUserData)
+    // console.log('Home.tsx currentUserData', currentUserData)
     const [newsDB, setNewsDB] = useState([]);
     
     // console.log("FunctionHome")
@@ -37,19 +35,20 @@ export default function Home({currentUser, currentUserData}: currentUserProps) {
         API.getAllNews()
         .then(res =>{
             // console.log('res.data[0].newsCreator', res.data[0].newsCreator)
-            // console.log('res.data', res.data)
+            // console.log('Home.tsx res.data.userId', res.data.userId)
             setNewsDB(res.data);
             // console.log('newsDB', newsDB)
         })
         .catch(err => console.log('err', err))
     }, [])
+
+    
    
     return (
         <div 
             className={classes.homeContainer}
         >
             <Scroll showBelow={250}/>
-            {/* <AppBar /> */}
             <AppBar currentUser={currentUser} currentUserData={currentUserData}/>
             <Sup currentUser={currentUser} currentUserData={currentUserData}/>
             <News newsDB ={newsDB} />

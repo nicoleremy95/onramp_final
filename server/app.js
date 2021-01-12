@@ -64,6 +64,7 @@ app.use(
   //Get all news in database, PASSED POSTMAN TEST: PASSED
   app.get('/news', (req, res) =>{
     db.News.find({})
+    .populate("userId", "username email")
     .then((allNews) =>{
         res.json(allNews);
     })
@@ -72,6 +73,21 @@ app.use(
         res.status(500).end();
     });
   })
+
+  //Get all news in database, PASSED POSTMAN TEST: PASSED
+  app.get('/news/:newsId', (req, res) =>{
+    db.News.findOne({_id:req.params.newsId})
+    .populate("userId", "username email")
+    .then((news) =>{
+        res.json(news);
+    })
+    .catch((err) =>{
+        console.log('err', err);
+        res.status(500).end();
+    });
+  })
+
+
 
   //Add news to the database, PASSED POSTMAN TEST: PASSED
   app.post('/news', (req, res) =>{
