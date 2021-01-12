@@ -42,7 +42,7 @@ function App(){
     //   setCurrentUser(res.data.user)
     //   console.log('app.tsx currentUser', currentUser)
     // })
-  }, [])
+  })
   
 
   return (

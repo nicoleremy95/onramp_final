@@ -67,7 +67,8 @@ export default function Login() {
 
     //TODO: move to app.tsx and pass down with props 
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
-        e.preventDefault();        
+        // e.preventDefault();  
+        history.push("/")      
         API.login(loginObj)
         .then(loginObj =>{
             history.push("/")
@@ -109,7 +110,7 @@ export default function Login() {
                             id="outlined-basic" 
                             label="password" 
                             variant="outlined" 
-                            type="textarea"
+                            type="password"
                             name="password"
                             value={loginObj.password}
                             onChange={inputChange}

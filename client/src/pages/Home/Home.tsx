@@ -51,7 +51,7 @@ export default function Home({currentUser, currentUserData}: currentUserProps) {
             <Scroll showBelow={250}/>
             {/* <AppBar /> */}
             <AppBar currentUser={currentUser} currentUserData={currentUserData}/>
-            <Sup/>
+            <Sup currentUser={currentUser} currentUserData={currentUserData}/>
             <News newsDB ={newsDB} />
             <Footer/>
         </div>
