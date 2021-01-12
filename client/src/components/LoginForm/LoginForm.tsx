@@ -16,26 +16,24 @@ interface State {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        // display: 'flex',
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
         marginTop:'auto',
-        marginBottom: '100px'
+        padding: '20px'
     },
     input: {
         '& > *': {
             background: 'white',
         },
         width: "100%",
-        marginRight: '100px'
     },
     formControl: {
         minWidth: "60%",
     },
-    send:{
-        marginTop: '50px',
-        marginRight: "0px"
+    button:{
+        marginTop: '20px',
+        marginBottom: "20px"
     }
   }),
 );
@@ -45,7 +43,6 @@ export default function Login() {
     
     const classes = useStyles();
 
-    //initialize form object state
     const [loginObj, setLoginObject] = useState<State>({
         username:"",
         password:""
@@ -53,12 +50,7 @@ export default function Login() {
 
     const history = useHistory();
 
-    // const login = () => {
-        
-    // }
-
     //TODO: move to app.tsx and pass down with props 
-    //input change function
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
         //TODO: refactor any
         const{ name, value}: any = e.target;
@@ -67,16 +59,15 @@ export default function Login() {
 
     //TODO: move to app.tsx and pass down with props 
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
-        // e.preventDefault();  
         history.push("/")      
         API.login(loginObj)
         .then(loginObj =>{
             history.push("/")
-            // console.log('loginObj', loginObj)
         })
         .catch(err =>console.log('err', err))
         return true;
     }
+    
     return (
         <div 
             className={classes.root}
@@ -88,7 +79,7 @@ export default function Login() {
             <div className="login-bubble">
                 <div className="login-arrow login-bottom right"></div>
                     <form 
-                    // className={classes.root} 
+                    className={classes.root} 
                         noValidate 
                         autoComplete="on" 
                         onSubmit={inputSubmit}
@@ -116,7 +107,7 @@ export default function Login() {
                             onChange={inputChange}
                             className={classes.input}
                         />
-                        <Button variant="contained" color="primary" type="submit">
+                        <Button variant="contained" color="primary" type="submit" className={classes.button}>
                             login
                         </Button>
                     </form>

@@ -11,7 +11,7 @@ const API = {
     postNews: function(news: object){
         return axios.post(`${urlPrefix}/news`, news, { withCredentials: true })
     },
-    postComment: function(comment: string, newsId: string){
+    postComment: function(comment: object, newsId: string){
         return axios.post(`${urlPrefix}/comment/${newsId}`, comment, { withCredentials: true })
     },
     postReaction: function(reaction: string, newsId: string){
@@ -34,6 +34,9 @@ const API = {
     },
     getCurrentUser: function (){
         return axios.get(`${urlPrefix}/readsession`, { withCredentials: true })
+    },
+    getNewsById: function(newsId: string){
+        return axios.get(`${urlPrefix}/news/${newsId}`)
     }
 }
 

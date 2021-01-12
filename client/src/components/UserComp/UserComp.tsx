@@ -16,12 +16,11 @@ interface State {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        // display: 'flex',
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
         marginTop:'auto',
-        marginBottom: '100px'
+        padding: "20px"
     },
     input: {
         '& > *': {
@@ -36,6 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
     send:{
         marginTop: '50px',
         marginRight: "0px"
+    },
+    button:{
+        marginTop: '20px',
+        marginBottom: "20px"
     }
   }),
 );
@@ -56,16 +59,12 @@ export default function UserComp() {
         //TODO: refactor any
         const{ name, value}: any = e.target;
         setUserObj({ ...userObj,[name]: value})
-        // setIcon(true)
     }
 
-    //TODO:
-    // input submit function
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean {
         history.push("/");
         API.signup(userObj)
         .then(user =>{
-            // console.log('UserComp.tsx user', user)
             history.push("/")
         })
         .catch(err=> console.log('err', err))
@@ -83,7 +82,7 @@ export default function UserComp() {
                 <div className="user-bubble">
                     <div className="user-arrow user-bottom right"></div>
                     <form 
-                    // className={classes.root} 
+                    className={classes.root} 
                         noValidate 
                         autoComplete="on" 
                         onSubmit={inputSubmit}
@@ -134,7 +133,7 @@ export default function UserComp() {
                             onChange={inputChange}
                             className={classes.input}
                         />
-                        <Button variant="contained" color="primary" type="submit">
+                        <Button variant="contained" color="primary" type="submit" className={classes.button}>
                             create account
                         </Button>
                     </form>

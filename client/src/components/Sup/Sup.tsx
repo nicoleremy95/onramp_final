@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import {TextField, Button, Grid, Container, Typography, Link} from '@material-ui/core';
+import {CircularProgress, TextField, Button, Grid, Container, Typography, CardContent, Card} from '@material-ui/core';
 import API from '../../utils/API';
 import './sup.css';
 
@@ -25,7 +25,6 @@ interface LoginProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        // display: 'flex',
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
@@ -52,6 +51,15 @@ const useStyles = makeStyles((theme: Theme) =>
     moreTalk: {
         fontSize: '30px !important',
         textAlign: 'left'
+    },
+    cards: {
+        marginTop: '50px',
+        marginBottom: 'auto',
+        boxShadow: theme.shadows[5],
+    },
+    button:{
+        marginTop: '20px',
+        marginBottom: "20px"
     }
   }),
 );
@@ -63,8 +71,8 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
     //initialize form object state
     const [newsObj, setNewsObj] = useState<State>({
         newsData:"",
-        // newsCreator:"",
-        // newsType:""
+        //TODO: add in newstype in form
+        // newsType: string,
     })
 
     const [loginObj, setLoginObject] = useState<LoginProps>({
@@ -119,7 +127,9 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
     //TODO: move to app.tsx and pass down with props 
     // input submit function
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
-        // e.preventDefault();        
+        if(!newsObj){
+            alert('hey')
+        }
         API.postNews(newsObj)
         .then(news =>{
             console.log('news', news)
@@ -142,17 +152,23 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                 <Grid item xs ={10} sm={10} md={6} lg={6}>
                 <div className="sup-bubble">
                     <div className="sup-arrow sup-bottom right"></div>
+                        {currentUser? <Typography align="right">
+                            <h2 className="sup">tell me {currentUserData.username}...suP?</h2>
+                        </Typography> : null}
                         
                         {currentUser ? 
+                            <Card 
+                                className={classes.cards} 
+                                variant="outlined" 
+                            >
+                            <CardContent>
                             <form 
-                            // className={classes.root} 
+                                className={classes.root} 
                                 noValidate 
                                 autoComplete="on" 
                                 onSubmit={inputSubmit}
                             >
-                                <Typography align="right">
-                                    <h2 className="sup">tell me {currentUserData.username}...suP?</h2>
-                                </Typography>
+                                
                                 <TextField 
                                     id="outlined-basic" 
                                     label="suP friend?" 
@@ -164,6 +180,10 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                                     value={newsObj.newsData}
                                     onChange={inputChange}
                                     className={classes.input}
+                                    inputProps={{
+                                        maxlength: 200
+                                    }}
+                                    helperText={`${newsObj.newsData.length}/200`}
                                 />
                                 <Button variant="contained" color="primary" type="submit">
                                     send
@@ -191,44 +211,46 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                                         <option value="Misc">Misc</option>
                                     </Select>
                                 </FormControl> */}
-                                            
-                        </form>
-                        : 
-                        <Typography><h3 className={classes.welcome}>...Welcome to suP!</h3> <h4 className={classes.moreTalk}> where talk is encouraged...</h4>
-                            <form 
-                        // className={classes.root} 
-                            noValidate 
-                            autoComplete="on" 
-                            onSubmit={loginInputSubmit}
-                        >
-                            <Typography align="right">
-                                <h2 className="login">...please login!</h2>
-                            </Typography>
-                            <TextField 
-                                id="outlined-basic" 
-                                label="username" 
-                                variant="outlined" 
-                                type="textarea"
-                                name="username"
-                                value={loginObj.username}
-                                onChange={loginInputChange}
-                                className={classes.input}
-                            />
-                            <TextField 
-                                id="outlined-basic" 
-                                label="password" 
-                                variant="outlined" 
-                                type="password"
-                                name="password"
-                                value={loginObj.password}
-                                onChange={loginInputChange}
-                                className={classes.input}
-                            />
-                            <Button variant="contained" color="primary" type="submit">
-                                login
-                            </Button>
+       
                             </form>
-                        </Typography>
+                            </CardContent>
+                            </Card>
+                            : 
+                            <Typography><h3 className={classes.welcome}>...Welcome to suP!</h3> <h4 className={classes.moreTalk}> where talk is encouraged...</h4>
+                            <form 
+                                className={classes.root} 
+                                noValidate 
+                                autoComplete="on" 
+                                onSubmit={loginInputSubmit}
+                            >
+                                <Typography align="right">
+                                    <h2 className="login">...please login!</h2>
+                                </Typography>
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="username" 
+                                    variant="outlined" 
+                                    type="textarea"
+                                    name="username"
+                                    value={loginObj.username}
+                                    onChange={loginInputChange}
+                                    className={classes.input}
+                                />
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="password" 
+                                    variant="outlined" 
+                                    type="password"
+                                    name="password"
+                                    value={loginObj.password}
+                                    onChange={loginInputChange}
+                                    className={classes.input}
+                                />
+                                <Button variant="contained" color="primary" type="submit" className={classes.button}>
+                                    login
+                                </Button>
+                                </form>
+                            </Typography>
                         }
                         </div>
                     </Grid>                 
