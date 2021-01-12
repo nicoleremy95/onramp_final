@@ -11,9 +11,7 @@ interface currentUserProps {
 export default function User({currentUser, currentUserData}: currentUserProps) {
     return (
         <div>
-            <Appbar currentUser={currentUser} currentUserData={currentUserData}/>
             <UserComp/>
-            <Footer/>
         </div>
     )
 }

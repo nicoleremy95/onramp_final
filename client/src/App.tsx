@@ -4,18 +4,16 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './pages/Home/Home'
 import User from './pages/User/User'
 import Login from './pages/Login/Login'
+import Appbar from './components/Appbar/Appbar'
+import Footer from './components/Footer/Footer'
 import './App.css';
 import API from './utils/API';
 
-
-// interface userData {
-//   username: string,
-//   email: string
-// }
-
 function App(){
+
   const [currentUser, setCurrentUser] = useState<boolean>(true);
 
+  //TODO: refactor any
   const [currentUserData, setCurrentUserData] = useState<any>({
     username: '',
     email: ''
@@ -28,7 +26,6 @@ function App(){
           if(!res.data.user){
             setCurrentUser(false);
           } else {
-            // const sessionUser = res.data.user;
             setCurrentUser(true);
             setCurrentUserData({
               username: res.data.user.username,
@@ -37,17 +34,12 @@ function App(){
           }
 
     })
-    // .then(res=>{
-    //   // console.log('res.data current user', res.data)
-    //   setCurrentUser(res.data.user)
-    //   console.log('app.tsx currentUser', currentUser)
-    // })
-  })
-  
+  }, [])
 
   return (
     <div className="App">
       <Router>
+        <Appbar currentUser={currentUser} currentUserData={currentUserData}/>
         <Switch>
           <Route exact path = '/'>
             <Home currentUser={currentUser} currentUserData={currentUserData}/>
@@ -59,6 +51,7 @@ function App(){
             <Login currentUser={currentUser} currentUserData={currentUserData} />
           </Route>
         </Switch>
+        <Footer/>
       </Router>
     </div>
   );

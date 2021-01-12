@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import { useHistory, useParams } from "react-router-dom";
 import {createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {Container, Card, CardActions, IconButton, CardContent, Button, Typography, TextField, Backdrop} from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -12,15 +13,19 @@ import './news.css'
 import API from '../../utils/API';
 
 interface State {
-  message: string;
+  message: string,
+  // id: string
 }
 
 
 interface Props {
   newsDB: any[],
-  // currentUserData: object
+  currentUser: boolean
 }
 
+interface ParamTypes {
+  id: string
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[5],
     },
     textField:{
-      width: '80%',
+      width: '90%',
       marginBottom: '20px'
     },
     cardAction: {
@@ -57,28 +62,51 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+    button:{
+      marginBottom: '20px'
+    }
   })
 );
 
-
-// console.log ("Function News running");
-
-export default function News({newsDB}: Props) : JSX.Element {
-  // console.log('News.tsx newsDB.newsData', newsDB.newsData)
+export default function News({newsDB, currentUser}: Props) : JSX.Element {
+  // console.log('News.tsx newsDB[0]', newsDB[0])
   const classes = useStyles();
 
   const [commentObj, setCommentObj] = useState<State>({
-    message:""
+    message:"",
+    // id: newsDB
   });
 
   const [open, setOpen] = React.useState(false);
 
   const [reactionObj, setReactionObj] = useState<boolean>(false);
 
+  const [inputField, setInputField] = useState<boolean>(true);
+
+  const history = useHistory();
+
+  const {id} = useParams<ParamTypes>();
+  
+  // console.log('id', id)
+
+  const addCommBtn = `/comment/${id}`
+  // console.log('News.tsx id', id)
+
+  //TODO: work on function and api call for favoriting a sup feed 
+  // const params = useParams<{params: string}>();
+  // console.log('params', params)
   // function favoriteCom(e: React.ChangeEvent<HTMLFormElement>): boolean{
   //   API.postReaction(reactionObj, newsDB._id)
   //   return true;
   // }
+
+  //TODO: work on api call to get newsid for particular sup feed for comments and reactions
+  // useEffect(()=>{
+  //   API.getNewsById(id)
+  //   .then(res=>{
+  //     console.log('News.tsx res.data', res.data)
+  //   })
+  // })
 
   const handleOpen = () => {
     setOpen(true);
@@ -93,11 +121,31 @@ export default function News({newsDB}: Props) : JSX.Element {
     //TODO: refactor any
     const{name,value}: any = e.target;
     setCommentObj({...commentObj, [name]: value})
+    //TODO: user protection around submitting an empty form 
+    // if(!value){
+    //   setInputField(true)
+    // }
+  }
+  
+  function inputSubmit(e: React.ChangeEvent<HTMLFormElement>) : boolean {
+    e.preventDefault();
+    // console.log('News.tsx id', id)
+    //TODO: work on input api call for comments 
+    // API.getNewsById(id)
+    // .then(res=>{
+    //   console.log('News.tsx res.data', res.data)
+    // })
+    API.postComment(commentObj, "5ffdf55c81a5d9c8ca26c543")
+    .then(comment =>{
+      // history.push("/")
+      console.log('News.tsx comment', comment)
+    })
+    .catch(err =>console.log('err', err))
+    return true;
   }
 
   const newsArr = [];
   for(let i = 0; i < newsDB.length; i ++){
-    console.log('newsDB[i].userId', newsDB[i].userId)
      newsArr.push(
       <div className="news-bubble">
       <div className="news-arrow news-bottom left"></div>
@@ -109,12 +157,6 @@ export default function News({newsDB}: Props) : JSX.Element {
             variant="outlined" 
           >
               <CardContent>
-              <Typography 
-                className="News-cards-category" 
-                color="textSecondary" 
-                gutterBottom>
-                  travel
-              </Typography>
               <Typography 
                 variant="h5" 
                 component="h2"
@@ -133,66 +175,76 @@ export default function News({newsDB}: Props) : JSX.Element {
                   <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
-                <IconButton aria-label="share">
                   <EmojiEmotionsIcon onClick={handleOpen} />
                 </IconButton>
-                <Modal
-                  aria-labelledby="transition-modal-title"
-                  aria-describedby="transition-modal-description"
-                  className={classes.modal}
-                  open={open}
-                  onClose={handleClose}
-                  closeAfterTransition
-                  BackdropComponent={Backdrop}
-                  BackdropProps={{
-                    timeout: 500,
-                  }}
-                >
-                <Fade in={open}>
-                  <div className={classes.paper}>
-                    <Button size="small">❤️️</Button>
-                    <Button size="small">😜️</Button>
-                    <Button size="small">😈</Button>
-                    <Button size="small">😍</Button>
-                    <Button size="small">😂</Button>
-                    <Button size="small">😊</Button>
-                  </div>
-                </Fade>
-              </Modal>
               </CardActions >
               <div
                 className="News-cards-comment"
               >
-                <TextField
+              {currentUser? <form
+                  noValidate 
+                  autoComplete="on" 
+                  onSubmit={inputSubmit}
+                >
+                  <TextField
                   id="filled-multiline-static"
                   label="comment"
+                  multiline
+                  rows={2}
                   variant="filled"
                   className={classes.textField}
+                  type="textarea"
+                  name="message"
+                  value={commentObj.message}
+                  onChange={inputChange}
+                  inputProps={{
+                    maxlength: 100
+                  }}
+                  helperText={`${commentObj.message.length}/100`}
                 />
-              </div>
-              
+                <Button 
+                  variant="contained" 
+                  color="primary"  
+                  type="submit" 
+                  data-comm-news-id={id}
+                  className={classes.button}
+                >
+                  send
+                </Button>
+                {/* TODO: input user protection around submitting an empty form  */}
+                {/* {inputField===false? <Button 
+                  variant="contained" 
+                  color="primary"  
+                  type="submit" 
+                  data-comm-news-id={id}
+                  className={classes.button}
+                >
+                  send
+                </Button> : null} */}
+                
+                </form>: null}
+                
+               
+              </div> 
          </Card>
-         </div>
+      </div>
      )
   }
   
-
-    return (
-      <div 
-        className= {classes.root}
-      >
-         <Container>
-           <Grid container>
-             <Grid item xs={1} sm={1} md={3} lg={3}></Grid>
-             <Grid item xs={10} sm={10} md={6} lg={6}>
-              {newsArr.map(news =>{return news})}
-             </Grid>
-             <Grid item xs={1} sm={1} md={2} lg={2}></Grid>
-           </Grid>
-         </Container>
-       </div>
-    )
+  return (
+    <div 
+      className= {classes.root}
+    >
+        <Container>
+          <Grid container>
+            <Grid item xs={1} sm={1} md={3} lg={3}></Grid>
+            <Grid item xs={10} sm={10} md={6} lg={6}>
+            {newsArr.map(news =>{return news})}
+            </Grid>
+            <Grid item xs={1} sm={1} md={2} lg={2}></Grid>
+          </Grid>
+        </Container>
+      </div>
+  )
 }
 
