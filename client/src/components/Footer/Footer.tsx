@@ -1,15 +1,10 @@
 import * as React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import Tooltip from '@material-ui/core/Tooltip';
-import Link from '@material-ui/core/Link';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import { IconButton } from '@material-ui/core';
-import './footer.css'
+import {Typography, Container, Grid, Tooltip, Link, IconButton} from '@material-ui/core';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import './footer.css';
 
 
 const useStyles = makeStyles((theme:Theme) =>({
@@ -35,8 +30,17 @@ const useStyles = makeStyles((theme:Theme) =>({
       },
       backgroundColor: "white",
 
+    },
+    moreTalk: {
+      fontSize: "250% !important",
+      font: "'Pacifico', cursive",
+    },
+    footerLinks: {
+      textDecoration: "none",
+      color: "white !important"
     }
 }))
+
 export default function Footer() {
     const classes = useStyles();
     return (
@@ -56,19 +60,19 @@ export default function Footer() {
 
                   <Tooltip title="Linkedin">
                     <IconButton aria-label="delete" edge="start">
-                      <Link  href="https://www.linkedin.com/in/nicole-remy-190202166/" target="blank" className="Footer-link-white">
+                      <Link  href="https://www.linkedin.com/in/nicole-remy-190202166/" target="blank" className={classes.footerLinks}>
                         <LinkedInIcon  fontSize="large" />
                       </Link>
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="GitHub">
                     <IconButton aria-label="delete">
-                      <Link  href="https://github.com/nicoleremy95" target="blank" className="Footer-link-white">
+                      <Link  href="https://github.com/nicoleremy95" target="blank" className={classes.footerLinks}>
                         <GitHubIcon fontSize="large"/>
                       </Link>
                     </IconButton>
                   </Tooltip>
-                  <Typography className="more-talk" align="left">
+                  <Typography className={classes.moreTalk} align="left">
                     <h1>suP?</h1>
                   </Typography>
                 </Grid>

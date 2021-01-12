@@ -1,36 +1,30 @@
 import * as React from 'react';
 import {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SendIcon from '@material-ui/icons/Send';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import Container from '@material-ui/core/Container';
+import {CircularProgress, TextField, Button, Grid, Container, Typography, CardContent, Card} from '@material-ui/core';
 import API from '../../utils/API';
-import { Typography } from '@material-ui/core';
-import './sup.css'
+import './sup.css';
 
 interface State {
     newsData: string,
-    newsCreator: string,
-    newsType: string,
+    //TODO: add in newstype in form
+    // newsType: string,
 }
-// interface Icon {
-//     icon: boolean
-// }
+
+interface currentUserProps {
+    currentUser: boolean,
+    currentUserData: any
+}
+
+interface LoginProps {
+    username: string,
+    password: string
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        // display: 'flex',
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
@@ -49,54 +43,104 @@ const useStyles = makeStyles((theme: Theme) =>
     send:{
         marginTop: '50px',
         marginRight: "0px"
+    },
+    welcome: {
+        fontSize: '30px !important',
+        textAlign: 'right'
+    },
+    moreTalk: {
+        fontSize: '30px !important',
+        textAlign: 'left'
+    },
+    cards: {
+        marginTop: '50px',
+        marginBottom: 'auto',
+        boxShadow: theme.shadows[5],
+    },
+    button:{
+        marginTop: '20px',
+        marginBottom: "20px"
     }
   }),
 );
 
 
-export default function Sup(){
+export default function Sup({currentUser, currentUserData}: currentUserProps){
     const classes = useStyles();
 
     //initialize form object state
     const [newsObj, setNewsObj] = useState<State>({
         newsData:"",
-        newsCreator:"",
-        newsType:""
+        //TODO: add in newstype in form
+        // newsType: string,
     })
 
-    const [state, setState] = React.useState<{ age: string | number; name: string }>({
-        age: '',
-        name: 'hai',
-      });
-    
-    const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    const name = event.target.name as keyof typeof state;
-    setState({
-        ...state,
-        [name]: event.target.value,
-    });
-    };
+    const [loginObj, setLoginObject] = useState<LoginProps>({
+        username:"",
+        password:""
+    })
 
+    const history = useHistory();
+
+    //TODO: add in newstype to form
+    // const [state, setState] = React.useState<{ age: string | number; name: string }>({
+    //     age: '',
+    //     name: 'hai',
+    //   });
+    
+    //TODO: add in newstype to form
+    // const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    // const name = event.target.name as keyof typeof state;
+    // setState({
+    //     ...state,
+    //     [name]: event.target.value,
+    // });
+    // };
+
+    function loginInputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
+        //TODO: refactor any
+        const{ name, value}: any = e.target;
+        setLoginObject({ ...loginObj,[name]: value})
+    }
+
+    //TODO: move to app.tsx and pass down with props 
+    function loginInputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
+        // e.preventDefault();   
+        history.push("/")     
+        API.login(loginObj)
+        .then(loginObj =>{
+            history.push("/")
+            // console.log('loginObj', loginObj)
+        })
+        .catch(err =>console.log('err', err))
+        return true;
+    }
+    //TODO: move to app.tsx and pass down with props 
     //input change function
-    function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>){
+    function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
         //TODO: refactor any
         const{ name, value}: any = e.target;
         setNewsObj({ ...newsObj,[name]: value})
         // setIcon(true)
     }
 
+    //TODO: move to app.tsx and pass down with props 
     // input submit function
-    function inputSubmit (e: React.FormEvent<HTMLFormElement>) {
+    function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
+        if(!newsObj){
+            alert('hey')
+        }
         API.postNews(newsObj)
         .then(news =>{
             console.log('news', news)
         })
         .catch(err =>console.log('err', err))
         setNewsObj({
-            newsData: "",
-            newsCreator: "",
-            newsType: ""
+            newsData: ""
+            //TODO: add in newstype to form
+            // newsType: ""
         })
+        return true;
     }
     return(
         <div 
@@ -104,19 +148,27 @@ export default function Sup(){
         >
             <Container>
             <Grid container >
-                <Grid item xs={1} md={3} lg={3} direction="column"></Grid>
-                <Grid item xs ={10} md={6} lg={6}>
+                <Grid item xs={1} sm={1} md={3} lg={3} direction="column"></Grid>
+                <Grid item xs ={10} sm={10} md={6} lg={6}>
                 <div className="sup-bubble">
                     <div className="sup-arrow sup-bottom right"></div>
-                        <form 
-                            // className={classes.root} 
+                        {currentUser? <Typography align="right">
+                            <h2 className="sup">tell me {currentUserData.username}...suP?</h2>
+                        </Typography> : null}
+                        
+                        {currentUser ? 
+                            <Card 
+                                className={classes.cards} 
+                                variant="outlined" 
+                            >
+                            <CardContent>
+                            <form 
+                                className={classes.root} 
                                 noValidate 
                                 autoComplete="on" 
                                 onSubmit={inputSubmit}
                             >
-                                <Typography align="right">
-                                    <h2 className="sup">tell me...suP?</h2>
-                                </Typography>
+                                
                                 <TextField 
                                     id="outlined-basic" 
                                     label="suP friend?" 
@@ -128,42 +180,81 @@ export default function Sup(){
                                     value={newsObj.newsData}
                                     onChange={inputChange}
                                     className={classes.input}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <IconButton className={classes.send}>
-                                                <SendIcon/>
-                                            </IconButton>
-
-                                        )
-                                    
+                                    inputProps={{
+                                        maxlength: 200
                                     }}
+                                    helperText={`${newsObj.newsData.length}/200`}
                                 />
-                                <FormControl className={classes.formControl}>
+                                <Button variant="contained" color="primary" type="submit">
+                                    send
+                                </Button>
+                                {/* TODO: add in newstype to form */}
+                                {/* <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="age-native-simple">Category</InputLabel>
                                     <Select
                                         native
-                                        value={state.age}
+                                        value={newsObj.newsType}
+                                        name="newsType"
                                         onChange={handleChange}
                                         inputProps={{
                                             name: 'category',
                                             id: 'age-native-simple',
                                         }}
                                         >
-                                        <option aria-label="None" value="" />
-                                        <option value={10}>Travel</option>
-                                        <option value={20}>Food</option>
-                                        <option value={30}>Entertainment</option>
-                                        <option value={30}>Fashion</option>
-                                        <option value={30}>Sports</option>
-                                        <option value={30}>Music</option>
-                                        <option value={30}>Misc</option>
+                                        <option aria-label="None" value="none" />
+                                        <option value="Travel">Travel</option>
+                                        <option value="Food">Food</option>
+                                        <option value="Entertainment">Entertainment</option>
+                                        <option value="Fashion">Fashion</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Misc">Misc</option>
                                     </Select>
-                                </FormControl>
-                                            
-                        </form>
+                                </FormControl> */}
+       
+                            </form>
+                            </CardContent>
+                            </Card>
+                            : 
+                            <Typography><h3 className={classes.welcome}>...Welcome to suP!</h3> <h4 className={classes.moreTalk}> where talk is encouraged...</h4>
+                            <form 
+                                className={classes.root} 
+                                noValidate 
+                                autoComplete="on" 
+                                onSubmit={loginInputSubmit}
+                            >
+                                <Typography align="right">
+                                    <h2 className="login">...please login!</h2>
+                                </Typography>
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="username" 
+                                    variant="outlined" 
+                                    type="textarea"
+                                    name="username"
+                                    value={loginObj.username}
+                                    onChange={loginInputChange}
+                                    className={classes.input}
+                                />
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="password" 
+                                    variant="outlined" 
+                                    type="password"
+                                    name="password"
+                                    value={loginObj.password}
+                                    onChange={loginInputChange}
+                                    className={classes.input}
+                                />
+                                <Button variant="contained" color="primary" type="submit" className={classes.button}>
+                                    login
+                                </Button>
+                                </form>
+                            </Typography>
+                        }
                         </div>
                     </Grid>                 
-                    <Grid item xs={1} md={2} lg={2} direction="column"></Grid>
+                    <Grid item xs={1} sm={1} md={2} lg={2} direction="column"></Grid>
                 </Grid>
             </Container>
         </div>

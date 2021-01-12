@@ -13,8 +13,10 @@ const News = new Schema({
     newsData : {
         type: String
     },
-    newsCreator : {
-        type: String
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
     },
     newsType: {
         type: String
@@ -25,4 +27,3 @@ const News = new Schema({
 }, {timestamps: true});
 
 module.exports = mongoose.model('News', News);
-
