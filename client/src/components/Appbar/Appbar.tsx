@@ -2,25 +2,15 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Home from '../../pages/Home/Home';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import Tooltip from '@material-ui/core/Tooltip';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import {AppBar, Toolbar, IconButton, Typography, Badge, Tooltip, MenuItem, Menu }from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import './appbar.css'
 import API from '../../utils/API';
+
 
 interface currentUserProps {
   currentUser: boolean,
@@ -92,6 +82,14 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'none',
       },
     },
+    appBarLinkWhite: {
+      textDecoration: "none",
+      color: "white !important"
+    },
+    appBarLinkBlack: {
+      textDecoration: "none",
+      color: "black !important"
+    }
   }),
 );
 
@@ -126,7 +124,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
     history.push('/');
     API.logout()
     .then(req =>{
-      // history.push('/')
+      history.push('/')
     })
     
   }
@@ -179,7 +177,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
           color="inherit"
         >
           <Tooltip title="New Account" aria-label="New Account">
-            <Link to="/user" className="Appbar-link-black">
+            <Link to="/user" className={classes.appBarLinkBlack}>
               <AccountCircle/>
             </Link>
           </Tooltip>
@@ -208,7 +206,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
           color="inherit"
         >
           <Tooltip title="Login" aria-label="Login">
-            <Link to="/login" className="Appbar-link-black">
+            <Link to="/login" className={classes.appBarLinkBlack}>
               <VpnKeyIcon />
             </Link>
           </Tooltip>
@@ -226,14 +224,14 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
         className={classes.appbar}
       >
         <Toolbar>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-                    <Link  to="/" className="Appbar-link-white" ><HomeIcon/></Link>
-            </IconButton>
+          <IconButton aria-label="show 4 new mails" color="inherit">
+                  <Link  to="/" className={classes.appBarLinkWhite} ><HomeIcon/></Link>
+          </IconButton>
           <Typography 
               
             noWrap
           >
-            <Link to="/" className="Appbar-link-white"><h3>suP?</h3></Link>
+            <Link to="/" className={classes.appBarLinkWhite}><h3>suP?</h3></Link>
           </Typography>
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -264,7 +262,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
               color="inherit"
             >
               <Tooltip title="New Account" aria-label="New Account">
-            <Link to="/user" className="Appbar-link-white">
+            <Link to="/user" className={classes.appBarLinkWhite}>
               <AccountCircle/>
             </Link>
           </Tooltip>
@@ -288,7 +286,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
             color="inherit"
           >
             <Tooltip title="Login" aria-label="Login">
-              <Link to="/login" className="Appbar-link-white">
+              <Link to="/login" className={classes.appBarLinkWhite}>
                 <VpnKeyIcon />
               </Link>
           </Tooltip>
@@ -296,7 +294,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
           </div>
           <div className={classes.sectionMobile}>
             {currentUser? <Typography noWrap><p >welcome back...{currentUserData.username}!</p></Typography>: <Typography noWrap><p>...welcome to suP!</p></Typography>}
-
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
