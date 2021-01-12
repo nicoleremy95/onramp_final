@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
         alignContent: 'center',
         justifyContent: 'center',
         marginTop:'auto',
-        marginBottom: '100px'
+        padding: "20px"
     },
     input: {
         '& > *': {
@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
     send:{
         marginTop: '50px',
         marginRight: "0px"
+    },
+    button:{
+        marginTop: '20px',
+        marginBottom: "20px"
     }
   }),
 );
@@ -129,7 +133,7 @@ export default function UserComp() {
                             onChange={inputChange}
                             className={classes.input}
                         />
-                        <Button variant="contained" color="primary" type="submit">
+                        <Button variant="contained" color="primary" type="submit" className={classes.button}>
                             create account
                         </Button>
                     </form>

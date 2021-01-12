@@ -14,11 +14,13 @@ import API from '../../utils/API';
 
 interface State {
   message: string,
+  // id: string
 }
 
 
 interface Props {
   newsDB: any[],
+  currentUser: boolean
 }
 
 interface ParamTypes {
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[5],
     },
     textField:{
-      width: '80%',
+      width: '90%',
       marginBottom: '20px'
     },
     cardAction: {
@@ -60,24 +62,34 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+    button:{
+      marginBottom: '20px'
+    }
   })
 );
 
-export default function News({newsDB}: Props) : JSX.Element {
+export default function News({newsDB, currentUser}: Props) : JSX.Element {
   // console.log('News.tsx newsDB[0]', newsDB[0])
   const classes = useStyles();
 
   const [commentObj, setCommentObj] = useState<State>({
     message:"",
+    // id: newsDB
   });
 
   const [open, setOpen] = React.useState(false);
 
   const [reactionObj, setReactionObj] = useState<boolean>(false);
 
+  const [inputField, setInputField] = useState<boolean>(true);
+
   const history = useHistory();
 
   const {id} = useParams<ParamTypes>();
+  
+  // console.log('id', id)
+
+  const addCommBtn = `/comment/${id}`
   // console.log('News.tsx id', id)
 
   //TODO: work on function and api call for favoriting a sup feed 
@@ -109,17 +121,26 @@ export default function News({newsDB}: Props) : JSX.Element {
     //TODO: refactor any
     const{name,value}: any = e.target;
     setCommentObj({...commentObj, [name]: value})
+    //TODO: user protection around submitting an empty form 
+    // if(!value){
+    //   setInputField(true)
+    // }
   }
   
   function inputSubmit(e: React.ChangeEvent<HTMLFormElement>) : boolean {
-    console.log('News.tsx id', id)
+    e.preventDefault();
+    // console.log('News.tsx id', id)
     //TODO: work on input api call for comments 
-    // API.postComment(commentObj, id)
-    // .then(comment =>{
-    //   // history.push("/")
-    //   console.log('News.tsx comment', comment)
+    // API.getNewsById(id)
+    // .then(res=>{
+    //   console.log('News.tsx res.data', res.data)
     // })
-    // .catch(err =>console.log('err', err))
+    API.postComment(commentObj, "5ffdf55c81a5d9c8ca26c543")
+    .then(comment =>{
+      // history.push("/")
+      console.log('News.tsx comment', comment)
+    })
+    .catch(err =>console.log('err', err))
     return true;
   }
 
@@ -136,13 +157,6 @@ export default function News({newsDB}: Props) : JSX.Element {
             variant="outlined" 
           >
               <CardContent>
-              <Typography 
-                className="News-cards-category" 
-                color="textSecondary" 
-                gutterBottom>
-                  {/* TODO: make this based on the drop down choices  */}
-                  travel
-              </Typography>
               <Typography 
                 variant="h5" 
                 component="h2"
@@ -161,39 +175,13 @@ export default function News({newsDB}: Props) : JSX.Element {
                   <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
-                <IconButton aria-label="share">
                   <EmojiEmotionsIcon onClick={handleOpen} />
                 </IconButton>
-                <Modal
-                  aria-labelledby="transition-modal-title"
-                  aria-describedby="transition-modal-description"
-                  className={classes.modal}
-                  open={open}
-                  onClose={handleClose}
-                  closeAfterTransition
-                  BackdropComponent={Backdrop}
-                  BackdropProps={{
-                    timeout: 500,
-                  }}
-                >
-                <Fade in={open}>
-                  <div className={classes.paper}>
-                    <Button size="small">❤️️</Button>
-                    <Button size="small">😜️</Button>
-                    <Button size="small">😈</Button>
-                    <Button size="small">😍</Button>
-                    <Button size="small">😂</Button>
-                    <Button size="small">😊</Button>
-                  </div>
-                </Fade>
-              </Modal>
               </CardActions >
               <div
                 className="News-cards-comment"
               >
-                <form
+              {currentUser? <form
                   noValidate 
                   autoComplete="on" 
                   onSubmit={inputSubmit}
@@ -201,17 +189,41 @@ export default function News({newsDB}: Props) : JSX.Element {
                   <TextField
                   id="filled-multiline-static"
                   label="comment"
+                  multiline
+                  rows={2}
                   variant="filled"
                   className={classes.textField}
                   type="textarea"
                   name="message"
                   value={commentObj.message}
                   onChange={inputChange}
+                  inputProps={{
+                    maxlength: 100
+                  }}
+                  helperText={`${commentObj.message.length}/100`}
                 />
-                <Button variant="contained" color="primary" type="submit">
+                <Button 
+                  variant="contained" 
+                  color="primary"  
+                  type="submit" 
+                  data-comm-news-id={id}
+                  className={classes.button}
+                >
                   send
                 </Button>
-                </form>
+                {/* TODO: input user protection around submitting an empty form  */}
+                {/* {inputField===false? <Button 
+                  variant="contained" 
+                  color="primary"  
+                  type="submit" 
+                  data-comm-news-id={id}
+                  className={classes.button}
+                >
+                  send
+                </Button> : null} */}
+                
+                </form>: null}
+                
                
               </div> 
          </Card>

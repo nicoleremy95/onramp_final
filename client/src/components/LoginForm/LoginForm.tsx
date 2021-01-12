@@ -20,21 +20,20 @@ const useStyles = makeStyles((theme: Theme) =>
         alignContent: 'center',
         justifyContent: 'center',
         marginTop:'auto',
-        marginBottom: '100px'
+        padding: '20px'
     },
     input: {
         '& > *': {
             background: 'white',
         },
         width: "100%",
-        marginRight: '100px'
     },
     formControl: {
         minWidth: "60%",
     },
-    send:{
-        marginTop: '50px',
-        marginRight: "0px"
+    button:{
+        marginTop: '20px',
+        marginBottom: "20px"
     }
   }),
 );
@@ -108,7 +107,7 @@ export default function Login() {
                             onChange={inputChange}
                             className={classes.input}
                         />
-                        <Button variant="contained" color="primary" type="submit">
+                        <Button variant="contained" color="primary" type="submit" className={classes.button}>
                             login
                         </Button>
                     </form>

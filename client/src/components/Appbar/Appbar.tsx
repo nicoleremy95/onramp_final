@@ -181,7 +181,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
             </Link>
           </Tooltip>
         </IconButton>
-        <p>New Account</p>
+        <Link to="/user" className={classes.appBarLinkBlack}>New Account</Link>
       </MenuItem>
       {currentUser? 
         <MenuItem>

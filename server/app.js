@@ -113,23 +113,21 @@ app.use(
     if(!req.session.user){
       res.status(401).send("login required")
     } else {
-
-    
-    db.News.findOne({
-      _id: req.params.newsId
-    })
-    .then(news =>{
-      news.comments.push({
-        message: req.body.message
+      db.News.findOne({
+        _id: req.params.newsId
       })
-      news.save();
-      res.json(news)
-    })
-    .catch((err) =>{
-      console.log('err', err)
-      res.status(500).end();
-    })
-  }
+      .then(news =>{
+        news.comments.push({
+          message: req.body.message
+        })
+        news.save();
+        res.json(news)
+      })
+      .catch((err) =>{
+        console.log('err', err)
+        res.status(500).end();
+      })
+    }
   })
 
   //Add reaction to news, PASSED POSTMAN TEST: PASSED 
