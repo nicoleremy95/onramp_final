@@ -102,7 +102,7 @@ export default function Sup(){
                             // className={classes.root} 
                                 noValidate 
                                 autoComplete="on" 
-                                onClick={inputSubmit}
+                                onSubmit={inputSubmit}
                             >
                                 <Typography align="right">
                                     <h2 className="sup">tell me...suP?</h2>

@@ -90,7 +90,7 @@ export default function Login() {
                     // className={classes.root} 
                         noValidate 
                         autoComplete="on" 
-                        onClick={inputSubmit}
+                        onSubmit={inputSubmit}
                     >
                         <Typography align="right">
                             <h2 className="login">...login?</h2>

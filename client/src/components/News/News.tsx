@@ -9,6 +9,7 @@ import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import './news.css'
+import API from '../../utils/API';
 
 interface State {
   message: string;
@@ -64,10 +65,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function News({newsDB}: Props) : JSX.Element {
   // console.log('News.tsx newsDB.newsData', newsDB.newsData)
+  const classes = useStyles();
+
   const [commentObj, setCommentObj] = useState<State>({
     message:""
-  })
+  });
+
   const [open, setOpen] = React.useState(false);
+
+  const [reactionObj, setReactionObj] = useState<boolean>(false);
+
+  // function favoriteCom(e: React.ChangeEvent<HTMLFormElement>): boolean{
+  //   API.postReaction(reactionObj, newsDB._id)
+  //   return true;
+  // }
 
   const handleOpen = () => {
     setOpen(true);
@@ -77,7 +88,6 @@ export default function News({newsDB}: Props) : JSX.Element {
     setOpen(false);
   };
 
-  const classes = useStyles();
 
   function inputChange(e: React.ChangeEvent<HTMLTextAreaElement>){
     //TODO: refactor any

@@ -8,12 +8,13 @@
 ## Project Requirements
 Please list examples of how your project meets the following requirements below:
 - [ ] Use a modern JS Library/Framework like React, Angular, etc. We suggest using React.js.
+    My project uses React.js.
 
 - [ ] Create an application that can be interacted with in a minimum of three different ways by the user.
-
-- [ ] Use of at least one Service.
+    A user can create an account, login/logout, create a "sup" piece of news, and comment on other people's "sup" news. 
 
 - [ ] The usage of a specified architectural pattern (MVC, MVP, MVVM,  etc.)
+    This project uses the MVC archiectural pattern.
 
 - [ ] Use of a [REST API](https://medium.com/@arteko/the-best-way-to-use-rest-apis-in-swift-95e10696c980).
 - [ ] Usage of at least 5 UI components from the [material-ui/@core](https://material-ui.com/) library (if you are not using React, a comparable UI library is acceptable)
