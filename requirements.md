@@ -64,27 +64,36 @@ Each User can have many "sup" News and each "sup" News has one User.
 ## suP?
 
 ### Login
-![login](images/login.png)
 The first page you come to as a user is the login page. At the top, the Appbar says "...welcome to suP!" indicating a new or not logged in user. For mobile view, the menu is displayed as a three dot dropdown to save space and be user intuitive. You can come back to the home page with the home icon or clicking on suP?
 
 
 ### Home Page
-![home page](images/typeinsup.png)
  After logging in, you are redirected to the main page where you can create a "sup" news. Sup is for quick remarks, therefore the features here include a max limit of 200 characters as well as a meter to show how many words you have left. Notice the Appbar at the top as well as the sup speech bubble both include the user's name to indicate they are logged in. The text box border also changes color and the title moves up to indicate the user is typing in the field. The text box also features "..." once clicked in the text box but before typing to guide the user to type. 
 
 ### Created News
-![created sup](images/afterSup.png)
 After you create your suP?, the page refreshes so you can see it populate down below with the option to delete your suP? if you would like. *this option is only available if you created the suP?
 
 ### More Sups 
-![more sups](images/sups.png)
 Here is an example of the newsfeed and notice that Tim is logged in therefore he can't delete Ann's news...this is a good thing.
 
 ### Logout
-![logout](images/logout.png)
 Done talking for the day? Logout here! You can always come back!
 
+### Login
+![login](images/login.png)
 
+### Home Page
+![home page](images/typeinsup.png)
+
+### Created News
+![created sup](images/afterSup.png)
+
+### More Sups
+![more sups](images/sups.png)
+
+
+### Logout
+![logout](images/logout.png)
 
 
 # Project Requirements
