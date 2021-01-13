@@ -1,18 +1,21 @@
 # Submission Requirements
 ## Project Description
-suP? is a newsfeed application for the modern chatter. This application was built with MERN and Typescript. 
+suP? is a mobile responsive, newsfeed application for the modern chatter where more talk is encouraged! Quickly tell people ...suP? This application was built with MERN and Typescript. 
 
-## User Story: The user can create an account, login, and make a "sup" in the news feed. From there the user can see other news in the news feed from other users. In addition, the user can update or delete their chat. 
+## User Story: 
+The user can create an account, login, and make a "sup" in the news feed. From there the user can see other news in the news feed from other users. In addition, the user can update or delete their chat. 
 
 ## Architectural Overview: 
-### One to many relationship
-### Each User can have many "sup" News and each "sup" News has one User 
+One to many relationship
+Each User can have many "sup" News and each "sup" News has one User. 
 
 ## Data Models: 
-    1) users
-    2) news(or suP? news) 
+    1) Users
+    2) News(suP? news) 
 
-## Components (components are capitalized and API calls are in parenthesis)
+## Components:
+    *(components are capitalized and API calls are in parenthesis)
+
     1) App.tsx (getCurrentUser)
         A) Pages 
             i. Home (getCurrentUser)
@@ -26,7 +29,7 @@ suP? is a newsfeed application for the modern chatter. This application was buil
         B) Components 
         C) AppBar (getCurrentUser) and Footer 
 
--- High Level File Structure 
+## High Level File Structure 
     1) client
         A) public
             i. index.html
@@ -55,40 +58,67 @@ suP? is a newsfeed application for the modern chatter. This application was buil
             iii. user.js 
         B) app.js 
 
--- Architectural Design Pattern : I used the MVC pattern for my project. The Model(M) are my models in the server-> models files. The Controller(C) are my routes, logic, data transformations, processing and API calls in the server-> app.js and client-> src-> utils-> API.tsx. The Views(V) are where all of my client/presentation side information in the client folders as components. 
+## Architectural Design Pattern 
+ I used the MVC pattern for my project. The Model(M) are my models in the server-> models files. The Controller(C) are my routes, logic, data transformations, processing and API calls in the server-> app.js and client-> src-> utils-> API.tsx. The Views(V) are where all of my client/presentation side information in the client folders as components. 
+
+## suP?
+![login](images/login.png)
+
+    The first page you come to as a user is the login page. At the top, the Appbar says "...welcome to suP!" indicating a new or not logged in user. For mobile view, the menu is displayed as a three dot dropdown to save space and be user intuitive. You can come back to the home page with the home icon or clicking on suP?
+
+![home page](images/typeinsup.png)
+
+    After logging in, you are redirected to the main page where you can create a "sup" news. Sup is for quick remarks, therefore the features here include a max limit of 200 characters as well as a meter to show how many words you have left. Notice the Appbar at the top as well as the sup speech bubble both include the user's name to indicate they are logged in. The text box border also changes color and the title moves up to indicate the user is typing in the field. The text box also features "..." once clicked in the text box but before typing to guide the user to type. 
+
+![created sup](images/afterSup.png)
+
+    After you create your suP?, the page refreshes so you can see it populate down below with the option to delete your suP? if you would like. *this option is only available if you created the suP?
+
+![more sups](images/sups.png)
+
+    Here is an example of the newsfeed and notice that Tim is logged in therefore he can't delete Ann's news...this is a good thing. 
+
+![logout](images/logout.png)
+
+    Done talking for the day? Logout here! You can always come back!
 
 
-- Screenshots of each View and descriptions of the overall user flow as well as any place that you made distinct design decisions.  (Screenshots can be taken via any screenshot capture application or native methods).
-
-
-## Project Requirements
-Please list examples of how your project meets the following requirements below:
-- [ ] Use a modern JS Library/Framework like React, Angular, etc. We suggest using React.js.
+# Project Requirements
+## Modern JS Library/Framework 
     My project uses React.js.
 
-- [ ] Create an application that can be interacted with in a minimum of three different ways by the user.
-    A user can create an account, login/logout, create, delete, and update your "sup" news. 
+## User Interaction
+    ...A user can 
+        1) create an account (POST ROUTE)
+        2) login (POST ROUTE)
+        3) logout (GET ROUTE)
+        3) create "sup" news (POST ROUTE)
+        4) delete "sup" news (DELETE ROUTE)
+        5) read "sup" news (GET ROUTE)
 
-- [ ] The usage of a specified architectural pattern (MVC, MVP, MVVM,  etc.)
+## Architectural Pattern
     This project uses the MVC archiectural pattern. See Architectural Design Pattern above. 
 
-- [ ] Use of a [REST API](https://medium.com/@arteko/the-best-way-to-use-rest-apis-in-swift-95e10696c980).
+## REST APIS
     This project uses these Rest API requests: 
         1. Get: users and news 
         2. Create: users and news
         3. Put: news
         4. Delete: news
 
-- [ ] Usage of at least 5 UI components from the [material-ui/@core](https://material-ui.com/) library (if you are not using React, a comparable UI library is acceptable)
+## Material UI Components 
     This project uses these Material UI components:
         1. Appbar
         2. TextFields
         3. Icons 
         4. Styles (ex. makeStyles, Theme, createStyles)
         5. Core (ex. Typography, Container, Grid, Button)
-        6. 
 
-- [ ] An example of a reusable UI component that you have created and used in the app. This should be different than the 5 UI components from the vendor library.
-    This project I created these reusable components:
-        1. Footer
-        2. LoginForm
+## Reusable Components 
+    *see below
+    1. Footer
+    2. LoginForm
+
+
+![login](images/resuable.png)
+
