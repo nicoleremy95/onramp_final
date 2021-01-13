@@ -2,17 +2,18 @@ import * as React from 'react';
 import {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import {CircularProgress, TextField, Button, Grid, Container, Typography, CardContent, Card} from '@material-ui/core';
+import {TextField, Button, Grid, Container, Typography, CardContent, Card} from '@material-ui/core';
 import API from '../../utils/API';
 import './sup.css';
 
+// INTERFACE
 interface State {
     newsData: string,
     //TODO: add in newstype in form
     // newsType: string,
 }
 
-interface currentUserProps {
+interface Props {
     currentUser: boolean,
     currentUserData: any
 }
@@ -22,6 +23,7 @@ interface LoginProps {
     password: string
 }
 
+//STYLES
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -46,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     welcome: {
         fontSize: '30px !important',
-        textAlign: 'right'
+        textAlign: 'left'
     },
     moreTalk: {
         fontSize: '30px !important',
@@ -60,15 +62,15 @@ const useStyles = makeStyles((theme: Theme) =>
     button:{
         marginTop: '20px',
         marginBottom: "20px"
-    }
+    },
   }),
 );
 
-
-export default function Sup({currentUser, currentUserData}: currentUserProps){
+//FC
+export default function Sup({currentUser, currentUserData}: Props){
+    //DECLARATIONS
     const classes = useStyles();
 
-    //initialize form object state
     const [newsObj, setNewsObj] = useState<State>({
         newsData:"",
         //TODO: add in newstype in form
@@ -96,16 +98,15 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
     //     [name]: event.target.value,
     // });
     // };
-
-    function loginInputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
+    
+    function inputChangeLogin (e: React.ChangeEvent<HTMLTextAreaElement>) {
         //TODO: refactor any
         const{ name, value}: any = e.target;
         setLoginObject({ ...loginObj,[name]: value})
     }
 
     //TODO: move to app.tsx and pass down with props 
-    function loginInputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
-        // e.preventDefault();   
+    function inputSubmitLogin (e: React.FormEvent<HTMLFormElement>) : boolean { 
         history.push("/")     
         API.login(loginObj)
         .then(loginObj =>{
@@ -115,8 +116,7 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
         .catch(err =>console.log('err', err))
         return true;
     }
-    //TODO: move to app.tsx and pass down with props 
-    //input change function
+    //TODO: move to App.tsx and pass down with props 
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
         //TODO: refactor any
         const{ name, value}: any = e.target;
@@ -125,7 +125,6 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
     }
 
     //TODO: move to app.tsx and pass down with props 
-    // input submit function
     function inputSubmit (e: React.FormEvent<HTMLFormElement>) : boolean { 
         if(!newsObj){
             alert('hey')
@@ -152,9 +151,11 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                 <Grid item xs ={10} sm={10} md={6} lg={6}>
                 <div className="sup-bubble">
                     <div className="sup-arrow sup-bottom right"></div>
-                        {currentUser? <Typography align="right">
-                            <h2 className="sup">tell me {currentUserData.username}...suP?</h2>
-                        </Typography> : null}
+                        {currentUser? 
+                            <Typography align="right">
+                                <h2 className="sup">tell me {currentUserData.username}...suP?</h2>
+                            </Typography> 
+                        : null}
                         
                         {currentUser ? 
                             <Card 
@@ -216,12 +217,12 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                             </CardContent>
                             </Card>
                             : 
-                            <Typography><h3 className={classes.welcome}>...Welcome to suP!</h3> <h4 className={classes.moreTalk}> where talk is encouraged...</h4>
+                            <Typography><h3 className={classes.welcome}>...Welcome to suP!</h3> 
                             <form 
                                 className={classes.root} 
                                 noValidate 
                                 autoComplete="on" 
-                                onSubmit={loginInputSubmit}
+                                onSubmit={inputSubmitLogin}
                             >
                                 <Typography align="right">
                                     <h2 className="login">...please login!</h2>
@@ -233,7 +234,7 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                                     type="textarea"
                                     name="username"
                                     value={loginObj.username}
-                                    onChange={loginInputChange}
+                                    onChange={inputChangeLogin}
                                     className={classes.input}
                                 />
                                 <TextField 
@@ -243,7 +244,7 @@ export default function Sup({currentUser, currentUserData}: currentUserProps){
                                     type="password"
                                     name="password"
                                     value={loginObj.password}
-                                    onChange={loginInputChange}
+                                    onChange={inputChangeLogin}
                                     className={classes.input}
                                 />
                                 <Button variant="contained" color="primary" type="submit" className={classes.button}>

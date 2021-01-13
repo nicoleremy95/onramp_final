@@ -7,12 +7,13 @@ import {Container, TextField, Typography, Button} from '@material-ui/core';
 import API from '../../utils/API';
 import './loginForm.css';
 
-
+//INTERFACE
 interface State {
     username: string,
     password: string
 }
 
+//STYLES
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
         alignContent: 'center',
         justifyContent: 'center',
         marginTop:'auto',
-        padding: '20px'
+        marginBottom: '20px'
     },
     input: {
         '& > *': {
@@ -38,9 +39,10 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
+//FC
 export default function Login() {
     
+    //DECLARATIONS
     const classes = useStyles();
 
     const [loginObj, setLoginObject] = useState<State>({
@@ -50,6 +52,7 @@ export default function Login() {
 
     const history = useHistory();
 
+    //FUNCTIONS
     //TODO: move to app.tsx and pass down with props 
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>) {
         //TODO: refactor any
@@ -68,6 +71,7 @@ export default function Login() {
         return true;
     }
     
+    //RENDER
     return (
         <div 
             className={classes.root}

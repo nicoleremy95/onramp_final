@@ -18,13 +18,8 @@ const User = new Schema (
             // required: true
         },
         name: {
-            first: {
-                type: String,
-                // required: true
-            },
-            last: {
-                type: String,
-            }
+            type: String
+            // required: true
         },
         // createdNews: {
         //     type: Schema.Types.ObjectId,

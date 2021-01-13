@@ -6,6 +6,7 @@ import {Container, TextField, Typography, Button, Grid} from '@material-ui/core'
 import API from '../../utils/API';
 import './UserComp.css';
 
+//INTERFACE
 interface State {
     username: string,
     name: string,
@@ -13,6 +14,7 @@ interface State {
     password: string 
 }
 
+//STYLES
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -43,7 +45,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+//FC
 export default function UserComp() {
+    //DECLARATIONS
     const classes = useStyles();
 
     const history = useHistory();
@@ -55,6 +59,7 @@ export default function UserComp() {
         password: ''
     })
 
+    //FUNCTIONS
     function inputChange (e: React.ChangeEvent<HTMLTextAreaElement>){
         //TODO: refactor any
         const{ name, value}: any = e.target;
@@ -71,6 +76,7 @@ export default function UserComp() {
         return true;
     }
 
+    //RENDER
     return (
         <div 
             className={classes.root}

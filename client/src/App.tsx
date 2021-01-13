@@ -1,16 +1,18 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from './pages/Home/Home'
-import User from './pages/User/User'
-import Login from './pages/Login/Login'
-import Appbar from './components/Appbar/Appbar'
-import Footer from './components/Footer/Footer'
+import Home from './pages/Home/Home';
+import User from './pages/User/User';
+import Login from './pages/Login/Login';
+import Appbar from './components/Appbar/Appbar';
+import Footer from './components/Footer/Footer';
+// import Account from './components/Account/Account';
 import './App.css';
 import API from './utils/API';
 
+//FC
 function App(){
-
+  //DECLARATIONS
   const [currentUser, setCurrentUser] = useState<boolean>(true);
 
   //TODO: refactor any
@@ -36,6 +38,7 @@ function App(){
     })
   }, [])
 
+  //RENDER 
   return (
     <div className="App">
       <Router>
@@ -45,11 +48,15 @@ function App(){
             <Home currentUser={currentUser} currentUserData={currentUserData}/>
           </Route>
           <Route exact path = '/user'>
-            <User currentUser={currentUser} currentUserData={currentUserData}/>
+            <User />
           </Route>
           <Route exact path = '/login'>
-            <Login currentUser={currentUser} currentUserData={currentUserData} />
+            <Login/>
           </Route>
+          {/* //TODO: account page route  */}
+          {/* <Route exact path = '/account'>
+            <Account currentUser={currentUser} currentUserData={currentUserData} />
+          </Route> */}
         </Switch>
         <Footer/>
       </Router>
