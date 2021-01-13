@@ -11,7 +11,8 @@ const Reactions = new Schema({
 
 const News = new Schema({
     newsData : {
-        type: String
+        type: String,
+        required: true
     },
     userId: {
         type: Schema.Types.ObjectId,

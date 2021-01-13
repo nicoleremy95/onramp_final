@@ -160,19 +160,21 @@ app.use(
     db.News.findOne({
       _id: req.params.newsId
     }) 
-    .then((news) =>{
+    .then( (news) =>{
+      console.log('app.js news', news)
+      res.json(news)
       if(!news) {
         res.status(404).send('data not found');
       } else {
-      news.newsData = req.body.newsData;
-      news.save()
-      .then(news =>{
-        res.json(news)
-      })
-      .catch((err) =>{
-        console.log('err', err)
-        res.status(500).end();
-      })
+        news.newsData = req.body.newsData;
+         news.save()
+        .then(news =>{
+          res.json(news)
+        })
+        .catch((err) =>{
+          console.log('err', err)
+          res.status(500).end();
+        })
       }
     })
     .catch((err) =>{
@@ -228,10 +230,7 @@ app.use(
             username:req.body.username,
             email: req.body.email,
             password:req.body.password,
-            name: {
-                first: req.body.name ? req.body.name.first : '',
-                last : req.body.name ? req.body.name.last : ''
-            }
+            name: req.body.name
         })
         .then(user=>{
           res.json(user)
@@ -269,6 +268,70 @@ app.use(
       res.status(500).end();
     });
   });
+
+  //Update user in the database, PASSED POSTMAN TEST: PENDING
+  app.put('/user/:userId', (req, res) =>{
+    if (!req.session.user) {
+      res.status(401).send("login required")
+    } else {
+    db.User.findOne({
+      _id: req.params.userId
+    }) 
+    .then((user) =>{
+      if(!user) {
+        res.status(404).send('data not found');
+      } else {
+      user.username = req.body.username;
+      user.email = req.body.email;
+      user.name = req.body.name;
+      user.save()
+      .then(user =>{
+        res.json(user)
+      })
+      .catch((err) =>{
+        console.log('err', err)
+        res.status(500).end();
+      })
+      }
+    })
+    .catch((err) =>{
+      console.log('err', err)
+      res.status(500).end();
+    })
+    }
+  })
+
+  //Update user in the database, PASSED POSTMAN TEST: PENDING
+  app.delete('/delete/:userId', (req,res) =>{
+    db.User.deleteOne({
+      _id: req.params.userId,
+
+    })
+    .then((allUsers) => {
+      res.json(allUsers);
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).end();
+    });
+    // .then(async (userDel) => {
+    //   try {
+    //     // TODO: ALSO DELETE INVITATIONS FROM USER
+    //     const deletePromises = [];
+    //     const newsDel = await db.Map.deleteMany({ userId: req.params.userId });
+    //     deletePromises.push(userDel, newsDel);
+    //     const deleteData = await Promise.all(deletePromises);
+    //     req.session.destroy();
+    //     res.json(userDel)
+    //   } catch {
+    //     console.log(error);
+    //     res.status(500).end();
+    //   }
+    // }).catch((err) => {
+    //   console.log(err);
+    //   res.status(500).end();
+    // });
+  })
   
   //Log out, PASSED POSTMAN TEST: PASSED 
   app.get('/logout', (req,res) =>{

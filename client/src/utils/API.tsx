@@ -20,11 +20,17 @@ const API = {
     updateNews: function(news: object, newsId: string){
         return axios.put(`${urlPrefix}/news/${newsId}`, news, { withCredentials: true })
     },
-    deleteNews: function(news: object, newsId: string){
-        return axios.delete(`${urlPrefix}/news/${newsId}`, news)
+    deleteNews: function(newsId: string){
+        return axios.delete(`${urlPrefix}/news/${newsId}`, {withCredentials: true})
     }, 
     signup: function(user: object){
         return axios.post(`${urlPrefix}/signup`, user, { withCredentials: true })
+    },
+    updateAccount: function(user: object, userId: string){
+        return axios.put(`${urlPrefix}/news/${userId}`, user, { withCredentials: true })
+    },
+    deleteAccount: function(userId: string){
+        return axios.delete(`/delete/${userId}`, {withCredentials:true})
     },
     login: function(user: object){
         return axios.post(`${urlPrefix}/login`, user, { withCredentials: true })

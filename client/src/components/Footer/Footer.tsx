@@ -1,12 +1,10 @@
 import * as React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {Typography, Container, Grid, Tooltip, Link, IconButton} from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import {Typography, Container, Grid} from '@material-ui/core';
 import './footer.css';
 
-
+//STYLES
 const useStyles = makeStyles((theme:Theme) =>({
     footer: {
         display: 'flex',
@@ -18,11 +16,6 @@ const useStyles = makeStyles((theme:Theme) =>({
     root: {
       flexGrow: 1,
       margin: '20px'
-    },
-    paper: {
-      padding: theme.spacing(2),
-      margin: 'auto',
-      maxWidth: 500,
     },
     link:{
       "&:hover": {
@@ -38,47 +31,42 @@ const useStyles = makeStyles((theme:Theme) =>({
     footerLinks: {
       textDecoration: "none",
       color: "white !important"
+    },
+    icon: {
+      marginLeft: "10%"    
+    },
+    copy: {
+      verticalAlign: 'middle',
+      display: "inlin-flex"
     }
-}))
+  }))
 
+//FC
 export default function Footer() {
-    const classes = useStyles();
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <div className ={classes.footer}>
-          <Container className={classes.root}>
-              <Grid item xs >
-                <Grid item xs>
-                  <Typography gutterBottom align="left">
-                    <h2>more talK with friendS</h2>
-                  </Typography>
-                 
-                  <Typography color="textSecondary" align="left">
-                    <p>a product by: nicole remy</p>
-                  </Typography>
+  //DECLARATIONS
+  const classes = useStyles();
 
-                  <Tooltip title="Linkedin">
-                    <IconButton aria-label="delete" edge="start">
-                      <Link  href="https://www.linkedin.com/in/nicole-remy-190202166/" target="blank" className={classes.footerLinks}>
-                        <LinkedInIcon  fontSize="large" />
-                      </Link>
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title="GitHub">
-                    <IconButton aria-label="delete">
-                      <Link  href="https://github.com/nicoleremy95" target="blank" className={classes.footerLinks}>
-                        <GitHubIcon fontSize="large"/>
-                      </Link>
-                    </IconButton>
-                  </Tooltip>
-                  <Typography className={classes.moreTalk} align="left">
-                    <h1>suP?</h1>
-                  </Typography>
-                </Grid>
+  //RENDER
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <div className ={classes.footer}>
+        <Container className={classes.root}>
+            <Grid item xs >
+              <Grid item xs>
+                <Typography gutterBottom align="left">
+                  <h2>more talK with friendS</h2>
+                </Typography>
+                <Typography color="textSecondary" align="left">
+                  <p>a product by: nicole remy</p>
+                </Typography>
+                <Typography className={classes.moreTalk} align="left">
+                  <h1>suP?</h1>
+                </Typography>
               </Grid>
-          </Container>
-        </div>
-      </React.Fragment>
-    );
-  }
+            </Grid>
+        </Container>
+      </div>
+    </React.Fragment>
+  );
+}

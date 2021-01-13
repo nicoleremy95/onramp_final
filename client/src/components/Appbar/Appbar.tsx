@@ -2,20 +2,21 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, IconButton, Typography, Badge, Tooltip, MenuItem, Menu }from '@material-ui/core';
+import {AppBar, Toolbar, IconButton, Typography,Tooltip, MenuItem, Menu }from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import API from '../../utils/API';
 
-
+//INTERFACE 
 interface currentUserProps {
   currentUser: boolean,
   currentUserData: any
 }
+
+//STYLES 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appbar: {
@@ -93,9 +94,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+//FC
 export default function PrimarySearchAppBar({currentUser, currentUserData}: currentUserProps) {
-  console.log('appbar.tsx currentUser', currentUser)
-  console.log('Appbar.tsx currentUserData.username', currentUserData.username)
+  //DEV 
+  // console.log('appbar.tsx currentUser', currentUser)
+  // console.log('Appbar.tsx currentUserData.username', currentUserData.username)
+  
+  //DECLARATIONS
   const history = useHistory();
 
   const classes = useStyles();
@@ -105,6 +110,10 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const menuId = 'primary-search-account-menu';
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+
+  // FUNCTIONS
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -129,7 +138,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
     return true;
   }
 
-  const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -145,7 +153,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -156,33 +163,25 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge 
-            badgeContent={4} 
-            color="secondary"
-            max={999}
+      {!currentUser? 
+        <MenuItem >
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
           >
-            <FavoriteIcon />
-          </Badge>
-        </IconButton>
-        <p>Favorites</p>
-      </MenuItem>
-      <MenuItem >
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <Tooltip title="New Account" aria-label="New Account">
-            <Link to="/user" className={classes.appBarLinkBlack}>
-              <AccountCircle/>
-            </Link>
+            <Tooltip title="New Account" aria-label="New Account">
+              <Link to="/user" className={classes.appBarLinkBlack}>
+                <AccountCircle/>
+              </Link>
+            </Tooltip>
+          </IconButton>
+          <Tooltip title="new account" aria-aria-label="new account">
+            <Link to="/user" className={classes.appBarLinkBlack}>New Account</Link>
           </Tooltip>
-        </IconButton>
-        <Link to="/user" className={classes.appBarLinkBlack}>New Account</Link>
-      </MenuItem>
+        </MenuItem>
+      : null}
       {currentUser? 
         <MenuItem>
           <IconButton
@@ -216,6 +215,7 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
     </Menu>
   );
 
+  //RENDER 
   return (
     <div className={classes.grow}>
       <AppBar 
@@ -224,27 +224,15 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
       >
         <Toolbar>
           <IconButton aria-label="show 4 new mails" color="inherit">
-                  <Link  to="/" className={classes.appBarLinkWhite} ><HomeIcon/></Link>
+            <Tooltip title="home" aria-label="home">
+              <Link  to="/" className={classes.appBarLinkWhite} ><HomeIcon/></Link>
+            </Tooltip>   
           </IconButton>
           <Typography   
             noWrap
           >
             <Link to="/" className={classes.appBarLinkWhite}><h3>suP?</h3></Link>
           </Typography>
-          {/* //TODO: Add in search bar to search by comment type */}
-          {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="find..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
           {currentUser? 
@@ -252,11 +240,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
             : 
             <Typography noWrap><p>...welcome to suP!</p></Typography>
           }
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <FavoriteIcon />
-              </Badge>
-            </IconButton>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -264,11 +247,14 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
               aria-haspopup="true"
               color="inherit"
             >
+            {!currentUser? 
               <Tooltip title="New Account" aria-label="New Account">
                 <Link to="/user" className={classes.appBarLinkWhite}>
                   <AccountCircle/>
                 </Link>
               </Tooltip>
+            : null}
+              
             </IconButton>
             {currentUser?   
               <IconButton
