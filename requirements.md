@@ -3,7 +3,7 @@
 suP? is a mobile responsive, newsfeed application for the modern chatter where more talk is encouraged! Quickly tell people ...suP? This application was built with MERN and Typescript. 
 
 ## User Story: 
-The user can create an account, login, and make a "sup" in the news feed. From there the user can see other news in the news feed from other users. In addition, the user can update or delete their chat. 
+The user can create an account, login, logout and make a "sup" in the news feed. From there the user can see other news in the news feed from other users. In addition, the user can delete their news. 
 
 ## Architectural Overview: 
 One to many relationship
@@ -11,7 +11,7 @@ Each User can have many "sup" News and each "sup" News has one User.
 
 ## Data Models: 
     1) Users
-    2) News(suP? news) 
+    2) News(suP?) 
 
 ## Components:
     *(components are capitalized and API calls are in parenthesis)
@@ -62,9 +62,9 @@ Each User can have many "sup" News and each "sup" News has one User.
  I used the MVC pattern for my project. The Model(M) are my models in the server-> models files. The Controller(C) are my routes, logic, data transformations, processing and API calls in the server-> app.js and client-> src-> utils-> API.tsx. The Views(V) are where all of my client/presentation side information in the client folders as components. 
 
 ## suP?
-![login](images/login.png)
 
     The first page you come to as a user is the login page. At the top, the Appbar says "...welcome to suP!" indicating a new or not logged in user. For mobile view, the menu is displayed as a three dot dropdown to save space and be user intuitive. You can come back to the home page with the home icon or clicking on suP?
+![login](images/login.png)
 
 ![home page](images/typeinsup.png)
 
