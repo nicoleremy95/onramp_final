@@ -1,18 +1,18 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '../../components/Appbar/Appbar';
 import News from '../../components/News/News';
 import Sup from '../../components/Sup/Sup';
 import API from '../../utils/API';
 import Scroll from '../../components/Scroll/Scroll';
-import Footer from '../../components/Footer/Footer';
 
+//INTERFACE
 interface currentUserProps {
     currentUser: boolean
     currentUserData: any
 }
 
+//STYLES
 const useStyles = makeStyles((theme: Theme)=>
     createStyles({
         homeContainer: {
@@ -21,12 +21,15 @@ const useStyles = makeStyles((theme: Theme)=>
     })
 )
 
+//FC
 export default function Home({currentUser, currentUserData}: currentUserProps) {
+    //DECLARATIONS 
     const classes = useStyles();
 
-    // console.log('Home.tsx currentUserData', currentUserData)
     const [newsDB, setNewsDB] = useState([]);
     
+    //DEV
+    // console.log('Home.tsx currentUserData', currentUserData)
     // console.log("FunctionHome")
     // console.log('home tsx currentUser.username', currentUser.username)
 
@@ -43,14 +46,14 @@ export default function Home({currentUser, currentUserData}: currentUserProps) {
     }, [])
 
     
-   
+    //RENDER
     return (
         <div 
             className={classes.homeContainer}
         >
             <Scroll showBelow={250}/>
             <Sup currentUser={currentUser} currentUserData={currentUserData}/>
-            <News currentUser={currentUser} newsDB ={newsDB} />
+            <News currentUser={currentUser} currentUserData={currentUserData}newsDB ={newsDB} />
         </div>
     )
 }

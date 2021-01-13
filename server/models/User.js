@@ -7,30 +7,18 @@ const User = new Schema (
         username: {
             type: String,
             required: true,
-            // unique: true
         },
         email: {
             type: String,
-            // required: true
+            required: true
         },
         password: {
             type: String,
-            // required: true
+            required: true
         },
         name: {
-            first: {
-                type: String,
-                // required: true
-            },
-            last: {
-                type: String,
-            }
-        },
-        // createdNews: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'News'
-        // },
-        // image: [],   
+            type: String
+        },  
     }, {timestamps: true}
 )
 
