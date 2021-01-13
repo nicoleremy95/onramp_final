@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {useState} from 'react';
 import {createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import {Container, Card, CardContent, Button, Typography, TextField} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import {Container, Card, CardContent, Button, Typography, TextField, Grid} from '@material-ui/core';
 import './news.css'
 import API from '../../utils/API';
 
@@ -55,6 +54,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     button:{
       marginBottom: '20px',
+    },
+    newsName: {
+      fontSize: "30px !important"
     }
   })
 );
@@ -67,6 +69,9 @@ export default function News({newsDB, currentUser, currentUserData}: Props) : JS
   const [supObj, setSupObj] =useState<Sup>({
     sup:"",
   })
+
+  // const { title, children, open, setOpen, onConfirm }: any = props;
+
 
   //FUNCTIONS 
   function inputChangeSup(e: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -97,6 +102,8 @@ export default function News({newsDB, currentUser, currentUserData}: Props) : JS
     .catch(err =>console.log('err', err))
     return true;
   }
+
+  //DEV
   // console.log('News.tsx newsDB[0]', newsDB[0]);
   // console.log('News.tsx newsDB[i].userId.username', newsDB[1].userId.username)
 
@@ -120,19 +127,19 @@ export default function News({newsDB, currentUser, currentUserData}: Props) : JS
                   variant="h5" 
                   component="h2"
                 >
-                  {newsDB[i].newsData}
+                  <span>"{newsDB[i].newsData}"</span>
                 </Typography>
                 <Typography 
                   variant="body2" 
-                  component="p"
                 >
-                  {newsDB[i].userId.username}
+                  <h3 className={classes.newsName}> ~{newsDB[i].userId.username}</h3>
                 </Typography>
               </CardContent>
               <div
                 className="News-cards-comment"
               >
-                {newsDB[i].userId.username===currentUserData.username?
+                {/* //TODO: update form not working */}
+                {/* {newsDB[i].userId.username===currentUserData.username?
                   <form
                     noValidate 
                     className={classes.root}
@@ -162,11 +169,11 @@ export default function News({newsDB, currentUser, currentUserData}: Props) : JS
                       type="submit" 
                       className={classes.button}
                     >
-                      update sup 
+                      update  
                     </Button>
 
                   </form>
-                : null}
+                : null} */}
                 {newsDB[i].userId.username===currentUserData.username? 
                   <form  
                     noValidate 
@@ -180,7 +187,7 @@ export default function News({newsDB, currentUser, currentUserData}: Props) : JS
                       type="submit" 
                       className={classes.button}
                       >
-                        delete sup
+                        delete 
                       </Button>
                   </form>
                 : null}

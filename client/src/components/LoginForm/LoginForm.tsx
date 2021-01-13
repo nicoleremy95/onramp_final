@@ -2,8 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import {Container, TextField, Typography, Button} from '@material-ui/core';
+import {Container, TextField, Typography, Button, Grid} from '@material-ui/core';
 import API from '../../utils/API';
 import './loginForm.css';
 
@@ -67,7 +66,7 @@ export default function Login() {
         .then(loginObj =>{
             history.push("/")
         })
-        .catch(err =>console.log('err', err))
+        .catch(err =>console.log('err', err) )
         return true;
     }
     

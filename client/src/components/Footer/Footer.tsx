@@ -1,12 +1,8 @@
 import * as React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {Typography, Container, Grid, Tooltip, Link, IconButton} from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import CopyrightIcon from '@material-ui/icons/Copyright';
+import {Typography, Container, Grid} from '@material-ui/core';
 import './footer.css';
-import { CopyrightSharp } from '@material-ui/icons';
 
 //STYLES
 const useStyles = makeStyles((theme:Theme) =>({
@@ -58,21 +54,6 @@ export default function Footer() {
         <Container className={classes.root}>
             <Grid item xs >
               <Grid item xs>
-                <CopyrightIcon className={classes.copy}/>
-              {/* <Tooltip title="Linkedin">
-                  <IconButton aria-label="delete" edge="start">
-                    <Link  href="https://www.linkedin.com/in/nicole-remy-190202166/" target="blank" className={classes.footerLinks}>
-                      <LinkedInIcon  className={classes.icon} fontSize="large" />
-                    </Link>
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="GitHub">
-                  <IconButton aria-label="delete">
-                    <Link  href="https://github.com/nicoleremy95" target="blank" className={classes.footerLinks}>
-                      <GitHubIcon fontSize="large"/>
-                    </Link>
-                  </IconButton>
-                </Tooltip> */}
                 <Typography gutterBottom align="left">
                   <h2>more talK with friendS</h2>
                 </Typography>

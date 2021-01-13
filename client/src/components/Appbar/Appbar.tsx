@@ -2,10 +2,9 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, IconButton, Typography, Badge, Tooltip, MenuItem, Menu }from '@material-ui/core';
+import {AppBar, Toolbar, IconButton, Typography,Tooltip, MenuItem, Menu }from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -164,18 +163,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge 
-            badgeContent={4} 
-            color="secondary"
-            max={999}
-          >
-            <FavoriteIcon />
-          </Badge>
-        </IconButton>
-        <p>Favorites</p>
-      </MenuItem>
       {!currentUser? 
         <MenuItem >
           <IconButton
@@ -190,7 +177,9 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
               </Link>
             </Tooltip>
           </IconButton>
-          <Link to="/user" className={classes.appBarLinkBlack}>New Account</Link>
+          <Tooltip title="new account" aria-aria-label="new account">
+            <Link to="/user" className={classes.appBarLinkBlack}>New Account</Link>
+          </Tooltip>
         </MenuItem>
       : null}
       {currentUser? 
@@ -235,27 +224,15 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
       >
         <Toolbar>
           <IconButton aria-label="show 4 new mails" color="inherit">
-                  <Link  to="/" className={classes.appBarLinkWhite} ><HomeIcon/></Link>
+            <Tooltip title="home" aria-label="home">
+              <Link  to="/" className={classes.appBarLinkWhite} ><HomeIcon/></Link>
+            </Tooltip>   
           </IconButton>
           <Typography   
             noWrap
           >
             <Link to="/" className={classes.appBarLinkWhite}><h3>suP?</h3></Link>
           </Typography>
-          {/* //TODO: Add in search bar to search by comment type */}
-          {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="find..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
           {currentUser? 
@@ -263,11 +240,6 @@ export default function PrimarySearchAppBar({currentUser, currentUserData}: curr
             : 
             <Typography noWrap><p>...welcome to suP!</p></Typography>
           }
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <FavoriteIcon />
-              </Badge>
-            </IconButton>
             <IconButton
               edge="end"
               aria-label="account of current user"

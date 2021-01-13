@@ -6,7 +6,6 @@ import User from './pages/User/User';
 import Login from './pages/Login/Login';
 import Appbar from './components/Appbar/Appbar';
 import Footer from './components/Footer/Footer';
-// import Account from './components/Account/Account';
 import './App.css';
 import API from './utils/API';
 
@@ -53,10 +52,6 @@ function App(){
           <Route exact path = '/login'>
             <Login/>
           </Route>
-          {/* //TODO: account page route  */}
-          {/* <Route exact path = '/account'>
-            <Account currentUser={currentUser} currentUserData={currentUserData} />
-          </Route> */}
         </Switch>
         <Footer/>
       </Router>
